@@ -7,7 +7,7 @@ if (empty($_POST['correo'])) {
 
     $email = $mysqli->real_escape_string($_POST['correo']);
 
-    if(!$email){
+    if (!$email) {
         $errors[] = "No se Encuentra ese correo";
 
         if (emailExiste($email)) {
@@ -15,7 +15,4 @@ if (empty($_POST['correo'])) {
             $nombre = getValor('nombre', 'correo', $email);
         }
     }
-
 }
-
-?>

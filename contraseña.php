@@ -1,7 +1,7 @@
 <?php
 session_start();
-$sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
-if(!empty($sessData['status']['msg'])){
+$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
+if (!empty($sessData['status']['msg'])) {
     $statusMsg = $sessData['status']['msg'];
     $statusMsgType = $sessData['status']['type'];
     unset($_SESSION['sessData']['status']);
@@ -9,10 +9,10 @@ if(!empty($sessData['status']['msg'])){
 ?>
 
 
-    <h1>En proceso</h1>
-   <br />
-    <a href='index.php'>Return</a>
- 
+<h1>En proceso</h1>
+<br />
+<a href='index.php'>Return</a>
+
 
 <!--
 <h2>Enter the Email of Your Account to Reset New Password</h2>
@@ -25,5 +25,5 @@ if(!empty($sessData['status']['msg'])){
                 <input type="submit" value="CONTINUE">
             </div>
         </form>-->
-    </div>
+</div>
 </div>
