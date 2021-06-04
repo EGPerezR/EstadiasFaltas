@@ -54,29 +54,33 @@ if (isset($_POST['buscar'])) {
                     <table border="1">
                         <thead>
                             <td colspan="4">
-                                <center><b><label><?php echo $grado . " Grado de ";
-                                                    if ($espe == 4) {
-                                                        echo "Sistemas";
-                                                    }
-                                                    if ($espe == 1) {
-                                                        echo "Combustion Interna";
-                                                    }
-                                                    if ($espe == 2) {
-                                                        echo "Maquinas y Herramientas";
-                                                    }
-                                                    if ($espe == 3) {
-                                                        echo "Electricidad";
-                                                    }
-                                                    if ($espe == 5) {
-                                                        echo "Mecatronica";
-                                                    }
-                                                    echo " del ";
-                                                    if ($secc == 2) {
-                                                        echo "B";
-                                                    }
-                                                    if ($secc == 1) {
-                                                        echo "A";
-                                                    } ?></label></b></center>
+                                <center>
+                                    <b>
+                                        <label>
+                                            <?php echo $grado . " Grado de ";
+                                            if ($espe == 4) {
+                                                echo "Sistemas";
+                                            }
+                                            if ($espe == 1) {
+                                                echo "Combustion Interna";
+                                            }
+                                            if ($espe == 2) {
+                                                echo "Maquinas y Herramientas";
+                                            }
+                                            if ($espe == 3) {
+                                                echo "Electricidad";
+                                            }
+                                            if ($espe == 5) {
+                                                echo "Mecatronica";
+                                            }
+                                            echo " del ";
+                                            if ($secc == 2) {
+                                                echo "B";
+                                            }
+                                            if ($secc == 1) {
+                                                echo "A";
+                                            } ?></label></b>
+                                </center>
                             </td>
                         </thead>
                         <tr>

@@ -1,3 +1,7 @@
+<?php
+require 'Controllers/funcs.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
