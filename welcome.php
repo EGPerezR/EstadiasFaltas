@@ -67,6 +67,7 @@ if (isset($_SESSION['matricula'])) {
 					if ($rows['tipo_usuario'] == 1) { ?>
 						<ul class='nav navbar-nav'>
 							<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
+							<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
 						</ul>
 					<?php } ?>
 

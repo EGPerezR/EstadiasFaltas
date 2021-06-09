@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION['matricula'])) {
+} else {
+	header('Location: index.php');
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +17,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insertar Alumnos</title>
+    <nav class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="welcome.php">Inicio</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="welcome.php" tabindex="-1" aria-disabled="true">return</a>
+        </li>
+    </nav>
 </head>
 
 <body>
