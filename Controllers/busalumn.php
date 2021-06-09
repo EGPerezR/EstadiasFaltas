@@ -116,11 +116,12 @@ if (isset($_POST['buscar'])) {
 //cuando empieze a insertar las faltas
 if (isset($_POST['insertar'])) {
 
-    //Construccion de las faltas
+    
     $hoy = date("Y-m-d");
     $lunes;
     $materia = $_POST['materia'];
     $nueva = [];
+    //Construccion de las faltas
     if (!empty($_POST["faltas"]) && is_array($_POST["faltas"])) {
         $faltas = array();
         foreach ($_POST["faltas"] as $como) {

@@ -1,99 +1,135 @@
 <?php
-if(isset($_POST['Insertar'])){
-$alumnos = [];
+if (isset($_POST['Insertar'])) {
+    $alumnos = [];
+    $nombre = $_FILES['fichero_usuario']['name'];
 
-$especialidad = $_POST['especialidad'];
 
-$columna = $_POST['columna'];
 
-$info = new SplFileInfo($_FILES['fichero_usuario']['name']);
-$extension = pathinfo($info->getFilename(),PATHINFO_EXTENSION);
 
-if($extension=='xlsx'){
-$dir_subida =  __DIR__ . '/../Excels/';
-$fichero_subido = $dir_subida . basename($_FILES['fichero_usuario']['name']);
-if(move_uploaded_file($_FILES['fichero_usuario']['tmp_name'],$fichero_subido)){
-    
-} else {
-    echo '¡posible ataque de subida de ficheros';
-} 
-}else {
-    echo "este tipo de archivo no esta permitido";
-}
+    $info = new SplFileInfo($_FILES['fichero_usuario']['name']);
+    $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);
 
-require __DIR__.'/../vendor/autoload.php';
+    if ($extension == 'xlsx') {
+        $dir_subida =  __DIR__ . '/../Excels/';
+        $fichero_subido = $dir_subida . basename($_FILES['fichero_usuario']['name']);
+        if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido)) {
+        } else {
+            echo '¡posible ataque de subida de ficheros';
+        }
+    } else {
+        echo "este tipo de archivo no esta permitido";
+    }
 
-class MyReadFilter implements \PhpOffice\PhpSpreadsheet\Reader\IReadFilter
-{
-    
-    public function readCell($column, $row, $worksheetName = '')
+    require __DIR__ . '/../vendor/autoload.php';
+
+    class MyReadFilter implements \PhpOffice\PhpSpreadsheet\Reader\IReadFilter
     {
-        $fila = $_POST['fila'];
-        // Read title row and rows 20 - 30
-        if ($row >= $fila) {
-            return true;
-        }
-        return false;
-    }
-}
-$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
-$inputFileName = __DIR__.'/../Excels/'.$_FILES['fichero_usuario']['name'];
 
+        public function readCell($column, $row, $worksheetName = '')
+        {
 
-/**  Identify the type of $inputFileName  **/
-$inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($inputFileName);
-/**  Create a new Reader of the type that has been identified  **/
-$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
-//Leo datos para obtener una celda especifica
-$reader->setReadFilter(new MyReadFilter());
-/**  Load $inputFileName to a Spreadsheet Object  **/
-$spreadsheet = $reader->load($inputFileName);
-
-?>
-
-
-<center><table border="1">
-    <thead>
-        <tr>
-            <th>Alumno</th>
-        </tr>
-    </thead>
-
-    <?php
-    
-    $cantidad = $spreadsheet->getActiveSheet()->toArray();
-    foreach ($cantidad as $row) {
-        if ($row[0] != '') {
-            $alumnos[] = $row[$columna];
-            echo '<tr><td>' . $row[$columna] . '</td></tr>';
-
+            // Read title row and rows 20 - 30
+            if ($row >= 13) {
+                return true;
+            }
+            return false;
         }
     }
-    
-    ?>
+    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+    $inputFileName = __DIR__ . '/../Excels/' . $_FILES['fichero_usuario']['name'];
 
-</table></center>
 
-<form action='' method="POST">
-
-<?php
-echo '<input name="espe" type="text" value="'.$especialidad.'" disabled hidden>';
-for ($i = 0; $i<count($alumnos); $i++){
-
-    echo '<input name = "alumno[]" type="text" value="'.$alumnos[$i].'" disabled hidden>';
-}
-?>
-<label for="confimar">Está segur@ de Insertar esta lista?</label>
-<input type="submit" value="Confirmar" name="confirmado">
-<input type="submit" value="Cancelar" name="cancelar">
-</form>
-
-<?php
-}
-
-if(isset($_POST['confirmado'])){
-
-}
+    /**  Identify the type of $inputFileName  **/
+    $inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($inputFileName);
+    /**  Create a new Reader of the type that has been identified  **/
+    $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+    //Leo datos para obtener una celda especifica
+    $reader->setReadFilter(new MyReadFilter());
+    /**  Load $inputFileName to a Spreadsheet Object  **/
+    $spreadsheet = $reader->load($inputFileName);
 
 ?>
 
+
+    <center>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Alumno</th>
+                </tr>
+            </thead>
+
+            <?php
+
+            $cantidad = $spreadsheet->getActiveSheet()->toArray();
+            foreach ($cantidad as $row) {
+                if ($row[0] != '') {
+                    $alumnos[] = $row[1];
+                    echo '<tr><td>' . $row[1] . '</td></tr>';
+                }
+            }
+
+            ?>
+
+        </table>
+    </center>
+
+    <form action='' method="POST">
+
+
+        <label for="especialidad">Especialidad: </label>
+        <select name="especialidad" id="especialidad" oninput="mossec()">
+            <option value="...">...</option>
+            <option value="1">Combustion Interna</option>
+            <option value="2">Maquinas y herramientas</option>
+            <option value="3">Electricidad</option>
+            <option value="4">sistemas</option>
+            <option value="5">Mecatronica</option>
+        </select>
+        <label for="seccion">Seccion:</label>
+        <select name="seccion" id="seccion" disabled>
+        <option value="1">A</option>
+        <option value="2">B</option>
+        </select>
+        <?php
+        echo '<input name="excel" type="text" value="' . $nombre . '"  hidden>';
+        for ($i = 0; $i < count($alumnos); $i++) {
+
+            echo '<input name = "alumno[]" type="text" value="' . $alumnos[$i] . '" hidden>';
+        }
+        ?>
+        <input type="button" onclick="confirm()" value="Enviar">
+        <div id="confirmado" hidden>
+        <b><label for="confimar">Está segur@ de Insertar esta lista?</label></b>
+        <input type="submit" value="Confirmar" name="confirmado">
+        <input type="submit" value="Cancelar" name="cancelar" onclick="actualizar()">
+        </div>
+    </form>
+
+<?php
+}
+
+if (isset($_POST['confirmado'])) {
+    include('conexion.php');
+    $seccion = $_POST['seccion'];
+    $espe = $_POST['especialidad'];
+    if (!empty($_POST["alumno"]) && is_array($_POST["alumno"])) {
+        $alumnos = array();
+        foreach ($_POST["alumno"] as $alavertebra) {
+            $alumnos[] = $alavertebra;
+        }
+    }
+
+    for ($i = 0; $i < count($alumnos); $i++) {
+        $insert = "INSERT INTO alumnos (nombres,especialidad,grado,seccion) VALUES ('".$alumnos[$i]."',".$espe.",1,".$seccion.")";
+        $ejecuta = mysqli_query($mysqli,$insert);
+    }
+
+    echo 'lista insertada correctamente';
+}
+
+if (isset($_POST['cancelar'])) {
+    unlink(__DIR__ . '/../Excels/' . $_POST['excel']);
+}
+
+?>
