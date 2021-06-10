@@ -16,7 +16,7 @@ if (isset($_SESSION['matricula'])) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Bienvenido</title>
+	<title>Registro de falta</title>
 	<link rel="shortcut icon" href="icono/bateil png.ico">
 	<link rel="stylesheet" href="css/style.css">
 
@@ -38,8 +38,9 @@ if (isset($_SESSION['matricula'])) {
 			<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
 			<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
 		<?php } ?>
-		<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
-	</ul>
+		
+		<li class="cerrar"><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
+		</ul>
 
 	<?php
 

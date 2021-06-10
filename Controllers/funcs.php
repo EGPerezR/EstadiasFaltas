@@ -48,6 +48,15 @@
 			return false;
 		}		
 	}
+
+	function isNullfecha($fecha){
+		if(strlen(trim($fecha)) < 1 )
+		{
+			return true;
+			} else {
+			return false;
+		}		
+	}
 	
 	function isEmail($email)
 	{

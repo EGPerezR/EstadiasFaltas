@@ -105,8 +105,8 @@ if (isset($_POST['buscar'])) {
                         </thead>
                         <tr>
 
-                            <td>Nombres</td>
-                            <td style="width: 40px;">Faltas</td>
+                            <th>Nombres</th>
+                            <th style="width: 40px;">Faltas</hd>
                         </tr>
                         <?php
                         while ($lista = $result->fetch_assoc()) {
