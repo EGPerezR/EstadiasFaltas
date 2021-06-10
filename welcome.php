@@ -14,7 +14,7 @@ if (isset($_SESSION['matricula'])) {
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Bienvenido</title>
 	<link rel="shortcut icon" href="icono/bateil png.ico">
@@ -26,62 +26,27 @@ if (isset($_SESSION['matricula'])) {
 
 <body>
 
+
+
+	<ul class="nav-excel">
+		<li class='active'><a href='welcome.php'>Inicio</a></li>
+		<?php
+		$nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION['matricula'] . "' or usuario = '" . $_SESSION['usuairo'] . "' Limit 1";
+		$result = mysqli_query($mysqli, $nombre)  or die(mysqli_error($mysqli));
+		$rows = mysqli_fetch_array($result);
+		if ($rows['tipo_usuario'] == 1) { ?>
+			<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
+			<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
+		<?php } ?>
+		<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
+	</ul>
+
 	<?php
 
-	if (isset($_SESSION['matricula'])) {
-
-
-
-		echo "<label style='color:red;'>Biendvenid@ </label>" . $_SESSION['usuairo'];
-	} else {
-		header('Location: index.php'); //Aqui lo redireccionas al lugar que quieras.
-		die();
-	}
-
-
-
+	//echo "<label>Inicio de semana: </label>" . $lunes;
+	//echo "<br>fecha: " . date("Y-m-d");
 	?>
-	<div class="container">
-
-		<nav class='navbar navbar-default'>
-			<div class='container-fluid'>
-				<div class='navbar-header'>
-					<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'>
-						<span class='sr-only'>Men&uacute;</span>
-						<span class='icon-bar'></span>
-						<span class='icon-bar'></span>
-						<span class='icon-bar'></span>
-					</button>
-				</div>
-
-				<div id='navbar' class='navbar-collapse collapse'>
-					<ul class='nav navbar-nav'>
-						<li class='active'><a href='welcome.php'>Inicio</a></li>
-					</ul>
-
-					<?php
-					$nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION['matricula'] . "' or usuario = '" . $_SESSION['usuairo'] . "' Limit 1";
-					$result = mysqli_query($mysqli, $nombre)  or die(mysqli_error($mysqli));
-					$rows = mysqli_fetch_array($result);
-
-					if ($rows['tipo_usuario'] == 1) { ?>
-						<ul class='nav navbar-nav'>
-							<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
-							<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
-						</ul>
-					<?php } ?>
-
-					<ul class='nav navbar-nav navbar-right'>
-						<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<?php
-
-		echo "<label>Inicio de semana: </label>" . $lunes;
-		echo "<br>fecha: " . date("Y-m-d");
-		?>
+	<div class="faltas">
 		<form action="welcome.php" method="POST">
 			<label>Seleccione Especialidad</label>
 			<select name="especialidad" id="especialidad" oninput="enablegrado()">
@@ -145,6 +110,10 @@ if (isset($_SESSION['matricula'])) {
 		} else {
 			document.getElementById('seccion').disabled = false;
 		}
+	}
+
+	function off() {
+		document.getElementById("hecho").style.display = "none";
 	}
 </script>
 

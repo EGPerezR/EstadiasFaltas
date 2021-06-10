@@ -15,14 +15,12 @@ require 'Controllers/funcs.php';
 </head>
 
 <body>
-    <nav class="nav">
-        <li class="nav-item">
-            <a class="nav-link active" href="welcome.php">Inicio</a>
-        </li>
-        <li class="nav-item">
+<ul class="nav-excel">
+        
+        <li>
             <a class="nav-link disabled" href="welcome.php" tabindex="-1" aria-disabled="true">return</a>
         </li>
-    </nav>
+    </ul>
     <form action="" method="POST">
         <label>Especialidad: </label>
         <select name="especialidad" id="especialidad" oninput="enablegra()">

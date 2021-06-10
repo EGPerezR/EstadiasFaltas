@@ -31,28 +31,47 @@ if (isset($_POST['buscar'])) {
 
 
 ?>
+            <div class="tablafa">
+                <form action="" method="POST">
+                    <div class="matefa">
+                        <b><label>Materia</label></b>
+                        <?php
+                        //consulta de materias
+                        $materia = "SELECT * from materias where especialidad = $espe and grado = $grado";
+                        $mate = mysqli_query($mysqli, $materia);
 
-            <form action="" method="POST">
-                <label>Materia</label>
-                <?php
-                //consulta de materias
-                $materia = "SELECT * from materias where especialidad = $espe and grado = $grado";
-                $mate = mysqli_query($mysqli, $materia);
+                        if (mysqli_num_rows($mate) > 0) {
 
-                if (mysqli_num_rows($mate) > 0) {
-
-                ?>
-                    <select name="materia">
-                    <?php
-                    while ($materiasli = $mate->fetch_assoc()) {
-                        //muestra las materias
-                        echo "<option value='" . $materiasli['id_materia'] . "'>" . $materiasli['nombre'] . "</option>";
-                    }
-                }
-                    ?>
-                    </select>
+                        ?>
+                            <select name="materia">
+                            <?php
+                            while ($materiasli = $mate->fetch_assoc()) {
+                                //muestra las materias
+                                echo "<option value='" . $materiasli['id_materia'] . "'>" . $materiasli['nombre'] . "</option>";
+                            }
+                        }
+                            ?>
+                            </select>
+                            <input type="submit" value="Insertar" name="insertar">
+                    </div>
                     <table border="1">
-                        <thead>
+                        <thead style="
+                        <?php
+                        if ($espe == 4) {
+                            echo "background-color: ##87ec8b;";
+                        }
+                        if ($espe == 1) {
+                            echo "background-color: #f79595;";
+                        }
+                        if ($espe == 2) {
+                            echo "background-color: #7ea7ff;";
+                        }
+                        if ($espe == 3) {
+                            echo "background-color: #ffb87e;";
+                        }
+                        if ($espe == 5) {
+                            echo "background-color: #9d61fd;";
+                        }    ?>">
                             <td colspan="4">
                                 <center>
                                     <b>
@@ -98,9 +117,9 @@ if (isset($_POST['buscar'])) {
 
                     </table>
 
-                    <input type="submit" value="Insertar" name="insertar">
-            </form>
 
+                </form>
+            </div>
         <?php
 
         } else {
@@ -116,7 +135,7 @@ if (isset($_POST['buscar'])) {
 //cuando empieze a insertar las faltas
 if (isset($_POST['insertar'])) {
 
-    
+
     $hoy = date("Y-m-d");
     $lunes;
     $materia = $_POST['materia'];
@@ -153,7 +172,7 @@ echo $hoy."<br>";
 */
         }
 
-        echo "todos los datos se han insertado correctamente";
+        echo "<div class = 'hecho' id = 'hecho' ><div class='alert'><h1><a onclick='off()' href=''>X</a></h1><br><h1><b>Todos los datos se han insertado correctamente</b></h1><div></div>";
     }
 }
 ?>

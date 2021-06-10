@@ -11,15 +11,18 @@
 </head>
 
 <body>
-  <div>
+  <div class="login">
+    <div class="logo">
+      <img src="img/logo.png">
+    </div>
     <form action="Controllers/backlogin.php" method="POST">
       <label>Matricula o Usuario</label>
       <input type="text" id="matricula" name="matricula" placeholder="Matricula o Usuairo">
       <label>Contraseña</label>
       <input type="password" id="contra" name="contra" placeholder="Contraseña...">
-      <div class="popup" onclick="myFunction()">Olvidaste tu contraseña?
+      <center><div class="popup" onclick="myFunction()" >Olvidaste tu contraseña?
         <span class="popuptext" id="myPopup">En proceso...</span>
-      </div>
+      </div><center>
       <input type="submit" value="Iniciar Session">
       <a href="#">Registro</a>
     </form>
