@@ -31,7 +31,7 @@ if (isset($_POST['buscar'])) {
 
 
 ?>
-            <div class="tablafa">
+            <div class="tablafa" id="tablafa">
                 <form action="" method="POST">
                     <div class="matefa">
                         <b><label>Materia</label></b>
@@ -53,12 +53,13 @@ if (isset($_POST['buscar'])) {
                             ?>
                             </select>
                             <input type="submit" value="Insertar" name="insertar">
+                            <input type="button" value="Cancelar" onclick="offa()">
                     </div>
                     <table border="1">
                         <thead style="
                         <?php
                         if ($espe == 4) {
-                            echo "background-color: ##87ec8b;";
+                            echo "background-color: #87ec8b;";
                         }
                         if ($espe == 1) {
                             echo "background-color: #f79595;";

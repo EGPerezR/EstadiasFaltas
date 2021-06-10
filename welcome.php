@@ -115,6 +115,9 @@ if (isset($_SESSION['matricula'])) {
 	function off() {
 		document.getElementById("hecho").style.display = "none";
 	}
+	function offa(){
+		document.getElementById("tablafa").style.display = "none";
+	}
 </script>
 
 </html>
