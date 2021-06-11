@@ -18,18 +18,15 @@ if (isset($_SESSION['matricula'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Registro de falta</title>
 	<link rel="shortcut icon" href="icono/bateil png.ico">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
 
 
 
 </head>
 
 <body>
-
-
-
 	<ul class="nav-excel">
-		<li class='active'><a href='welcome.php'>Inicio</a></li>
+		<li><a href='welcome.php'>Inicio</a></li>
 		<?php
 		$nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION['matricula'] . "' or usuario = '" . $_SESSION['usuairo'] . "' Limit 1";
 		$result = mysqli_query($mysqli, $nombre)  or die(mysqli_error($mysqli));
@@ -37,10 +34,14 @@ if (isset($_SESSION['matricula'])) {
 		if ($rows['tipo_usuario'] == 1) { ?>
 			<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
 			<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
+			<!--<li><div><a href=''>Generador de QR <img src="img/qr.png" class="qr"></a></div></li>-->
 		<?php } ?>
-		
+
 		<li class="cerrar"><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
-		</ul>
+	</ul>
+
+
+
 
 	<?php
 
@@ -116,7 +117,8 @@ if (isset($_SESSION['matricula'])) {
 	function off() {
 		document.getElementById("hecho").style.display = "none";
 	}
-	function offa(){
+
+	function offa() {
 		document.getElementById("tablafa").style.display = "none";
 	}
 </script>

@@ -30,7 +30,7 @@ $pass = $_POST['contra'];
                 $_SESSION['usuairo'] = $guarda['usuario'];
             }
 
-            guardausuario($_SESSION['matricula']);
+            
 
 
             $usuario = $mysqli->query($sql);
@@ -43,10 +43,10 @@ $pass = $_POST['contra'];
 
 
             header("Location: ../welcome.php");
-        } else {
+        } $mysqli->close();/*else {
             echo '<h1 style= color:red;>El Usuario o password es incorrecto, <a href="../index.php">vuelva a intenarlo</a><h1><br/>';
             echo $result;
-        }
+        }*/
     }
 
 
