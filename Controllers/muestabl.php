@@ -123,6 +123,7 @@ if (isset($_POST['buscar'])) {
                             <tr>
                                 <th>Nombre alumno</th> <?php while ($rows = $materias->fetch_assoc()) {
                                                             echo "<th>" . $rows['nombre'] . "</th>";
+                                                            echo "<input type = 'text' value = '" . $rows['nombre'] . "' name='mate[]' hidden>";
                                                             $materia[] = $rows['nombre'];
                                                         }   ?> <th> Faltas de la semana No. <?php echo $semana;  ?></th>
                             </tr>

@@ -9,6 +9,9 @@ $seccion = "A";
 $espe = "maquinas y Herramientas";
 
 
+
+
+
 require  __DIR__ . '/../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
