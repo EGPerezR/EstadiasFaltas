@@ -64,7 +64,7 @@ if (isset($_POST['buscar'])) {
                         if ($espe == 5) {
                             echo "background-color: #9d61fd;";
                         }    ?>">
-                <form method="POST" action="">
+                <form method="POST" action="Controllers/creaexcel.php">
                     <center><b><label>Registro de faltas del grupo
                                 <?php echo $grado;  ?> de
                                 <?php
@@ -124,7 +124,7 @@ if (isset($_POST['buscar'])) {
                                 <th>Nombre alumno</th> <?php while ($rows = $materias->fetch_assoc()) {
                                                             echo "<th>" . $rows['nombre'] . "</th>";
                                                             echo "<input type = 'text' value = '" . $rows['nombre'] . "' name='mate[]' hidden>";
-                                                            $materia[] = $rows['nombre'];
+                                                            $materia[] = $rows['nombre'];  
                                                         }   ?> <th> Faltas de la semana No. <?php echo $semana;  ?></th>
                             </tr>
                         </thead>

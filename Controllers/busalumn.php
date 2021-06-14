@@ -164,13 +164,6 @@ if (isset($_POST['insertar'])) {
         for ($i = 0; $i < count($faltas); $i++) {
             $insert = "INSERT INTO faltas (id_alumno, id_profesor,  id_materia, faltas, semana, dia_registro) VALUES(" . $alumnos[$i] . ",'" . $_SESSION['matricula'] . "'," . $materia . "," . $faltas[$i] . ",'" . $lunes . "','" . $hoy . "')";
             $insertando = mysqli_query($mysqli, $insert);
-            /*echo $alumnos[$i]."<br>";
-echo $_SESSION['matricula']."<br>";
-echo $materia."<br>";
-echo $faltas[$i]."<br>";
-echo $lunes."<br>";
-echo $hoy."<br>";
-*/
         }
 
         echo "<div class = 'hecho' id = 'hecho' ><div class='alert'><h1><a onclick='off()' href=''>X</a></h1><br><h1><b>Todos los datos se han insertado correctamente</b></h1><div></div>";
