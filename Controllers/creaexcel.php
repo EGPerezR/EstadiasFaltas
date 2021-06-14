@@ -97,8 +97,8 @@ $styleArray = [
     ],
 ];
 $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(20);
-$spreadsheet->getActiveSheet()->mergeCells('C2:H2');
-$sheet->setCellValue('C2', 'Registro de faltas del grupo ' . $grado . ' de ' . $espe . ' del ' . $seccion . '');
+$spreadsheet->getActiveSheet()->mergeCells('B2:H2');
+$sheet->setCellValue('B2', 'Registro de faltas del grupo ' . $grado . ' de ' . $espe . ' del ' . $seccion . '');
 
 $spreadsheet->getActiveSheet()->getCell('A4')->setValue($bold);
 $col = $colu;
@@ -142,9 +142,9 @@ $colu++;
 $spreadsheet->getActiveSheet()->mergeCells($colu1 . $filama . ':' . $colu . $filama);
 
 
-
-//$sheet->setCellValue('A1', 'Hello World !');
-//$sheet->setCellValue('A1', 'Hello World !');
-
 $writer = new Xlsx($spreadsheet);
-$writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.'.xlsx');
+
+
+if($writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.'.xlsx')){
+header('Location:'.__DIR__.'/../tablafaltas.php');
+}
