@@ -21,9 +21,7 @@ if (!empty($_POST["mate"]) && is_array($_POST["mate"])) {
     echo "nada paso";
 }
 
-for ($i = 0; $i < count($materia); $i++) {
-    echo $materia[$i] . "<br>";
-}
+
 
 //construccion de los nombres
 
@@ -36,9 +34,7 @@ if (!empty($_POST["nombre"]) && is_array($_POST["nombre"])) {
 } else {
     echo "nada paso";
 }
-for ($i = 0; $i < count($nombrea); $i++) {
-    echo $nombrea[$i] . "<br>";
-}
+
 
 //construccion de las faltas de la semana por materia
 
@@ -52,9 +48,7 @@ if (!empty($_POST["faltase"]) && is_array($_POST["faltase"])) {
     echo "nada paso";
 }
 
-for ($i = 0; $i < count($faltase); $i++) {
-    echo $faltase[$i] . "<br>";
-}
+
 
 //Construccion de las faltas totales del alumno
 if (!empty($_POST["faltato"]) && is_array($_POST["faltato"])) {
@@ -68,9 +62,7 @@ if (!empty($_POST["faltato"]) && is_array($_POST["faltato"])) {
 }
 
 
-for ($i = 0; $i < count($faltat); $i++) {
-    echo $faltat[$i];
-}
+
 
 
 
@@ -145,6 +137,5 @@ $spreadsheet->getActiveSheet()->mergeCells($colu1 . $filama . ':' . $colu . $fil
 $writer = new Xlsx($spreadsheet);
 
 
-if($writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.'.xlsx')){
-header('Location:'.__DIR__.'/../tablafaltas.php');
-}
+$writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.'.xlsx');
+header('Location: ../tablafaltas.php');
