@@ -52,10 +52,29 @@ require 'Controllers/funcs.php';
                 <option value="1">A</option>
                 <option value="2">B</option>
             </select>
-
-            <label>De la semana: (escoger inicio de la semana -> lunes)</label>
-            <input type="date" name="semana" id="semana" disabled>
-            <input type="submit" value="buscar" name="buscar">
+            <label for="por dia">Por Día</label>
+            <input type="checkbox" name="dia" id="dia" onclick="showfe()" value="dia">
+            <label for="por dia">Por Semana</label>
+            <input type="checkbox" name="semana" id="semana" onclick="showfe()" value="mes">
+            <label for="por dia">Por Mes</label>
+            <input type="checkbox" name="mes" id="mes" onclick="showfe()" value="semana">
+            <br> 
+            <br> 
+            <div id="fecha1" style="display: none;">
+                <label>Seleccione Dia</label>
+                <input type="date" name="semana" id="semana1" disabled>
+                <input type="submit" value="buscar" name="buscar">
+            </div>
+            <div id="fecha2" style="display: none;">
+                <label>Seleccione semana: (inicio de la semana -> lunes)</label>
+                <input type="date" name="semana" id="semana2" disabled>
+                <input type="submit" value="buscar" name="buscar">
+            </div>
+            <div id="fecha3" style="display: none;">
+                <label>Seleccione Mes: (escoger inicio de la semana -> lunes)</label>
+                <input type="date" name="semana" id="semana3" disabled>
+                <input type="submit" value="buscar" name="buscar">
+            </div>
         </form>
     </div>
 
@@ -100,6 +119,55 @@ require 'Controllers/funcs.php';
 
     function offtab() {
         document.getElementById("tabfal").style.display = "none";
+    }
+
+    function alerta() {
+        alert("Su tabla se ha creado exitosamente");
+    }
+
+
+
+    function showfe() {
+        element1 = document.getElementById("fecha1");
+        check1 = document.getElementById("dia");
+        element2 = document.getElementById("fecha2");
+        check2 = document.getElementById("semana");
+        element3 = document.getElementById("fecha3");
+        check3 = document.getElementById("mes");
+        if (check1.checked) {
+            check2.checked = false;
+            check3.checked = false;
+            document.getElementById('semana1').disabled = false;
+            document.getElementById('semana3').disabled = true;
+            document.getElementById('semana2').disabled = true;
+            element1.style.display = 'block';
+            element2.style.display = 'none';
+            element3.style.display = 'none';
+        } else {
+            element1.style.display = 'none';
+        }
+        if (check2.checked) {
+            check1.checked = false;
+            check3.checked = false;
+            element2.style.display = 'block';
+            element1.style.display = 'none';
+            document.getElementById('semana2').disabled = false;
+            document.getElementById('semana3').disabled = true;
+            document.getElementById('semana1').disabled = true;
+            element3.style.display = 'none';
+        } else {
+            element2.style.display = 'none';
+        }
+        if (check3.checked) {
+            check1.checked = false;
+            check2.checked = false;
+            element3.style.display = 'block';
+            element1.style.display = 'none';
+            document.getElementById('semana3').disabled = false;
+            element2.style.display = 'none';
+        } else {
+            element3.style.display = 'none';
+        }
     }
 </script>
 

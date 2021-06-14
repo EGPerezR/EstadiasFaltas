@@ -138,4 +138,5 @@ $writer = new Xlsx($spreadsheet);
 
 
 $writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.'.xlsx');
+
 header('Location: ../tablafaltas.php');

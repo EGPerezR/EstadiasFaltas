@@ -44,8 +44,8 @@ if (isset($_POST['buscar'])) {
 
 
 ?>
-        <div class="tabfal" id="tabfal" onclick="offtab()">
-
+        <div class="tabfal" id="tabfal" >
+            
             <div class="tablafal" style="
             
                         <?php
@@ -63,7 +63,7 @@ if (isset($_POST['buscar'])) {
                         }
                         if ($espe == 5) {
                             echo "background-color: #9d61fd;";
-                        }    ?>">
+                        }    ?>"><a href="" onclick="offtab()" style="color = red;">X</a>
                 <form method="POST" action="Controllers/creaexcel.php">
                     <center><b><label>Registro de faltas del grupo
                                 <?php echo $grado;  ?> de
@@ -183,7 +183,7 @@ if (isset($_POST['buscar'])) {
                     <br>
                     <div class="imprimir">
 
-                        <input type="submit" value="Imprimir" name="imprimir">
+                        <input type="submit" value="Imprimir" name="imprimir" onclick="alerta()">
                 </form>
             </div>
         </div>
