@@ -111,7 +111,7 @@ if (isset($_POST['buscar'])) {
                         <?php
                         while ($lista = $result->fetch_assoc()) {
                             //muestra los alumnos 
-                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' style='width: 80%;' name='faltas[]' value='0'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td></tr>";
+                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='0' style='width: 80%;' name='faltas[]' value='0'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td></tr>";
                         }
 
                         ?>

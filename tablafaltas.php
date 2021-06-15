@@ -53,11 +53,11 @@ require 'Controllers/funcs.php';
                 <option value="2">B</option>
             </select>
             <label for="por dia">Por Día</label>
-            <input type="checkbox" name="dia" id="dia" onclick="showfe()" value="dia">
+            <input type="checkbox" name="seleccion1" id="dia" onclick="showfe()" value="1">
             <label for="por dia">Por Semana</label>
-            <input type="checkbox" name="semana" id="semana" onclick="showfe()" value="mes">
+            <input type="checkbox" name="seleccion2" id="semana" onclick="showfe()" value="1">
             <label for="por dia">Por Mes</label>
-            <input type="checkbox" name="mes" id="mes" onclick="showfe()" value="semana">
+            <input type="checkbox" name="seleccion3" id="mes" onclick="showfe()" value="1">
             <br> 
             <br> 
             <div id="fecha1" style="display: none;">
@@ -71,8 +71,21 @@ require 'Controllers/funcs.php';
                 <input type="submit" value="buscar" name="buscar">
             </div>
             <div id="fecha3" style="display: none;">
-                <label>Seleccione Mes: (escoger inicio de la semana -> lunes)</label>
-                <input type="date" name="semana" id="semana3" disabled>
+                <label>Seleccione Mes:</label>
+                <select name="mes" id="semana3" disabled>
+                <option value="Enero">Enero</option>
+                <option value="Febrero">Febrero</option>
+                <option value="Marzo">Marzo</option>
+                <option value="Abril">Abril</option>
+                <option value="Mayo">Mayo</option>
+                <option value="Junio">Junio</option>
+                <option value="Julio">Julio</option>
+                <option value="Agosto">Agosto</option>
+                <option value="Septiembre">Septiembre</option>
+                <option value="Octubre">Octubre</option>
+                <option value="Noviembre">Noviembre</option>
+                <option value="Diciembre">Diciembre</option>
+                </select>
                 <input type="submit" value="buscar" name="buscar">
             </div>
         </form>
@@ -135,20 +148,16 @@ require 'Controllers/funcs.php';
         element3 = document.getElementById("fecha3");
         check3 = document.getElementById("mes");
         if (check1.checked) {
-            check2.checked = false;
-            check3.checked = false;
+            
             document.getElementById('semana1').disabled = false;
-            document.getElementById('semana3').disabled = true;
-            document.getElementById('semana2').disabled = true;
+            element3.style.display = 'none';
             element1.style.display = 'block';
             element2.style.display = 'none';
-            element3.style.display = 'none';
         } else {
             element1.style.display = 'none';
         }
         if (check2.checked) {
-            check1.checked = false;
-            check3.checked = false;
+            
             element2.style.display = 'block';
             element1.style.display = 'none';
             document.getElementById('semana2').disabled = false;
@@ -159,11 +168,11 @@ require 'Controllers/funcs.php';
             element2.style.display = 'none';
         }
         if (check3.checked) {
-            check1.checked = false;
-            check2.checked = false;
             element3.style.display = 'block';
             element1.style.display = 'none';
             document.getElementById('semana3').disabled = false;
+            document.getElementById('semana2').disabled = true;
+            document.getElementById('semana1').disabled = true;
             element2.style.display = 'none';
         } else {
             element3.style.display = 'none';

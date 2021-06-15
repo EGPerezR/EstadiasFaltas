@@ -90,7 +90,10 @@ $styleArray = [
 ];
 $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(20);
 $spreadsheet->getActiveSheet()->mergeCells('B2:H2');
-$sheet->setCellValue('B2', 'Registro de faltas del grupo ' . $grado . ' de ' . $espe . ' del ' . $seccion . '');
+$titulo = new RichText();
+$negro = $titulo->createTextRun('Registro de faltas del grupo ' . $grado . ' de ' . $espe . ' del ' . $seccion );
+$negro->getFont()->setBold(true);
+$sheet->setCellValue('B2', $titulo );
 
 $spreadsheet->getActiveSheet()->getCell('A4')->setValue($bold);
 $col = $colu;
@@ -128,15 +131,37 @@ for ($j = 0; $j < count($faltat); $j++) {
     $fila4++;
     $sheet->setCellValue($colu3 . $fila4, $faltat[$j]);
 }
-$sheet->setCellValue($colu . $filama, 'semana No.');
+if($_POST['seleccion'] == 1){
+    $sheet->setCellValue($colu . $filama, 'Dia '.date('Y-m-d'));
+}
+if($_POST['seleccion'] == 2){
+    $semana = $_POST['sema'];
+    $sheet->setCellValue($colu . $filama, 'semana No. '.$semana);
+}
+if($_POST['seleccion'] == 3){
+    $mes = $_POST['mes'];
+    $sheet->setCellValue($colu . $filama, 'Faltas de '.$mes);
+}
+
 $colu1 = $colu;
+$colu++;
 $colu++;
 $spreadsheet->getActiveSheet()->mergeCells($colu1 . $filama . ':' . $colu . $filama);
 
 
 $writer = new Xlsx($spreadsheet);
 
+if($_POST['seleccion'] == 1){
+    $writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.' del Dia '.date('Y-m-d').'.xlsx');
+}
+if($_POST['seleccion'] == 2){
+    $no = $_POST['semana'];
+    $writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.' de la semana '.$no.'.xlsx');
+}
+if($_POST['seleccion'] == 3){
+    $mes = $_POST['mes'];
+    $writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.' del mes de '.$mes.'.xlsx');
+}
 
-$writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.'.xlsx');
 
 header('Location: ../tablafaltas.php');

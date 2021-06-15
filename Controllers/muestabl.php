@@ -19,14 +19,12 @@ if (isset($_POST['buscar'])) {
         echo '<script>
             alert("Seleccionar una Seccion");
           </script>';
-    } else if (isNullfecha($_POST['semana'])) {
-        echo '<script>
-        alert("Seleccionar una fecha");
-      </script>';
     } else {
         $grado = $_POST['grado'];
         $espe = $_POST['especialidad'];
         $secc = $_POST['seccion'];
+        $mes = $_POST['mes'];
+
         $fechaselect = $_POST['semana'];
         $materia = [];
         $i = 0;
@@ -44,8 +42,8 @@ if (isset($_POST['buscar'])) {
 
 
 ?>
-        <div class="tabfal" id="tabfal" >
-            
+        <div class="tabfal" id="tabfal">
+
             <div class="tablafal" style="
             
                         <?php
@@ -116,16 +114,47 @@ if (isset($_POST['buscar'])) {
                         echo "<input type='text' value = 'B' name='secc' hidden>";
                     }
                     echo "<input type = 'text' value = '" . $grado . "' name='gra' hidden>";
+
                     ?>
                     <table class="table table-light" border="1">
                         <thead class="thead-light">
 
                             <tr>
-                                <th>Nombre alumno</th> <?php while ($rows = $materias->fetch_assoc()) {
-                                                            echo "<th>" . $rows['nombre'] . "</th>";
-                                                            echo "<input type = 'text' value = '" . $rows['nombre'] . "' name='mate[]' hidden>";
-                                                            $materia[] = $rows['nombre'];  
-                                                        }   ?> <th> Faltas de la semana No. <?php echo $semana;  ?></th>
+                                <th>Nombre alumno</th>
+                                <?php while ($rows = $materias->fetch_assoc()) {
+                                    echo "<th>" . $rows['nombre'] . "</th>";
+                                    echo "<input type = 'text' value = '" . $rows['nombre'] . "' name='mate[]' hidden>";
+                                    $materia[] = $rows['nombre'];
+                                }   ?>
+                                <?php
+                                if (isset($_POST['seleccion1'])) {
+                                    echo "<input type ='text' value = '1' name='seleccion' hidden>";
+                                ?>
+                                    <th> Faltas del dia <?php echo date('Y-m-d');  ?></th>
+                                <?php
+                                }
+                                ?>
+                                <?php
+                                if (isset($_POST['seleccion2'])) {
+                                    echo "<input type ='text' value = '2' name='seleccion' hidden>";
+                                    echo "<input type ='text' value = '" . $fechaselect . "' name='sema' hidden>";
+                                    echo "<input type ='text' value = '" . $semana . "' name='semana' hidden>";
+
+                                ?>
+                                    <th> Faltas de la semana No. <?php echo $semana;  ?></th>
+                                <?php
+                                }
+                                ?>
+                                <?php
+                                if (isset($_POST['seleccion3'])) {
+
+                                    echo "<input type ='text' value = '3' name='seleccion' hidden>";
+                                    echo "<input type ='text' value = '" . $mes . "' name='mes' hidden>";
+                                ?>
+                                    <th> Faltas del Mes de <?php echo $mes;  ?></th>
+                                <?php
+                                }
+                                ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -139,42 +168,505 @@ if (isset($_POST['buscar'])) {
                                 echo "</td>";
 
                                 for ($i = 0; $i < count($materia); $i++) {
-                                    $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana = "' . $fechaselect . '"';
 
-                                    $falta = mysqli_query($mysqli, $bufa);
 
-                                    $fa = $falta->fetch_assoc();
 
+                                    if (isset($_POST['seleccion1'])) {
+                                        if (isNullfecha($_POST['semana'])) {
+                                            echo '<script>
+                                            alert("Seleccionar una fecha");
+                                          </script>';
+                                        } else {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.dia_registro = "' . $fechaselect . '"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        }
+                                    } else if (isset($_POST['seleccion2'])) {
+                                        if (isNullfecha($_POST['semana'])) {
+                                            echo '<script>
+                                            alert("Seleccionar una fecha");
+                                          </script>';
+
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana = "' . $fechaselect . '"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        }
+                                    } else if (isset($_POST['seleccion3'])) {
+
+                                        if ($mes == 'Enero') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-01-01" AND faltas.semana <= "2021-01-31"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Febrero') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-02-01" AND faltas.semana <= "2021-02-28"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Marzo') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-03-01" AND faltas.semana <= "2021-03-31"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Abril') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-04-01" AND faltas.semana <= "2021-04-30"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Mayo') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-05-01" AND faltas.semana <= "2021-05-31"';
+                                            echo $bufa;
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Junio') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-06-01" AND faltas.semana <= "2021-06-30"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Julio') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-07-01" AND faltas.semana <= "2021-07-31"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Agosto') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-08-01" AND faltas.semana <= "2021-08-31"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Septiembre') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-09-01" AND faltas.semana <= "2021-09-30"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Octubre') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-10-01" AND faltas.semana <= "2021-10-31"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Noviembre') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-11-01" AND faltas.semana <= "2021-11-30"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        } else if ($mes == 'Diciembre') {
+                                            $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-12-01" AND faltas.semana <= "2021-12-31"';
+
+                                            $falta = mysqli_query($mysqli, $bufa);
+
+                                            $fa = $falta->fetch_assoc();
+
+                                            echo "<td>";
+                                            if (empty($fa['faltas'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                            } else {
+                                                echo $fa['faltas'];
+                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                        }
+                                    }
+                                }
+
+
+
+                                if (isset($_POST['seleccion1'])) {
                                     echo "<td>";
-                                    if (empty($fa['faltas'])) {
+                                    $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND dia_registro = "' . $fechaselect . '")';
+
+                                    $total = mysqli_query($mysqli, $totfa);
+                                    $to = $total->fetch_assoc();
+                                    if (empty($to['falta'])) {
                                         echo "0";
-                                        echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                        echo "<input type='text' value='0' name='faltato[]'  hidden>";
                                     } else {
-                                        echo $fa['faltas'];
-                                        echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                        echo $to['falta'];
+                                        echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
                                     }
 
                                     echo "</td>";
+                                    echo "</tr>";
+                                } else if (isset($_POST['seleccion2'])) {
+                                    echo "<td>";
+                                    $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND semana = "' . $fechaselect . '")';
+
+                                    $total = mysqli_query($mysqli, $totfa);
+                                    $to = $total->fetch_assoc();
+                                    if (empty($to['falta'])) {
+                                        echo "0";
+                                        echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                    } else {
+                                        echo $to['falta'];
+                                        echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                    }
+
+                                    echo "</td>";
+                                    echo "</tr>";
+                                } else if (isset($_POST['seleccion3'])) {
+                                    if ($mes == 'Enero') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-01-01" AND faltas.semana <= "2021-01-31")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Febrero') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-02-01" AND faltas.semana <= "2021-02-28")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Marzo') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-03-01" AND faltas.semana <= "2021-03-31")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Abril') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" faltas.semana >= "2021-04-01" AND faltas.semana <= "2021-04-30")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Mayo') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-05-01" AND faltas.semana <= "2021-05-31")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Junio') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-06-01" AND faltas.semana <= "2021-06-30")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Julio') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-07-01" AND faltas.semana <= "2021-07-31")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Agosto') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-08-01" AND faltas.semana <= "2021-08-31")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Septiembre') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-09-01" AND faltas.semana <= "2021-09-30")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Octubre') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-10-01" AND faltas.semana <= "2021-10-31")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Noviembre') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-11-01" AND faltas.semana <= "2021-11-30")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    if ($mes == 'Diciembre') {
+                                        echo "<td>";
+                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-12-01" AND faltas.semana <= "2021-12-31")';
+
+                                        $total = mysqli_query($mysqli, $totfa);
+                                        $to = $total->fetch_assoc();
+                                        if (empty($to['falta'])) {
+                                            echo "0";
+                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                        } else {
+                                            echo $to['falta'];
+                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                        }
+
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
                                 }
-
-
-
-
-
-                                echo "<td>";
-                                $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND semana = "' . $fechaselect . '")';
-                                $total = mysqli_query($mysqli, $totfa);
-                                $to = $total->fetch_assoc();
-                                if (empty($to['falta'])) {
-                                    echo "0";
-                                    echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                } else {
-                                    echo $to['falta'];
-                                    echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
-                                }
-
-                                echo "</td>";
-                                echo "</tr>";
                             }
 
                             ?>
