@@ -98,7 +98,7 @@ if (isset($_POST['Insertar'])) {
                                 <label for="advertencia" style="background-color: yellow; color: red; padding: 5px; width:100%;">Advertencia</label><br>
                                 <b><label for="confimar">Está segur@ de Insertar esta lista?</label></b>
                                 <input type="submit" value="Confirmar" name="confirmado">
-                                <input type="submit" value="Cancelar" name="cancelar" onclick="actualizar()">
+                                <input type="submit" value="Cancelar" name="cancelar" style="background-color: #af4f4c;" onclick="actualizar()">
                             </div>
                         </div>
                     </form>

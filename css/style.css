@@ -420,6 +420,7 @@ td {
 .alert a {
     color: red;
     margin-left: 95%;
+    cursor:pointer;
     float: left;
 }
 

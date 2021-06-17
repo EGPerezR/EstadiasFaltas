@@ -166,7 +166,7 @@ if (isset($_POST['insertar'])) {
             $insertando = mysqli_query($mysqli, $insert);
         }
 
-        echo "<div class = 'hecho' id = 'hecho' ><div class='alert'><h1><a onclick='off()' href=''>X</a></h1><br><h1><b>Todos los datos se han insertado correctamente</b></h1><div></div>";
+        echo "<div class = 'hecho' id = 'hecho' ><div class='alert'><label><a onclick='off()' href=''>X</a></h1><br><h1><b>Todos los datos se han insertado correctamente</b></label><div></div>";
     }
 }
 ?>

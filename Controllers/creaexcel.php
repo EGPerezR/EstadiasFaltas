@@ -74,32 +74,38 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 $spreadsheet = new Spreadsheet();
+
 $bold = new RichText();
 $cambio = $bold->createTextRun('Alumno');
 $cambio->getFont()->setbold(true);
 
-$spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-$sheet = $spreadsheet->getActiveSheet();
+
 $styleArray = [
     'borders' => [
         'outline' => [
-            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-            'color' => ['argb' => 'FFFF0000'],
+            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+            'color' => ['argb' => '000000'],
         ],
     ],
 ];
-$spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+$spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+$sheet = $spreadsheet->getActiveSheet();
+$spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(25);
 $spreadsheet->getActiveSheet()->mergeCells('B2:H2');
 $titulo = new RichText();
-$negro = $titulo->createTextRun('Registro de faltas del grupo ' . $grado . ' de ' . $espe . ' del ' . $seccion );
+$negro = $titulo->createTextRun('Registro de faltas del grupo ' . $grado . ' de ' . $espe . ' del ' . $seccion);
 $negro->getFont()->setBold(true);
-$sheet->setCellValue('B2', $titulo );
+$sheet->setCellValue('B2', $titulo);
 
+//$spreadsheet->getActiveSheet()->getStyle('A4')->getBorders()->getAllBorders()->setBorderStyle(true);
+$sheet->getStyle('A4')->applyFromArray($styleArray);
 $spreadsheet->getActiveSheet()->getCell('A4')->setValue($bold);
+
 $col = $colu;
 for ($i = 0; $i < count($materia); $i++) {
     $sheet->setCellValue($colu . $filama, $materia[$i]);
-
+    $sheet->getStyle($colu . $filama)->applyFromArray($styleArray);
+    //$spreadsheet->getActiveSheet()->getStyle($colu . $filama)->getBorders()->getAllBorders()->setBorderStyle(true);
     $colu++;
 }
 $colu2 = $colu;
@@ -110,10 +116,14 @@ $fila4 = $filama;
 $fila5 = $filama;
 $colu3 = $colu2++;
 for ($a = 0; $a < count($nombrea); $a++) {
+    $sheet->getStyle($colmal . $filalm)->applyFromArray($styleArray);
+    //$spreadsheet->getActiveSheet()->getStyle($colmal . $filalm)->getBorders()->getAllBorders()->setBorderStyle(true);
     $sheet->setCellValue($colmal . $filalm, $nombrea[$a]);
     $colupa = $col;
     for ($m = 0; $m < count($materia); $m++) {
         if ($o < count($faltase)) {
+            $sheet->getStyle($colupa . $filalm)->applyFromArray($styleArray);
+            //$spreadsheet->getActiveSheet()->getStyle($colupa . $filalm)->getBorders()->getBottom()->setBorderStyle(true);
             $sheet->setCellValue($colupa . $filalm, $faltase[$o]);
             $colupa++;
             $o++;
@@ -125,42 +135,49 @@ for ($a = 0; $a < count($nombrea); $a++) {
     $fila1++;
     $fila2++;
     $spreadsheet->getActiveSheet()->mergeCells($colu3 . $fila1 . ':' . $colu2 . $fila2);
+    $sheet->getStyle($colu3 . $fila1 . ':' . $colu2 . $fila2)->applyFromArray($styleArray);
+    //$spreadsheet->getActiveSheet()->getStyle($colu3 . $fila1 . ':' . $colu2 . $fila2)->getBorders()->getAllBorders()->setBorderStyle(true);
 }
 
 for ($j = 0; $j < count($faltat); $j++) {
     $fila4++;
     $sheet->setCellValue($colu3 . $fila4, $faltat[$j]);
+    $sheet->getStyle($colu3 . $fila4)->applyFromArray($styleArray);
+    //$spreadsheet->getActiveSheet()->getStyle($colu3 . $fila4)->getBorders()->getAllBorders()->setBorderStyle(true);
 }
-if($_POST['seleccion'] == 1){
-    $sheet->setCellValue($colu . $filama, 'Dia '.date('Y-m-d'));
+if ($_POST['seleccion'] == 1) {
+    $sheet->getStyle($colu . $filama)->applyFromArray($styleArray);
+    $sheet->setCellValue($colu . $filama, 'Dia ' . date('Y-m-d'));
 }
-if($_POST['seleccion'] == 2){
+if ($_POST['seleccion'] == 2) {
     $semana = $_POST['sema'];
-    $sheet->setCellValue($colu . $filama, 'semana No. '.$semana);
+    $sheet->getStyle($colu . $filama)->applyFromArray($styleArray);
+    $sheet->setCellValue($colu . $filama, 'semana No. ' . $semana);
 }
-if($_POST['seleccion'] == 3){
+if ($_POST['seleccion'] == 3) {
     $mes = $_POST['mes'];
-    $sheet->setCellValue($colu . $filama, 'Faltas de '.$mes);
+    $sheet->getStyle($colu . $filama)->applyFromArray($styleArray);
+    $sheet->setCellValue($colu . $filama, 'Faltas de ' . $mes);
 }
 
 $colu1 = $colu;
 $colu++;
-$colu++;
 $spreadsheet->getActiveSheet()->mergeCells($colu1 . $filama . ':' . $colu . $filama);
+$spreadsheet->getActiveSheet()->getColumnDimension($colu1)->setWidth(15);
 
 
 $writer = new Xlsx($spreadsheet);
 
-if($_POST['seleccion'] == 1){
-    $writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.' del Dia '.date('Y-m-d').'.xlsx');
+if ($_POST['seleccion'] == 1) {
+    $writer->save(__DIR__ . '/../Impreso/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
 }
-if($_POST['seleccion'] == 2){
+if ($_POST['seleccion'] == 2) {
     $no = $_POST['semana'];
-    $writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.' de la semana '.$no.'.xlsx');
+    $writer->save(__DIR__ . '/../Impreso/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx');
 }
-if($_POST['seleccion'] == 3){
+if ($_POST['seleccion'] == 3) {
     $mes = $_POST['mes'];
-    $writer->save(__DIR__.'/../Impreso/Tabla de faltas de la semana de '.$espe.' de '.$grado.' grado del '.$seccion.' del mes de '.$mes.'.xlsx');
+    $writer->save(__DIR__ . '/../Impreso/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
 }
 
 
