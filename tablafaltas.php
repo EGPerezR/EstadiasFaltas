@@ -135,7 +135,7 @@ require 'Controllers/funcs.php';
     }
 
     function alerta() {
-        alert("Su tabla se ha creado exitosamente");
+        alert("Su tabla se ha creado exitosamente en su escritorio :D");
     }
 
 
