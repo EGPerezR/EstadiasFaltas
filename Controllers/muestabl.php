@@ -33,7 +33,7 @@ if (isset($_POST['buscar'])) {
         $materias = mysqli_query($mysqli, $buscarm);
 
         //busca los alumnos de una especialidad, grado y seccion
-        $busa = "SELECT nombres from alumnos where grado= $grado and especialidad = $espe and seccion = $secc";
+        $busa = "SELECT nombres from alumnos where grado= $grado and especialidad = $espe and seccion = $secc ORDER BY nombres ASC";
         $alumnos = mysqli_query($mysqli, $busa);
 
 

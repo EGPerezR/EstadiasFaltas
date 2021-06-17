@@ -169,8 +169,12 @@ $spreadsheet->getActiveSheet()->getColumnDimension($colu1)->setWidth(15);
 $writer = new Xlsx($spreadsheet);
 $usuario = getenv('USERNAME');
 $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels';
+
+
 if(!is_dir($ruta)){
     mkdir($ruta);
+    echo $ruta;
+    /*
 if ($_POST['seleccion'] == 1) {
     $writer->save( 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
     header('Location: ../tablafaltas.php');
@@ -184,9 +188,11 @@ if ($_POST['seleccion'] == 3) {
     $mes = $_POST['mes'];
     $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
     header('Location: ../tablafaltas.php');
-}
+}*/
 }else {
-
+    
+    /*
+    
 if ($_POST['seleccion'] == 1) {
     $writer->save( 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
     header('Location: ../tablafaltas.php');
@@ -200,7 +206,25 @@ if ($_POST['seleccion'] == 3) {
     $mes = $_POST['mes'];
     $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
     header('Location: ../tablafaltas.php');
-}
+}*/
 }
 
 
+function get_client_ip() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}

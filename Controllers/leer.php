@@ -9,9 +9,10 @@ if (isset($_POST['Insertar'])) {
     $info = new SplFileInfo($_FILES['fichero_usuario']['name']);
     $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);
     $dir_subida =  __DIR__ . '/../Excels';
-    if ($extension == 'xlsx') {
+    if ($extension == 'xlsx' or $extension == 'xls') {
         $tmp_name = $_FILES['fichero_usuario']['tmp_name'];
         $name = basename($_FILES['fichero_usuario']['name']);
+        
         if (move_uploaded_file($tmp_name, $dir_subida . '/' . $name)) {
             require __DIR__ . '/../vendor/autoload.php';
 
@@ -29,17 +30,28 @@ if (isset($_POST['Insertar'])) {
                 }
             }
             $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+            $re = new \PHPOffice\PhpSpreadsheet\Reader\Xls();
             $inputFileName = __DIR__ . '/../Excels/' . $_FILES['fichero_usuario']['name'];
 
 
             /**  Identify the type of $inputFileName  **/
             $inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($inputFileName);
-            /**  Create a new Reader of the type that has been identified  **/
-            $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
-            //Leo datos para obtener una celda especifica
-            $reader->setReadFilter(new MyReadFilter());
-            /**  Load $inputFileName to a Spreadsheet Object  **/
-            $spreadsheet = $reader->load($inputFileName);
+            if ($extension == 'xlsx') {
+                /**  Create a new Reader of the type that has been identified  **/
+                $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+                //Leo datos para obtener una celda especifica
+                $reader->setReadFilter(new MyReadFilter());
+                /**  Load $inputFileName to a Spreadsheet Object  **/
+                $spreadsheet = $reader->load($inputFileName);
+            } else if($extension == 'xls'){
+                /**  Create a new Reader of the type that has been identified  **/
+                $re = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+                //Leo datos para obtener una celda especifica
+                $re->setReadFilter(new MyReadFilter());
+                /**  Load $inputFileName to a Spreadsheet Object  **/
+                $spreadsheet = $re->load($inputFileName);
+            }
+
 
 ?>
 
@@ -58,6 +70,7 @@ if (isset($_POST['Insertar'])) {
                     $cantidad = $spreadsheet->getActiveSheet()->toArray();
                     foreach ($cantidad as $row) {
                         if ($row[0] != '') {
+                            asort($alumnos);
                             $alumnos[] = $row[1];
                             echo '<tr><td>' . $row[1] . '</td></tr>';
                         }

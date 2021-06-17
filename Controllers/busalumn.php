@@ -25,7 +25,8 @@ if (isset($_POST['buscar'])) {
         $grado = $_POST['grado'];
         $secc = $_POST['seccion'];
         //consulta de alumnos
-        $sql = "SELECT  id_alumnos, nombres, grado, seccion from alumnos where especialidad = $espe and grado = $grado and seccion = $secc";
+        $sql = "SELECT  id_alumnos, nombres, grado, seccion from alumnos where especialidad = $espe and grado = $grado and seccion = $secc ORDER BY nombres ASC";
+        
         $result = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($result) > 0) {
 
