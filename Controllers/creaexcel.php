@@ -174,57 +174,88 @@ $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels';
 if(!is_dir($ruta)){
     mkdir($ruta);
     echo $ruta;
-    /*
+    
 if ($_POST['seleccion'] == 1) {
     $writer->save( 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
+    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
+    $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
     header('Location: ../tablafaltas.php');
 }
 if ($_POST['seleccion'] == 2) {
     $no = $_POST['semana'];
     $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx');
+    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
+    $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
+    descargar($ruta, $fichero);
     header('Location: ../tablafaltas.php');
 }
 if ($_POST['seleccion'] == 3) {
     $mes = $_POST['mes'];
     $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
+    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
+    $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
+    descargar($ruta,$fichero);
     header('Location: ../tablafaltas.php');
-}*/
+}
 }else {
+
     
-    /*
     
 if ($_POST['seleccion'] == 1) {
     $writer->save( 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
+    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
+    $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
+    descargar($ruta,$fich);
     header('Location: ../tablafaltas.php');
+    
 }
 if ($_POST['seleccion'] == 2) {
     $no = $_POST['semana'];
     $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx');
+    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
+    $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
+    descargar($ruta,$fich);
     header('Location: ../tablafaltas.php');
-}
+
+    }
+    
+
+
+
 if ($_POST['seleccion'] == 3) {
     $mes = $_POST['mes'];
     $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
+    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
+    $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
+    descargar($ruta, $fich);
     header('Location: ../tablafaltas.php');
-}*/
+}
 }
 
 
-function get_client_ip() {
-    $ipaddress = '';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if(getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if(getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if(getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if(getenv('HTTP_FORWARDED'))
-       $ipaddress = getenv('HTTP_FORWARDED');
-    else if(getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
-    else
-        $ipaddress = 'UNKNOWN';
-    return $ipaddress;
+function descargar($ruta, $fich){
+    if(file_exists($ruta) && is_file($ruta)){
+
+        header('Cache-control: private');
+        header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Length: '.filesize($ruta));
+        header('Content-Disposition: filename='.$fich);
+     
+        // flush content
+        flush();
+     
+         //abrimos el fichero
+         $file = fopen($ruta , "rb");
+     
+         //imprimimos el contenido del fichero al navegador
+         print fread ($file, filesize($ruta )); 
+     
+         //cerramos el fichero abierto
+         fclose($file);
+     
+    } else {
+     
+        die('Error:  El fichero  '.$ruta .' no existe!');  //termino la ejecución de código por que el fichero no existe.
+     
+    }
 }

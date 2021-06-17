@@ -673,7 +673,7 @@ if (isset($_POST['buscar'])) {
                     <br>
                     <div class="imprimir">
 
-                        <input type="submit" value="Imprimir" name="imprimir" onclick="alerta()">
+                        <input type="submit" value="Imprimir" name="imprimir" >
                 </form>
             </div>
         </div>
