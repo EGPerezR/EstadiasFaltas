@@ -109,6 +109,24 @@
 		}
 	}
 
+	function alumnoExiste($alumno)
+	{
+		global $mysqli;
+		
+		$stmt = $mysqli->prepare("SELECT nombres FROM alumnos WHERE nombres = ? LIMIT 1");
+		$stmt->bind_param("s", $alumno);
+		$stmt->execute();
+		$stmt->store_result();
+		$num = $stmt->num_rows;
+		$stmt->close();
+		
+		if ($num > 0){
+			return true;
+			} else {
+			return false;
+		}
+	}
+
 	function matriculaExiste($matricula){
 		global $mysqli;
 

@@ -72,6 +72,12 @@ if (isset($_SESSION['matricula'])) {
     function off() {
         document.getElementById("tablaexcel").style.display = "none";
     }
+
+    function cerrar(){
+        document.getElementById('advertencia').style.display = "none";
+        document.getElementById('tablaexcel').style.display = "none";
+        
+    }
 </script>
 
 </html>

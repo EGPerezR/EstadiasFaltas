@@ -199,7 +199,8 @@ if (isset($_POST['buscar'])) {
                                           </script>';
                                             }else{
                                             $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana = "' . $fechaselect . '"';
-                                           
+                                                
+                                        
                                             $falta = mysqli_query($mysqli, $bufa);
 
                                             $fa = $falta->fetch_assoc();

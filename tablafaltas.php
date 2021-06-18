@@ -1,5 +1,10 @@
 <?php
 require 'Controllers/funcs.php';
+session_start();
+if (isset($_SESSION['matricula'])) {
+} else {
+	header('Location: index.php');
+}
 
 ?>
 <!DOCTYPE html>

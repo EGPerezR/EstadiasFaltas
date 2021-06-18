@@ -1,4 +1,7 @@
 <?php
+require 'funcs.php';
+require 'conexion.php';
+$contador = 0;
 if (isset($_POST['Insertar'])) {
     $alumnos = [];
     $nombre = $_FILES['fichero_usuario']['name'];
@@ -12,7 +15,7 @@ if (isset($_POST['Insertar'])) {
     if ($extension == 'xlsx' or $extension == 'xls') {
         $tmp_name = $_FILES['fichero_usuario']['tmp_name'];
         $name = basename($_FILES['fichero_usuario']['name']);
-        
+
         if (move_uploaded_file($tmp_name, $dir_subida . '/' . $name)) {
             require __DIR__ . '/../vendor/autoload.php';
 
@@ -43,7 +46,7 @@ if (isset($_POST['Insertar'])) {
                 $reader->setReadFilter(new MyReadFilter());
                 /**  Load $inputFileName to a Spreadsheet Object  **/
                 $spreadsheet = $reader->load($inputFileName);
-            } else if($extension == 'xls'){
+            } else if ($extension == 'xls') {
                 /**  Create a new Reader of the type that has been identified  **/
                 $re = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
                 //Leo datos para obtener una celda especifica
@@ -51,7 +54,7 @@ if (isset($_POST['Insertar'])) {
                 /**  Load $inputFileName to a Spreadsheet Object  **/
                 $spreadsheet = $re->load($inputFileName);
             }
-
+            $cantidad = $spreadsheet->getActiveSheet()->toArray();
 
 ?>
 
@@ -67,7 +70,7 @@ if (isset($_POST['Insertar'])) {
 
                     <?php
 
-                    $cantidad = $spreadsheet->getActiveSheet()->toArray();
+                    
                     foreach ($cantidad as $row) {
                         if ($row[0] != '') {
                             asort($alumnos);
@@ -103,7 +106,13 @@ if (isset($_POST['Insertar'])) {
                         for ($i = 0; $i < count($alumnos); $i++) {
 
                             echo '<input name = "alumno[]" type="text" value="' . $alumnos[$i] . '" hidden>';
+                            $valida = "SELECT * FROM alumnos where nombres = '" . $alumnos[$i] . "'";
+                            $ejec = mysqli_query($mysqli, $valida) or die(mysqli_error($conexion));
+                            if (mysqli_num_rows($ejec) > 0) {
+                                $contador++;
+                            }
                         }
+
                         ?>
                         <input type="button" onclick="confirm()" value="Enviar">
                         <div id="confirmado" class="confirmar" hidden>
@@ -115,7 +124,23 @@ if (isset($_POST['Insertar'])) {
                             </div>
                         </div>
                     </form>
+
                 </div>
+                <?php
+                if ($contador == count($alumnos)) {
+                ?>
+                    <div class="advertencia" id="advertencia">
+                        <div class="caution" id="caution">
+                            <a id="cerrar" onclick="cerrar()">X</a><br>
+                            <label for="Caution">Esta lista ya ha sido Insertada, Intente con Otra</label>
+                        </div>
+                    </div>
+
+
+                <?php
+                }
+
+                ?>
             </div>
 <?php
 
@@ -138,6 +163,8 @@ if (isset($_POST['confirmado'])) {
             $alumnos[] = $alavertebra;
         }
     }
+
+
 
     for ($i = 0; $i < count($alumnos); $i++) {
         $insert = "INSERT INTO alumnos (nombres,especialidad,grado,seccion) VALUES ('" . $alumnos[$i] . "'," . $espe . ",1," . $seccion . ")";
