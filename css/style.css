@@ -1,529 +1,532 @@
-body {
-    background-color: rgba(60, 149, 250, 0.568);
-}
-
-
-/* Popup container */
-
-.popup {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    color: blue;
-}
-
-
-/* The actual popup (appears on top) */
-
-.popup .popuptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 140%;
-    left: 50%;
-    margin-left: -80px;
-}
-
-
-/* Popup arrow */
-
-.popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
-
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-
-.popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
-}
-
-
-/* Add animation (fade in the popup) */
-
-@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-
-/*al mostrar la tabla de la lista*/
-
-.tablaexcel {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    margin-left: 1px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    overflow: scroll;
-}
-
-
-/*seleccion de la lista*/
-
-.form {
-    left: 35%;
-    top: 30%;
-    border-radius: 5px;
-    width: 30%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    position: fixed;
-    animation-duration: 1s;
-    overflow: hidden;
-    animation-name: slidein;
-}
-
-@keyframes slidein {
-    from {
-        margin-top: -30%;
-    }
-    to {
-        top: 30%;
-    }
-}
-
-.form input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.form input[type=file] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.formu {
-    left: 5%;
-    top: 5%;
-    border-radius: 5px;
-    width: 30%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    position: fixed;
-}
-
-.formu select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.formu input[type=button] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.conf {
-    left: 30%;
-    top: 10%;
-    border-radius: 5px;
-    width: 30%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    position: absolute;
-}
-
-.conf input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.confirmar {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-
-/*estilo de la tabla de alumnos */
-
-.tablaexcel table {
-    position: absolute;
-    border-collapse: collapse;
-    width: 25%;
-    left: 40%;
-    background-color: white;
-}
-
-.tablaexcel table th,
-td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-.nav-excel {
-    list-style-type: none;
-    margin: 0;
-    padding: 50;
-    overflow: hidden;
-    background-color: rgb(255, 255, 255) !important;
-}
-
-.nav-excel li {
-    float: left;
-    ;
-}
-
-.nav-excel li a {
-    display: block;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.qr {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    top: 1.5%;
-}
-
-.nav-excel .cerrar {
-    margin-left: 85%;
-    position: absolute;
-}
-
-.login {
-    top: 10%;
-    left: 35%;
-    border-radius: 5px;
-    width: 30%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    position: fixed;
-    animation-duration: 2s;
-    animation-name: log;
-}
-
-@keyframes log {
-    from {
-        top: -100%;
-    }
-    to {
-        top: 10%;
-    }
-}
-
-.login input[type=text],
-input[type=password],
-select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.login input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.logo img {
-    width: 50%;
-    margin-left: 23%;
-}
-
-.logo {
-    width: 100%;
-    width: fit-content;
-    padding: 5px;
-    background-color: white;
-}
-
-.faltas {
-    top: 10%;
-    left: 35%;
-    border-radius: 5px;
-    width: 30%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    position: fixed;
-}
-
-.faltas input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.tablafa {
-    position: fixed;
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin-left: 1px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    overflow: scroll;
-}
-
-.matefa {
-    top: 10%;
-    left: 5%;
-    border-radius: 5px;
-    width: 30%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    position: fixed;
-}
-
-.matefa input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.matefa input[type=button] {
-    width: 100%;
-    background-color: #af4f4c;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.tablafa table {
-    position: absolute;
-    border-collapse: collapse;
-    width: 25%;
-    left: 40%;
-    top: 10%;
-    background-color: white;
-}
-
-.tablafa table th,
-td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-.hecho {
-    position: fixed;
-    width: 100%;
-    display: block;
-    height: 100%;
-    margin-left: 1px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.alert {
-    width: fit-content;
-    position: fixed;
-    top: 35%;
-    left: 30%;
-    height: 15%;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: rgb(187, 255, 132);
-}
-
-.alert a {
-    color: red;
-    margin-left: 95%;
-    cursor: pointer;
-    float: left;
-}
-
-.imprimir {
-    width: 100%;
-}
-
-.imprimir input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.formfaltas {
-    top: 15%;
-    left: 35%;
-    border-radius: 5px;
-    width: 30%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    position: fixed;
-}
-
-.formfaltas input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.formfaltas input[type=date] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.tabfal {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    margin-left: 1px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    overflow: scroll;
-}
-
-.tablafal {
-    width: fit-content;
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
-    position: absolute;
-}
-
-.tablafal table {
-    border-collapse: collapse;
-    background-color: white;
-    width: auto;
-    overflow: scroll;
-}
-
-#advertencia {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    margin-left: 1px;
-    top: 0;
-    left: 0;
-    display: block;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-#caution {
-    background-color: rgb(255, 196, 0);
-    width: fit-content;
-    position: fixed;
-    top: 35%;
-    left: 40%;
-    padding: 20px;
-    border-radius: 5px;
-}
-
-#caution a {
-    color: red;
-    cursor: pointer;
-}
+   body {
+       background-color: rgba(60, 149, 250, 0.568);
+       font-size: 80%;
+   }
+   /* Popup container */
+   
+   .popup {
+       position: relative;
+       display: inline-block;
+       cursor: pointer;
+       color: blue;
+   }
+   /* The actual popup (appears on top) */
+   
+   .popup .popuptext {
+       visibility: hidden;
+       width: 160px;
+       background-color: #555;
+       color: #fff;
+       text-align: center;
+       border-radius: 6px;
+       padding: 8px 0;
+       position: absolute;
+       z-index: 1;
+       bottom: 140%;
+       left: 50%;
+       margin-left: -80px;
+   }
+   /* Popup arrow */
+   
+   .popup .popuptext::after {
+       content: "";
+       position: absolute;
+       top: 100%;
+       left: 50%;
+       margin-left: -5px;
+       border-width: 5px;
+       border-style: solid;
+       border-color: #555 transparent transparent transparent;
+   }
+   /* Toggle this class when clicking on the popup container (hide and show the popup) */
+   
+   .popup .show {
+       visibility: visible;
+       -webkit-animation: fadeIn 1s;
+       animation: fadeIn 1s
+   }
+   /* Add animation (fade in the popup) */
+   
+   @-webkit-keyframes fadeIn {
+       from {
+           opacity: 0;
+       }
+       to {
+           opacity: 1;
+       }
+   }
+   
+   @keyframes fadeIn {
+       from {
+           opacity: 0;
+       }
+       to {
+           opacity: 1;
+       }
+   }
+   /*al mostrar la tabla de la lista*/
+   
+   .tablaexcel {
+       position: fixed;
+       width: 100%;
+       height: 100%;
+       margin-left: 1px;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background-color: rgba(0, 0, 0, 0.5);
+       z-index: 1;
+       overflow: scroll;
+   }
+   /*seleccion de la lista*/
+   
+   .form {
+       left: 35%;
+       top: 30%;
+       border-radius: 5px;
+       width: 30%;
+       background-color: #f2f2f2;
+       padding: 20px;
+       position: fixed;
+       animation-duration: 1s;
+       overflow: hidden;
+       animation-name: slidein;
+   }
+   
+   @keyframes slidein {
+       from {
+           margin-top: -30%;
+       }
+       to {
+           top: 30%;
+       }
+   }
+   
+   .form input[type=submit] {
+       width: 100%;
+       background-color: #4CAF50;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .form input[type=file] {
+       width: 100%;
+       padding: 12px 20px;
+       margin: 8px 0;
+       display: inline-block;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       box-sizing: border-box;
+   }
+   
+   .formu {
+       left: 5%;
+       top: 5%;
+       border-radius: 5px;
+       width: 30%;
+       background-color: #f2f2f2;
+       padding: 20px;
+       position: fixed;
+   }
+   
+   .formu select {
+       width: 100%;
+       padding: 12px 20px;
+       margin: 8px 0;
+       display: inline-block;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       box-sizing: border-box;
+   }
+   
+   .formu input[type=button] {
+       width: 100%;
+       background-color: #4CAF50;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .conf {
+       left: 30%;
+       top: 10%;
+       border-radius: 5px;
+       width: 30%;
+       background-color: #f2f2f2;
+       padding: 20px;
+       position: absolute;
+   }
+   
+   .conf input[type=submit] {
+       width: 100%;
+       background-color: #4CAF50;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .confirmar {
+       width: 100%;
+       height: 100%;
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background-color: rgba(0, 0, 0, 0.5);
+       z-index: 1;
+   }
+   /*estilo de la tabla de alumnos */
+   
+   .tablaexcel table {
+       position: absolute;
+       border-collapse: collapse;
+       width: 25%;
+       left: 40%;
+       background-color: white;
+   }
+   
+   .tablaexcel table th,
+   td {
+       padding: 10px;
+       border: 1px solid #ddd;
+       text-align: left;
+   }
+   
+   @media screen and (max-width:480px) {
+       body {
+           font-family: sans-serif;
+       }
+       body .nav-excel {}
+   }
+   
+   .nav-excel {
+       list-style-type: none;
+       margin: 0;
+       padding: 50;
+       overflow: hidden;
+       background-color: rgb(255, 255, 255) !important;
+   }
+   
+   .nav-excel li {
+       float: left;
+       ;
+   }
+   
+   .nav-excel li a {
+       display: block;
+       color: rgb(0, 0, 0);
+       text-align: center;
+       padding: 14px 16px;
+       text-decoration: none;
+   }
+   
+   .qr {
+       width: 40px;
+       height: 40px;
+       position: absolute;
+       top: 1.5%;
+   }
+   
+   .nav-excel .cerrar {
+       margin-left: 85%;
+       position: absolute;
+   }
+   
+   @media screen and (max-width:480px) {
+       body .login {
+           top: 10%;
+           width: 70%;
+           left: 10%;
+       }
+       label {
+           font-size: 2em;
+       }
+   }
+   
+   .login {
+       top: 10%;
+       left: 35%;
+       border-radius: 5px;
+       width: 20%;
+       background-color: #f2f2f2;
+       padding: 20px;
+       position: fixed;
+       animation-duration: 2s;
+       animation-name: log;
+   }
+   
+   @keyframes log {
+       from {
+           top: -100%;
+       }
+       to {
+           top: 10%;
+       }
+   }
+   
+   .login input[type=text],
+   input[type=password],
+   select {
+       width: 100%;
+       padding: 12px 20px;
+       margin: 8px 0;
+       display: inline-block;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       box-sizing: border-box;
+   }
+   
+   .login input[type=submit] {
+       width: 100%;
+       background-color: #4CAF50;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .logo img {
+       width: 50%;
+       margin-left: 23%;
+   }
+   
+   .logo {
+       width: 100%;
+       width: fit-content;
+       padding: 5px;
+       background-color: white;
+   }
+   
+   .faltas {
+       top: 10%;
+       left: 35%;
+       border-radius: 5px;
+       width: 30%;
+       background-color: #f2f2f2;
+       padding: 20px;
+       position: fixed;
+   }
+   
+   .faltas input[type=submit] {
+       width: 100%;
+       background-color: #4CAF50;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .tablafa {
+       position: fixed;
+       display: block;
+       width: 100%;
+       height: 100%;
+       margin-left: 1px;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background-color: rgba(0, 0, 0, 0.5);
+       z-index: 1;
+       overflow: scroll;
+   }
+   
+   .matefa {
+       top: 10%;
+       left: 5%;
+       border-radius: 5px;
+       width: 30%;
+       background-color: #f2f2f2;
+       padding: 20px;
+       position: fixed;
+   }
+   
+   .matefa input[type=submit] {
+       width: 100%;
+       background-color: #4CAF50;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .matefa input[type=button] {
+       width: 100%;
+       background-color: #af4f4c;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .tablafa table {
+       position: absolute;
+       border-collapse: collapse;
+       width: 25%;
+       left: 40%;
+       top: 10%;
+       background-color: white;
+   }
+   
+   .tablafa table th,
+   td {
+       padding: 10px;
+       border: 1px solid #ddd;
+       text-align: left;
+   }
+   
+   .hecho {
+       position: fixed;
+       width: 100%;
+       display: block;
+       height: 100%;
+       margin-left: 1px;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background-color: rgba(0, 0, 0, 0.5);
+       z-index: 1;
+   }
+   
+   .alert {
+       width: fit-content;
+       position: fixed;
+       top: 35%;
+       left: 30%;
+       height: 15%;
+       padding: 5px;
+       border-radius: 5px;
+       background-color: rgb(187, 255, 132);
+   }
+   
+   .alert a {
+       color: red;
+       margin-left: 95%;
+       cursor: pointer;
+       float: left;
+   }
+   
+   .imprimir {
+       width: 100%;
+   }
+   
+   .imprimir input[type=submit] {
+       width: 100%;
+       background-color: #4CAF50;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .formfaltas {
+       top: 15%;
+       left: 35%;
+       border-radius: 5px;
+       width: 30%;
+       background-color: #f2f2f2;
+       padding: 20px;
+       position: fixed;
+   }
+   
+   .formfaltas input[type=submit] {
+       width: 100%;
+       background-color: #4CAF50;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .formfaltas input[type=date] {
+       width: 100%;
+       padding: 12px 20px;
+       margin: 8px 0;
+       display: inline-block;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       box-sizing: border-box;
+   }
+   
+   .tabfal {
+       position: fixed;
+       width: 100%;
+       height: 100%;
+       margin-left: 1px;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background-color: rgba(0, 0, 0, 0.5);
+       z-index: 1;
+       overflow: scroll;
+   }
+   
+   .tablafal {
+       width: fit-content;
+       padding: 10px;
+       background-color: white;
+       border-radius: 5px;
+       position: absolute;
+   }
+   
+   .tablafal table {
+       border-collapse: collapse;
+       background-color: white;
+       width: auto;
+       overflow: scroll;
+   }
+   
+   #advertencia {
+       position: fixed;
+       width: 100%;
+       height: 100%;
+       margin-left: 1px;
+       top: 0;
+       left: 0;
+       display: block;
+       right: 0;
+       bottom: 0;
+       background-color: rgba(0, 0, 0, 0.5);
+       z-index: 1;
+   }
+   
+   #caution {
+       background-color: rgb(255, 196, 0);
+       width: fit-content;
+       position: fixed;
+       top: 35%;
+       left: 40%;
+       padding: 20px;
+       border-radius: 5px;
+   }
+   
+   #caution a {
+       color: red;
+       cursor: pointer;
+   }
