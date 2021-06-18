@@ -26,13 +26,14 @@ if (isset($_POST['buscar'])) {
         $secc = $_POST['seccion'];
         //consulta de alumnos
         $sql = "SELECT  id_alumnos, nombres, grado, seccion from alumnos where especialidad = $espe and grado = $grado and seccion = $secc ORDER BY nombres ASC";
-        
+
         $result = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($result) > 0) {
 
 
 ?>
             <div class="tablafa" id="tablafa">
+
                 <form action="" method="POST">
                     <div class="matefa">
                         <b><label>Materia</label></b>
@@ -56,7 +57,7 @@ if (isset($_POST['buscar'])) {
                             <input type="submit" value="Insertar" name="insertar">
                             <input type="button" value="Cancelar" onclick="offa()">
                     </div>
-                    <table border="1">
+                    <table border="1" class="tabla">
                         <thead style="
                         <?php
                         if ($espe == 4) {

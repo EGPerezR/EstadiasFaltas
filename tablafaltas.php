@@ -20,12 +20,17 @@ if (isset($_SESSION['matricula'])) {
 </head>
 
 <body>
-    <ul class="nav-excel">
-
-        <li>
-            <a class="nav-link disabled" href="welcome.php" tabindex="-1" aria-disabled="true">return</a>
-        </li>
-    </ul>
+<header>
+<div class="menu_bar">
+            <a href="#" class="bt-menu"><span class="icon-list2"></span>Menu</a>
+        </div>
+	<nav class="lista">
+		<ul class="nav-excel">
+			<li><a href='welcome.php' class="bt-menu">Regresar</a></li>
+			
+		</ul>
+	</nav>
+	</header>
     <div class="formfaltas">
         <form action="" method="POST">
             <label>Especialidad: </label>
@@ -101,7 +106,32 @@ if (isset($_SESSION['matricula'])) {
     ?>
 
 </body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+$(document).ready(main);
+
+var contador = 1;
+
+function main() {
+	$('.menu_bar').click(function() {
+		// $('nav').toggle(); 
+
+		if (contador == 1) {
+			$('.lista').animate({
+				left: '0'
+			});
+			contador = 0;
+		} else {
+			contador = 1;
+			$('.lista').animate({
+				left: '-100%'
+			});
+		}
+
+	});
+
+};
+
     function enablegra() {
         var combo = document.getElementById("especialidad");
         var selected = combo.options[combo.selectedIndex].text;
