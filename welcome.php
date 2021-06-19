@@ -56,7 +56,7 @@ if (isset($_SESSION['matricula'])) {
 	?>
 	<div class="faltas">
 		<form action="welcome.php" method="POST">
-			<label>Seleccione Especialidad</label>
+			<label class="letra">Seleccione Especialidad</label>
 			<select name="especialidad" id="especialidad" oninput="enablegrado()">
 				<option value="">...</option>
 				<option value="1">Combustion Interna</option>
@@ -65,7 +65,7 @@ if (isset($_SESSION['matricula'])) {
 				<option value="4">Sistemas</option>
 				<option value="5">Mecatronica</option>
 			</select>
-			<lablel>Seleccione Grado</lablel>
+			<lablel >Seleccione Grado</lablel>
 			<select name="grado" disabled id="grado" oninput="enableseccion()">
 				<option value="">...</option>
 				<option value="1">1</option>
