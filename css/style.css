@@ -64,12 +64,13 @@
        }
    }
    /*al mostrar la tabla de la lista*/
+
    
    .tablaexcel {
        position: fixed;
        width: 100%;
        height: 100%;
-       margin-left: 1px;
+       
        top: 0;
        left: 0;
        right: 0;
@@ -79,6 +80,13 @@
        overflow: scroll;
    }
    /*seleccion de la lista*/
+   @media screen and (max-width:480px) {
+       body .form {
+           left: 5%;
+           width: 80%;
+       }
+       
+   }
    
    .form {
        left: 35%;
@@ -121,6 +129,12 @@
        border: 1px solid #ccc;
        border-radius: 4px;
        box-sizing: border-box;
+   }
+   @media screen and (max-width: 480px){
+       body .formu {
+           width: 80%;
+           font-size: 10px;
+       }
    }
    
    .formu {
@@ -187,6 +201,13 @@
        z-index: 1;
    }
    /*estilo de la tabla de alumnos */
+   @media screen and (max-width: 480px){
+    body .tablaexcel table{
+        left: 5%;
+        top: 50%;
+        width: 90%;
+    }
+}
    
    .tablaexcel table {
        position: absolute;
@@ -203,7 +224,7 @@
        text-align: left;
    }
    
-   @media screen and (max-width:800px) {
+   @media screen and (max-width:480px) {
        body .lista {
            width: 50%;
            height: 100%;
@@ -334,6 +355,13 @@
        body .faltas {
            width: 80%;
            left: 5%;
+           
+       }
+       body .faltas label {
+           font-size: 15px;
+       }
+       body .faltas .letra {
+           font-size: 20px;
        }
    }
    
@@ -436,13 +464,24 @@
        border: 1px solid #ddd;
        text-align: left;
    }
+   @media screen and (max-width:480px){
+       body .alert {
+           top: 35%;
+           left: 5%;
+           width: 90%;
+       }
+       body .alert label{
+           font-size: 25px;
+       }
+       
+   }
    
    .hecho {
        position: fixed;
        width: 100%;
        display: block;
        height: 100%;
-       margin-left: 1px;
+       
        top: 0;
        left: 0;
        right: 0;
@@ -482,6 +521,15 @@
        border: none;
        border-radius: 4px;
        cursor: pointer;
+   }
+   @media screen and (max-width:480px){
+       body .formfaltas{
+           left: 5%;
+           width: 80%;
+       }
+       body .formfaltas {
+           font-size: 10px;
+       }
    }
    
    .formfaltas {
@@ -548,7 +596,7 @@
        position: fixed;
        width: 100%;
        height: 100%;
-       margin-left: 1px;
+       
        top: 0;
        left: 0;
        display: block;
@@ -556,6 +604,20 @@
        bottom: 0;
        background-color: rgba(0, 0, 0, 0.5);
        z-index: 1;
+   }
+   @media screen and (max-width: 480px){
+       body #caution{
+           left: 5%;
+           width: 80%;
+       }
+       body #caution a{
+           font-size: 20px;
+
+       }
+       /* G327-A*/
+       body #caution label{
+           font-size: 20px;
+       }
    }
    
    #caution {

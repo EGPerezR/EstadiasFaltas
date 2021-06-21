@@ -19,15 +19,21 @@ if (isset($_SESSION['matricula'])) {
     <link rel="stylesheet" href="css/style.css">
     <title>Insertar Alumnos</title>
 
-    <ul class="nav-excel">
-        
-        <li>
-            <a class="nav-link disabled" href="welcome.php" tabindex="-1" aria-disabled="true">return</a>
-        </li>
-    </ul>
+    
 </head>
 
 <body>
+<header>
+<div class="menu_bar">
+            <a href="#" class="bt-menu"><span class="icon-list2"></span>Menu</a>
+        </div>
+	<nav class="lista">
+		<ul class="nav-excel">
+			<li><a href='welcome.php' class="bt-menu">Regresar</a></li>
+			
+		</ul>
+	</nav>
+	</header>
     <div class="form">
         <form action="alumnos.php" method="POST" enctype="multipart/form-data">
             <label for="lista">Elegir una lista: </label>
@@ -42,7 +48,7 @@ if (isset($_SESSION['matricula'])) {
 
     ?>
 </body>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script type="text/javascript">
     function actualizar() {
@@ -78,6 +84,30 @@ if (isset($_SESSION['matricula'])) {
         document.getElementById('tablaexcel').style.display = "none";
         
     }
+
+    $(document).ready(main);
+
+var contador = 1;
+
+function main() {
+	$('.menu_bar').click(function() {
+		// $('nav').toggle(); 
+
+		if (contador == 1) {
+			$('.lista').animate({
+				left: '0'
+			});
+			contador = 0;
+		} else {
+			contador = 1;
+			$('.lista').animate({
+				left: '-100%'
+			});
+		}
+
+	});
+
+};
 </script>
 
 </html>
