@@ -381,7 +381,7 @@
            font-size: 10px;
        }
        body .tablafa .tabla {
-           position: absolute;
+           position: absolute; 
            margin: 0;
            top: 40%;
            left: 0;
