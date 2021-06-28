@@ -64,13 +64,11 @@
        }
    }
    /*al mostrar la tabla de la lista*/
-
    
    .tablaexcel {
        position: fixed;
        width: 100%;
        height: 100%;
-       
        top: 0;
        left: 0;
        right: 0;
@@ -80,12 +78,12 @@
        overflow: scroll;
    }
    /*seleccion de la lista*/
+   
    @media screen and (max-width:480px) {
        body .form {
            left: 5%;
            width: 80%;
        }
-       
    }
    
    .form {
@@ -130,7 +128,8 @@
        border-radius: 4px;
        box-sizing: border-box;
    }
-   @media screen and (max-width: 480px){
+   
+   @media screen and (max-width: 480px) {
        body .formu {
            width: 80%;
            font-size: 10px;
@@ -201,13 +200,14 @@
        z-index: 1;
    }
    /*estilo de la tabla de alumnos */
-   @media screen and (max-width: 480px){
-    body .tablaexcel table{
-        left: 5%;
-        top: 50%;
-        width: 90%;
-    }
-}
+   
+   @media screen and (max-width: 480px) {
+       body .tablaexcel table {
+           left: 5%;
+           top: 50%;
+           width: 90%;
+       }
+   }
    
    .tablaexcel table {
        position: absolute;
@@ -295,6 +295,21 @@
        }
    }
    
+   @media screen and(min-width:481px) and(max-width: 720px) {
+       body {
+           overflow: scroll;
+       }
+       body .login {
+           top: 10%;
+           width: 50%;
+           position: fixed;
+           left: 10%;
+       }
+       label {
+           font-size: 2em;
+       }
+   }
+   
    .login {
        top: 10%;
        left: 35%;
@@ -351,11 +366,23 @@
        background-color: white;
    }
    
-   @media screen and (max-width:800px) {
+   @media screen and (max-width:480px) {
        body .faltas {
            width: 80%;
            left: 5%;
-           
+       }
+       body .faltas label {
+           font-size: 15px;
+       }
+       body .faltas .letra {
+           font-size: 20px;
+       }
+   }
+   
+   @media screen and (min-width:481px) and(max-width: 700px) {
+       body .faltas {
+           width: 105%;
+           left: 5%;
        }
        body .faltas label {
            font-size: 15px;
@@ -409,7 +436,7 @@
            font-size: 10px;
        }
        body .tablafa .tabla {
-           position: absolute; 
+           position: absolute;
            margin: 0;
            top: 40%;
            left: 0;
@@ -464,16 +491,16 @@
        border: 1px solid #ddd;
        text-align: left;
    }
-   @media screen and (max-width:480px){
+   
+   @media screen and (max-width:480px) {
        body .alert {
            top: 35%;
            left: 5%;
            width: 90%;
        }
-       body .alert label{
+       body .alert label {
            font-size: 25px;
        }
-       
    }
    
    .hecho {
@@ -481,7 +508,6 @@
        width: 100%;
        display: block;
        height: 100%;
-       
        top: 0;
        left: 0;
        right: 0;
@@ -522,8 +548,9 @@
        border-radius: 4px;
        cursor: pointer;
    }
-   @media screen and (max-width:480px){
-       body .formfaltas{
+   
+   @media screen and (max-width:700px) {
+       body .formfaltas {
            left: 5%;
            width: 80%;
        }
@@ -596,7 +623,6 @@
        position: fixed;
        width: 100%;
        height: 100%;
-       
        top: 0;
        left: 0;
        display: block;
@@ -605,17 +631,17 @@
        background-color: rgba(0, 0, 0, 0.5);
        z-index: 1;
    }
-   @media screen and (max-width: 480px){
-       body #caution{
+   
+   @media screen and (max-width: 480px) {
+       body #caution {
            left: 5%;
            width: 80%;
        }
-       body #caution a{
+       body #caution a {
            font-size: 20px;
-
        }
        /* G327-A*/
-       body #caution label{
+       body #caution label {
            font-size: 20px;
        }
    }

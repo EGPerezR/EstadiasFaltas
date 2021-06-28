@@ -39,6 +39,7 @@ if (isset($_SESSION['matricula'])) {
 			if ($rows['tipo_usuario'] == 1) { ?>
 				<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
 				<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
+				<li><a href='#'>Alumnos Activos</a></li>
 
 			<?php } ?>
 
@@ -51,8 +52,8 @@ if (isset($_SESSION['matricula'])) {
 
 	<?php
 
-	//echo "<label>Inicio de semana: </label>" . $lunes;
-	//echo "<br>fecha: " . date("Y-m-d");
+	echo "<label>Inicio de semana: </label>" . $lunes;
+	echo "<br>fecha: " . date("Y-m-d");
 	?>
 	<div class="faltas">
 		<form action="welcome.php" method="POST">

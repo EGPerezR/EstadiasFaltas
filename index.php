@@ -24,7 +24,7 @@
         <span class="popuptext" id="myPopup">En proceso...</span>
       </div><center>
       <input type="submit" value="Iniciar Session">
-      <a href="#">Registro</a>
+      <a href="registro.php">Registro</a>
     </form>
 
 
