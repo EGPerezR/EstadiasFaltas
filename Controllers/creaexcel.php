@@ -168,7 +168,7 @@ $spreadsheet->getActiveSheet()->getColumnDimension($colu1)->setWidth(15);
 
 $writer = new Xlsx($spreadsheet);
 $usuario = getenv('USERNAME');
-$ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels';
+$ruta = '../Impresion_Excels';
 
 
 if(!is_dir($ruta)){
@@ -176,23 +176,23 @@ if(!is_dir($ruta)){
     echo $ruta;
     
 if ($_POST['seleccion'] == 1) {
-    $writer->save( 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
-    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
+    $writer->save( '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
+    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
     $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
     header('Location: ../tablafaltas.php');
 }
 if ($_POST['seleccion'] == 2) {
     $no = $_POST['semana'];
-    $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx');
-    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
+    $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx');
+    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
     $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
     descargar($ruta, $fichero);
     header('Location: ../tablafaltas.php');
 }
 if ($_POST['seleccion'] == 3) {
     $mes = $_POST['mes'];
-    $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
-    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
+    $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
+    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
     $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
     descargar($ruta,$fichero);
     header('Location: ../tablafaltas.php');
@@ -202,8 +202,8 @@ if ($_POST['seleccion'] == 3) {
     
     
 if ($_POST['seleccion'] == 1) {
-    $writer->save( 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
-    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
+    $writer->save( '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx');
+    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
     $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
     descargar($ruta,$fich);
     header('Location: ../tablafaltas.php');
@@ -211,8 +211,8 @@ if ($_POST['seleccion'] == 1) {
 }
 if ($_POST['seleccion'] == 2) {
     $no = $_POST['semana'];
-    $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx');
-    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
+    $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx');
+    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
     $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
     descargar($ruta,$fich);
     header('Location: ../tablafaltas.php');
@@ -224,8 +224,8 @@ if ($_POST['seleccion'] == 2) {
 
 if ($_POST['seleccion'] == 3) {
     $mes = $_POST['mes'];
-    $writer->save('C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
-    $ruta = 'C:/users/'.$usuario.'/desktop/Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
+    $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx');
+    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
     $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
     descargar($ruta, $fich);
     header('Location: ../tablafaltas.php');
