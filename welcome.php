@@ -33,6 +33,7 @@ if (isset($_SESSION['matricula'])) {
 		<ul class="nav-excel">
 			<li><a href='welcome.php' class="bt-menu">Inicio</a></li>
 			<?php
+			
 			$nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION['matricula'] . "' or usuario = '" . $_SESSION['usuairo'] . "' Limit 1";
 			$result = mysqli_query($mysqli, $nombre)  or die(mysqli_error($mysqli));
 			$rows = mysqli_fetch_array($result);
@@ -52,8 +53,8 @@ if (isset($_SESSION['matricula'])) {
 
 	<?php
 
-	echo "<label>Inicio de semana: </label>" . $lunes;
-	echo "<br>fecha: " . date("Y-m-d");
+	//echo "<label>Inicio de semana: </label>" . $lunes;
+	//echo "<br>fecha: " . date("Y-m-d");
 	?>
 	<div class="faltas">
 		<form action="welcome.php" method="POST">
