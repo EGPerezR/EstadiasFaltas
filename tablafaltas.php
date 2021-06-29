@@ -3,7 +3,7 @@ require 'Controllers/funcs.php';
 session_start();
 if (isset($_SESSION['matricula'])) {
 } else {
-	header('Location: index.php');
+    header('Location: index.php');
 }
 
 ?>
@@ -20,17 +20,17 @@ if (isset($_SESSION['matricula'])) {
 </head>
 
 <body>
-<header>
-<div class="menu_bar">
+    <header>
+        <div class="menu_bar">
             <a href="#" class="bt-menu"><span class="icon-list2"></span>Menu</a>
         </div>
-	<nav class="lista">
-		<ul class="nav-excel">
-			<li><a href='welcome.php' class="bt-menu">Regresar</a></li>
-			
-		</ul>
-	</nav>
-	</header>
+        <nav class="lista">
+            <ul class="nav-excel">
+                <li><a href='welcome.php' class="bt-menu">Regresar</a></li>
+
+            </ul>
+        </nav>
+    </header>
     <div class="formfaltas">
         <form action="" method="POST">
             <label>Especialidad: </label>
@@ -68,8 +68,8 @@ if (isset($_SESSION['matricula'])) {
             <input type="checkbox" name="seleccion2" id="semana" onclick="showfe()" value="1">
             <label for="por dia">Por Mes</label>
             <input type="checkbox" name="seleccion3" id="mes" onclick="showfe()" value="1">
-            <br> 
-            <br> 
+            <br>
+            <br>
             <div id="fecha1" style="display: none;">
                 <label>Seleccione Dia</label>
                 <input type="date" name="semana" id="semana1" disabled>
@@ -83,18 +83,18 @@ if (isset($_SESSION['matricula'])) {
             <div id="fecha3" style="display: none;">
                 <label>Seleccione Mes:</label>
                 <select name="mes" id="semana3" disabled>
-                <option value="Enero">Enero</option>
-                <option value="Febrero">Febrero</option>
-                <option value="Marzo">Marzo</option>
-                <option value="Abril">Abril</option>
-                <option value="Mayo">Mayo</option>
-                <option value="Junio">Junio</option>
-                <option value="Julio">Julio</option>
-                <option value="Agosto">Agosto</option>
-                <option value="Septiembre">Septiembre</option>
-                <option value="Octubre">Octubre</option>
-                <option value="Noviembre">Noviembre</option>
-                <option value="Diciembre">Diciembre</option>
+                    <option value="Enero">Enero</option>
+                    <option value="Febrero">Febrero</option>
+                    <option value="Marzo">Marzo</option>
+                    <option value="Abril">Abril</option>
+                    <option value="Mayo">Mayo</option>
+                    <option value="Junio">Junio</option>
+                    <option value="Julio">Julio</option>
+                    <option value="Agosto">Agosto</option>
+                    <option value="Septiembre">Septiembre</option>
+                    <option value="Octubre">Octubre</option>
+                    <option value="Noviembre">Noviembre</option>
+                    <option value="Diciembre">Diciembre</option>
                 </select>
                 <input type="submit" value="buscar" name="buscar">
             </div>
@@ -108,29 +108,29 @@ if (isset($_SESSION['matricula'])) {
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-$(document).ready(main);
+    $(document).ready(main);
 
-var contador = 1;
+    var contador = 1;
 
-function main() {
-	$('.menu_bar').click(function() {
-		// $('nav').toggle(); 
+    function main() {
+        $('.menu_bar').click(function() {
+            // $('nav').toggle(); 
 
-		if (contador == 1) {
-			$('.lista').animate({
-				left: '0'
-			});
-			contador = 0;
-		} else {
-			contador = 1;
-			$('.lista').animate({
-				left: '-100%'
-			});
-		}
+            if (contador == 1) {
+                $('.lista').animate({
+                    left: '0'
+                });
+                contador = 0;
+            } else {
+                contador = 1;
+                $('.lista').animate({
+                    left: '-100%'
+                });
+            }
 
-	});
+        });
 
-};
+    };
 
     function enablegra() {
         var combo = document.getElementById("especialidad");
@@ -183,7 +183,7 @@ function main() {
         element3 = document.getElementById("fecha3");
         check3 = document.getElementById("mes");
         if (check1.checked) {
-            
+
             document.getElementById('semana1').disabled = false;
             element3.style.display = 'none';
             element1.style.display = 'block';
@@ -192,7 +192,7 @@ function main() {
             element1.style.display = 'none';
         }
         if (check2.checked) {
-            
+
             element2.style.display = 'block';
             element1.style.display = 'none';
             document.getElementById('semana2').disabled = false;

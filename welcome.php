@@ -26,27 +26,28 @@ if (isset($_SESSION['matricula'])) {
 
 <body>
 	<header>
-<div class="menu_bar">
-            <a href="#" class="bt-menu">Menu</a>
-        </div>
-	<nav class="lista">
-		<ul class="nav-excel">
-			<li><a href='welcome.php' class="bt-menu">Inicio</a></li>
-			<?php
-			
-			$nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION['matricula'] . "' or usuario = '" . $_SESSION['usuairo'] . "' Limit 1";
-			$result = mysqli_query($mysqli, $nombre)  or die(mysqli_error($mysqli));
-			$rows = mysqli_fetch_array($result);
-			if ($rows['tipo_usuario'] == 1) { ?>
-				<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
-				<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
-				<li><a href='#'>Alumnos Activos</a></li>
+		<div class="menu_bar">
+			<a href="#" class="bt-menu">Menu</a>
+		</div>
+		<nav class="lista">
+			<ul class="nav-excel">
+				<li><a href='welcome.php' class="bt-menu">Inicio</a></li>
+				<?php
 
-			<?php } ?>
+				$nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION['matricula'] . "' or usuario = '" . $_SESSION['usuairo'] . "' Limit 1";
+				$result = mysqli_query($mysqli, $nombre)  or die(mysqli_error($mysqli));
+				$rows = mysqli_fetch_array($result);
+				if ($rows['tipo_usuario'] == 1) { ?>
+					<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
+					<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
 
-			<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
-		</ul>
-	</nav>
+					<li><a href='GestionA.php'>Gestion de alumnos</a></li>
+
+				<?php } ?>
+
+				<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
+			</ul>
+		</nav>
 	</header>
 
 
@@ -67,7 +68,7 @@ if (isset($_SESSION['matricula'])) {
 				<option value="4">Sistemas</option>
 				<option value="5">Mecatronica</option>
 			</select>
-			<lablel >Seleccione Grado</lablel>
+			<lablel>Seleccione Grado</lablel>
 			<select name="grado" disabled id="grado" oninput="enableseccion()">
 				<option value="">...</option>
 				<option value="1">1</option>
@@ -95,7 +96,6 @@ if (isset($_SESSION['matricula'])) {
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-
 	function disable() {
 
 		document.getElementById("grado").disabled = true;
@@ -131,31 +131,30 @@ if (isset($_SESSION['matricula'])) {
 		document.getElementById("tablafa").style.display = "none";
 	}
 
-	
+
 	$(document).ready(main);
 
-var contador = 1;
+	var contador = 1;
 
-function main() {
-	$('.menu_bar').click(function() {
-		// $('nav').toggle(); 
+	function main() {
+		$('.menu_bar').click(function() {
+			// $('nav').toggle(); 
 
-		if (contador == 1) {
-			$('.lista').animate({
-				left: '0'
-			});
-			contador = 0;
-		} else {
-			contador = 1;
-			$('.lista').animate({
-				left: '-100%'
-			});
-		}
+			if (contador == 1) {
+				$('.lista').animate({
+					left: '0'
+				});
+				contador = 0;
+			} else {
+				contador = 1;
+				$('.lista').animate({
+					left: '-100%'
+				});
+			}
 
-	});
+		});
 
-};
-
+	};
 </script>
 
 </html>

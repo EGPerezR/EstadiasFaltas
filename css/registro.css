@@ -1,6 +1,69 @@
+@media screen and (max-width:480px) {
+    body .lista {
+        width: 50%;
+        height: 100%;
+        margin: 0;
+        left: -100%;
+        z-index: 1;
+        position: fixed;
+    }
+    body .lista .nav-excel li {
+        display: block;
+        float: left;
+        border-bottom: 1px solid rgba(255, 255, 255, .3);
+    }
+    body .menu_bar {
+        width: 100%;
+        display: block;
+    }
+    body .menu_bar .bt-menu {
+        display: block;
+        padding: 20px;
+        background: rgb(255, 255, 255);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 25px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}
+
+.lista {
+    width: 100%;
+    margin: 20px auto;
+    background: white;
+}
+
+.menu_bar {
+    display: none;
+}
+
+.nav-excel {
+    overflow: hidden;
+    list-style: none;
+    height: fit-content;
+}
+
+.nav-excel li {
+    float: left;
+    ;
+}
+
+.nav-excel li a {
+    display: block;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
 body {
     background-color: rgba(60, 149, 250, 0.568);
 }
+
+
+/*Formulario*/
 
 @media screen and (max-width:480px) {
     body .registro {
@@ -10,12 +73,9 @@ body {
     }
 }
 
-
-/*Formulario*/
-
 .registro {
     left: 35%;
-    top: 10%;
+    top: 15%;
     border-radius: 5px;
     width: 30%;
     background-color: #f2f2f2;
@@ -144,23 +204,23 @@ select {
 /*alertas de login*/
 
 @media screen and (max-width:480px) {
-    body .log {
+    body .logi {
         top: 45%;
         width: fit-content;
         font-size: 15px;
     }
-    body .log a {
+    body .logi a {
         display: block;
         font-size: 20px;
         cursor: pointer;
         float: right;
     }
-    body .log br {
+    body .logi br {
         display: block;
     }
 }
 
-.log {
+.logi {
     background-color: rgb(248, 129, 129);
     width: fit-content;
     padding: 15px;
@@ -173,11 +233,11 @@ select {
     animation-name: login;
 }
 
-.log a {
+.logi a {
     display: none;
 }
 
-.log br {
+.logi br {
     display: none;
 }
 

@@ -319,10 +319,10 @@ function login($matricula, $password)
 			header("location: welcome.php");
 		} else {
 
-			echo "<div class='fondo' id='fondo'><div class='log' id='log'><a onclick='login()'>X</a><br>La contrase&ntilde;a es incorrecta</div></div>";
+			echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>La contrase&ntilde;a es incorrecta</div></div>";
 		}
 	} else {
-		echo "<div class='fondo' id='fondo'><div class='log' id='log'><a onclick='login()'>X</a><br>El nombre de usuario o matricula no existe</div></div>";
+		echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>El nombre de usuario o matricula no existe</div></div>";
 	}
 	
 }
