@@ -29,10 +29,10 @@ if (isset($_POST['enviar'])) {
             $cifrado = encriptar($pass1);
         $token = generateToken();
         $tipo = 2;
-         echo 'numa';  
-        /*if ($insertar = registraMaestro($matri, $nomb, $usuario, $cifrado, $correo, $token, $tipo)):
+          
+        if ($insertar = registraMaestro($matri, $nomb, $usuario, $cifrado, $correo, $token, $tipo)):
             echo '<div class="fondo" id="fondo"><div class="exito" id="error"><a onclick="cerrarerror()">X</a><br><label>Docente registrado con exito</label></div></div>';
-        endif;*/
+        endif;
         endif;
         
         
