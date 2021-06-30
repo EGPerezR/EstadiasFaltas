@@ -306,10 +306,8 @@ function login($matricula, $password)
 
 		$stmt->bind_result($matri, $usu, $passwd);
 		$stmt->fetch();
-echo encriptar($password).'<br>';
-echo $passwd;
 		
-/*
+
 		if ($password == desencriptar($passwd)) {
 
 
@@ -320,7 +318,7 @@ echo $passwd;
 		} else {
 
 			echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>La contrase&ntilde;a es incorrecta</div></div>";
-		}*/
+		}
 	} else {
 		echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>El nombre de usuario o matricula no existe</div></div>";
 	}
