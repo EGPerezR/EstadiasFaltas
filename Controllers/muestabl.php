@@ -168,7 +168,7 @@ if (isset($_POST['buscar'])) {
                                 echo "</td>";
                                 for ($i = 0; $i < count($materia); $i++) {
                                     if (isset($_POST['seleccion1'])) {
-                                        
+
                                         if (isNullfecha($_POST['semana'])) {
                                             echo '<script>
                                             alert("Seleccionar una fecha");
@@ -192,15 +192,14 @@ if (isset($_POST['buscar'])) {
                                             echo "</td>";
                                         }
                                     } else if (isset($_POST['seleccion2'])) {
-                                        
                                         if (isNullfecha($_POST['semana'])) {
                                             echo '<script>
                                             alert("Seleccionar una fecha");
                                           </script>';
-                                            }else{
+                                        } else {
                                             $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana = "' . $fechaselect . '"';
-                                                
-                                        
+
+
                                             $falta = mysqli_query($mysqli, $bufa);
 
                                             $fa = $falta->fetch_assoc();
@@ -217,7 +216,7 @@ if (isset($_POST['buscar'])) {
                                             echo "</td>";
                                         }
                                     } else if (isset($_POST['seleccion3'])) {
-                                            $mes = $_POST['mes'];
+                                        $mes = $_POST['mes'];
                                         if ($mes == 'Enero') {
                                             $bufa = 'SELECT SUM(faltas.faltas) as faltas from faltas INNER JOIN materias on faltas.id_materia=materias.id_materia INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos where faltas.id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '") AND faltas.id_materia=(SELECT materias.id_materia from materias WHERE materias.nombre = "' . $materia[$i] . '" AND materias.grado = ' . $grado . ' AND materias.especialidad = ' . $espe . ') AND faltas.semana >= "2021-01-01" AND faltas.semana <= "2021-01-31"';
 
@@ -674,7 +673,7 @@ if (isset($_POST['buscar'])) {
                     <br>
                     <div class="imprimir">
 
-                        <input type="submit" value="Imprimir" name="imprimir" >
+                        <input type="submit" value="Imprimir" name="imprimir">
                 </form>
             </div>
         </div>

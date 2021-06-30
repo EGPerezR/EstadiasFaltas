@@ -70,7 +70,6 @@ if (isset($_POST['Insertar'])) {
 
                     <?php
 
-                    
                     foreach ($cantidad as $row) {
                         if ($row[0] != '') {
                             asort($alumnos);

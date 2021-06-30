@@ -19,21 +19,21 @@ if (isset($_SESSION['matricula'])) {
     <link rel="stylesheet" href="css/style.css">
     <title>Insertar Alumnos</title>
 
-    
+
 </head>
 
 <body>
-<header>
-<div class="menu_bar">
+    <header>
+        <div class="menu_bar">
             <a href="#" class="bt-menu"><span class="icon-list2"></span>Menu</a>
         </div>
-	<nav class="lista">
-		<ul class="nav-excel">
-			<li><a href='welcome.php' class="bt-menu">Regresar</a></li>
-			
-		</ul>
-	</nav>
-	</header>
+        <nav class="lista">
+            <ul class="nav-excel">
+                <li><a href='welcome.php' class="bt-menu">Regresar</a></li>
+
+            </ul>
+        </nav>
+    </header>
     <div class="form">
         <form action="alumnos.php" method="POST" enctype="multipart/form-data">
             <label for="lista">Elegir una lista: </label>
@@ -79,35 +79,35 @@ if (isset($_SESSION['matricula'])) {
         document.getElementById("tablaexcel").style.display = "none";
     }
 
-    function cerrar(){
+    function cerrar() {
         document.getElementById('advertencia').style.display = "none";
         document.getElementById('tablaexcel').style.display = "none";
-        
+
     }
 
     $(document).ready(main);
 
-var contador = 1;
+    var contador = 1;
 
-function main() {
-	$('.menu_bar').click(function() {
-		// $('nav').toggle(); 
+    function main() {
+        $('.menu_bar').click(function() {
+            // $('nav').toggle(); 
 
-		if (contador == 1) {
-			$('.lista').animate({
-				left: '0'
-			});
-			contador = 0;
-		} else {
-			contador = 1;
-			$('.lista').animate({
-				left: '-100%'
-			});
-		}
+            if (contador == 1) {
+                $('.lista').animate({
+                    left: '0'
+                });
+                contador = 0;
+            } else {
+                contador = 1;
+                $('.lista').animate({
+                    left: '-100%'
+                });
+            }
 
-	});
+        });
 
-};
+    };
 </script>
 
 </html>

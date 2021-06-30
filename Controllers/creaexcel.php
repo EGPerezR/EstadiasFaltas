@@ -171,91 +171,89 @@ $usuario = getenv('USERNAME');
 $ruta = '../Impresion_Excels';
 
 
-if(!is_dir($ruta)){
+if (!is_dir($ruta)) {
     mkdir($ruta);
     echo $ruta;
-    
-if ($_POST['seleccion'] == 1) {
-    $writer->save( '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xls');
-    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xls';
-    $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
-    header('Location: ../tablafaltas.php');
-}
-if ($_POST['seleccion'] == 2) {
-    $no = $_POST['semana'];
-    $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xls');
-    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xls';
-    $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
-    descargar($ruta, $fichero);
-    header('Location: ../tablafaltas.php');
-}
-if ($_POST['seleccion'] == 3) {
-    $mes = $_POST['mes'];
-    $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xls');
-    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xls';
-    $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
-    descargar($ruta,$fichero);
-    header('Location: ../tablafaltas.php');
-}
-}else {
 
-    
-    
-if ($_POST['seleccion'] == 1) {
-    $writer->save( '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xls');
-    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xls';
-    $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
-    descargar($ruta,$fich);
-    header('Location: ../tablafaltas.php');
-    
-}
-if ($_POST['seleccion'] == 2) {
-    $no = $_POST['semana'];
-    $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xls');
-    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xls';
-    $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
-    descargar($ruta,$fich);
-    header('Location: ../tablafaltas.php');
-
+    if ($_POST['seleccion'] == 1) {
+        $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xls');
+        $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xls';
+        $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
+        header('Location: ../tablafaltas.php');
     }
-    
+    if ($_POST['seleccion'] == 2) {
+        $no = $_POST['semana'];
+        $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xls');
+        $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xls';
+        $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
+        descargar($ruta, $fichero);
+        header('Location: ../tablafaltas.php');
+    }
+    if ($_POST['seleccion'] == 3) {
+        $mes = $_POST['mes'];
+        $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xls');
+        $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xls';
+        $fichero = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
+        descargar($ruta, $fichero);
+        header('Location: ../tablafaltas.php');
+    }
+} else {
 
 
 
-if ($_POST['seleccion'] == 3) {
-    $mes = $_POST['mes'];
-    $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xls');
-    $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xls';
-    $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
-    descargar($ruta, $fich);
-    header('Location: ../tablafaltas.php');
+    if ($_POST['seleccion'] == 1) {
+        $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xls');
+        $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xls';
+        $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del Dia ' . date('Y-m-d') . '.xlsx';
+        descargar($ruta, $fich);
+        header('Location: ../tablafaltas.php');
+    }
+    if ($_POST['seleccion'] == 2) {
+        $no = $_POST['semana'];
+        $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xls');
+        $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xls';
+        $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' de la semana ' . $no . '.xlsx';
+        descargar($ruta, $fich);
+        header('Location: ../tablafaltas.php');
+    }
+
+
+
+
+    if ($_POST['seleccion'] == 3) {
+        $mes = $_POST['mes'];
+        $writer->save('../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xls');
+        $ruta = '../Impresion_Excels/Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xls';
+        $fich = 'Tabla de faltas de ' . $espe . ' de ' . $grado . ' grado del ' . $seccion . ' del mes de ' . $mes . '.xlsx';
+        descargar($ruta, $fich);
+        header('Location: ../tablafaltas.php');
+    }
 }
-}
 
 
-function descargar($ruta, $fich){
-    if(file_exists($ruta) && is_file($ruta)){
+function descargar($ruta, $fich)
+{
+    if (file_exists($ruta) && is_file($ruta)) {
 
         header('Cache-control: private');
         header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Length: '.filesize($ruta));
-        header('Content-Disposition: filename='.$fich);
-     
+        header('Content-Length: ' . filesize($ruta));
+        header('Content-Disposition: filename=' . $fich);
+
         // flush content
         flush();
-     
-         //abrimos el fichero
-         $file = fopen($ruta , "rb");
-     
-         //imprimimos el contenido del fichero al navegador
-         print fread ($file, filesize($ruta )); 
-     
-         //cerramos el fichero abierto
-         fclose($file);
-     
+
+        //abrimos el fichero
+        $file = fopen($ruta, "rb");
+
+        //imprimimos el contenido del fichero al navegador
+        print fread($file, filesize($ruta));
+
+        //cerramos el fichero abierto
+        fclose($file);
     } else {
-     
-        die('Error:  El fichero  '.$ruta .' no existe!');  //termino la ejecución de código por que el fichero no existe.
-     
+
+        die('Error:  El fichero  ' . $ruta . ' no existe!');  //termino la ejecución de código por que el fichero no existe.
+
     }
 }

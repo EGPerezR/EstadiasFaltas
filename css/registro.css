@@ -127,8 +127,8 @@ select {
         z-index: 1;
     }
     body .error {
-        margin-top: 70%;
-        margin-left: 15%;
+        top: 45%;
+        left: 12%;
         background-color: rgb(251, 255, 0);
         width: 70%;
     }

@@ -1,0 +1,141 @@
+/*Botones*/
+
+@media screen and (max-width:480px) {
+    body .gestion {
+        margin-left: 3%;
+        margin-top: 45%;
+    }
+    body .gestion center {
+        display: block;
+    }
+    body #button1 {
+        margin: 4px;
+        padding: 7.5px 16px;
+    }
+    body #button2 {
+        margin: 4px;
+        float: right;
+        padding: 7.5px 16px;
+    }
+    body #button3 {
+        margin: 4px;
+        padding: 7.5px 16px;
+    }
+}
+
+.gestion {
+    border-style: solid;
+    width: fit-content;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin-left: 35%;
+    margin-top: 15%;
+}
+
+#button1 {
+    background-color: white;
+    color: black;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 15px 32px;
+    float: left;
+    border: 2px solid #4caf50;
+    transition: 0.5s;
+    margin: 15px;
+}
+
+#button1:hover {
+    border: 2px solid black;
+    background-color: rgba(76, 175, 80, 0.5);
+}
+
+#button2 {
+    background-color: white;
+    color: black;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 15px 32px;
+    cursor: pointer;
+    transition: 0.5s;
+    overflow: hidden;
+    border: 2px solid #4c93af;
+    float: right;
+    margin: 15px;
+}
+
+#button2:hover {
+    border: 2px solid black;
+    background-color: rgba(76, 147, 175, 0.5);
+}
+
+#button3 {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 15px 32px;
+    border: 2px solid #189c1d;
+    transition: 0.5s;
+    margin: 15px;
+}
+
+#button3:hover {
+    border: 2px solid black;
+    background-color: rgba(200, 209, 27, 0.5);
+}
+
+
+/*DIVS*/
+
+.formG {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.fomrge {
+    top: 25%;
+    left: 35%;
+    border-radius: 5px;
+    width: 30%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    position: fixed;
+}
+
+.fomrge a {
+    float: right;
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.fomrge .title {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    font-style: unset;
+}
+
+.formGe {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}

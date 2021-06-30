@@ -18,14 +18,16 @@
     </div>
     <form action="index.php" method="POST">
       <label>Matricula o Usuario</label>
-      <input type="text" id="matricula" name="matricula" placeholder="Matricula o Usuairo">
+      <input type="text" id="matricula" tabindex="1" name="matricula" placeholder="Matricula o Usuairo">
       <label>Contraseña</label>
-      <input type="password" id="contra" name="contra" placeholder="Contraseña...">
-      <center><div class="popup" onclick="myFunction()" >Olvidaste tu contraseña?
-        <span class="popuptext" id="myPopup">En proceso...</span>
-      </div><center>
-      <input type="submit" value="Iniciar Session" name="Iniciar">
-      <a href="registro.php">Registro</a>
+      <input type="password" id="contra" tabindex="2" name="contra" placeholder="Contraseña...">
+      <center>
+        <div class="popup" onclick="myFunction()">Olvidaste tu contraseña?
+          <span class="popuptext" id="myPopup">En proceso...</span>
+        </div>
+        <center>
+          <input type="submit" value="Iniciar Session" name="Iniciar">
+          <a href="registro.php">Registro</a>
     </form>
 
 
@@ -41,10 +43,36 @@ include('Controllers/backlogin.php');
     popup.classList.toggle("show");
   }
 
-  function login(){
+  function login() {
     document.getElementById('fondo').style.display = "none";
     document.getElementById('log').style.display = "none";
   }
+
+  
+  document.addEventListener('keypress', function(evt) {
+
+// Si el evento NO es una tecla Enter
+if (evt.key !== 'Enter') {
+  return;
+}
+
+let element = evt.target;
+
+// Si el evento NO fue lanzado por un elemento con class "focusNext"
+if (!element.classList.contains('focusNext')) {
+  return;
+}
+
+// AQUI logica para encontrar el siguiente
+let tabIndex = element.tabIndex + 1;
+var next = document.querySelector('[tabindex="'+tabIndex+'"]');
+
+// Si encontramos un elemento
+if (next) {
+  next.focus();
+  event.preventDefault();
+}
+});
 </script>
 
 </html>

@@ -306,7 +306,7 @@ function login($matricula, $password)
 
 		$stmt->bind_result($matri, $usu, $passwd);
 		$stmt->fetch();
-		
+
 
 		if ($password == desencriptar($passwd)) {
 
@@ -322,7 +322,6 @@ function login($matricula, $password)
 	} else {
 		echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>El nombre de usuario o matricula no existe</div></div>";
 	}
-	
 }
 
 function lastSession($id)
