@@ -138,8 +138,8 @@ select {
 }
 
 .error {
-    margin-top: 45%;
-    margin-left: 35%;
+    top: 75%;
+    left: 35%;
     background-color: rgb(248, 129, 129);
     width: 31.5%;
     padding: 10px;

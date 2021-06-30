@@ -17,9 +17,9 @@ $pass = $_POST['contra'];
 <h1>
     <?php
     if (empty($_POST['matricula']) || empty($_POST['contra'])) {
-        echo "campos faltantes "; ?>
+        echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>Campos faltantes</div></div>"; ?>
 
-        <a href="../index.php" style="color: red;">intente de nuevo</a>
+        
 </h1>
 <?php
 

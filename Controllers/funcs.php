@@ -158,9 +158,8 @@ function emailExiste($email)
 	$stmt->bind_param("s", $email);
 	$stmt->execute();
 	$stmt->store_result();
-	$num = $stmt->num_rows;
+	$num = $stmt->num_rows();
 	$stmt->close();
-
 	if ($num > 0) {
 		return true;
 	} else {
@@ -307,10 +306,11 @@ function login($matricula, $password)
 
 		$stmt->bind_result($matri, $usu, $passwd);
 		$stmt->fetch();
-
+echo encriptar($password).'<br>';
+echo $passwd;
 		
-
-		if (123 == $passwd) {
+/*
+		if ($password == desencriptar($passwd)) {
 
 
 			$_SESSION['matricula'] = $matri;
@@ -320,7 +320,7 @@ function login($matricula, $password)
 		} else {
 
 			echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>La contrase&ntilde;a es incorrecta</div></div>";
-		}
+		}*/
 	} else {
 		echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>El nombre de usuario o matricula no existe</div></div>";
 	}

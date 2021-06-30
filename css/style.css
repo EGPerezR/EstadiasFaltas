@@ -286,9 +286,9 @@
    
    @media screen and (max-width:480px) {
        body .login {
-           top: 10%;
+           margin-top: 10%;
            width: 70%;
-           left: 10%;
+           margin-left: 10%;
        }
        label {
            font-size: 2em;
@@ -300,10 +300,10 @@
            overflow: scroll;
        }
        body .login {
-           top: 10%;
+           margin-top: 10%;
            width: 50%;
            position: fixed;
-           left: 10%;
+           margin-left: 10%;
        }
        label {
            font-size: 2em;
@@ -311,13 +311,13 @@
    }
    
    .login {
-       top: 10%;
-       left: 35%;
+       margin-top: 5%;
+       margin-left: 40%;
        border-radius: 5px;
        width: 20%;
        background-color: #f2f2f2;
        padding: 20px;
-       position: fixed;
+       position: relative;
        animation-duration: 2s;
        animation-name: log;
    }
