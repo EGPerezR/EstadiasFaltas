@@ -1,3 +1,14 @@
+<?php
+session_start();
+require 'Controllers/conexion.php';
+if (isset($_SESSION['matricula'])) {
+} else {
+    header('Location: index.php');
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +16,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+
     <link rel="stylesheet" href="css/gestion.css">
     <title>Document</title>
 </head>
@@ -30,9 +41,12 @@
             <center><button id="button3" onclick="mostg()">Gestion por Covid</button></center>
         </div>
         <div id="activos" class="formG">
-            <div class="fomrge">
-                <form action="">
-                    <label class="title">Activo / Inactivo</label><a onclick="cerrara()">X</a>
+            <div class="faltas">
+                <form action="GestionA.php" method="POST">
+                    <label style="font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    font-style: unset;">Activo / Inactivo</label><a onclick="cerrara()" style="float: right; color:red; font-size: 20px; cursor:pointer;">X</a>
                     <br>
                     <br>
                     <label class="letra">Seleccione Especialidad</label>
@@ -60,14 +74,17 @@
                         <option value="1">A</option>
                         <option value="2">B</option>
                     </select>
-                    <input type="submit" value="Buscar" name="buscar">
+                    <input type="submit" value="Buscar" name="activo">
                 </form>
             </div>
         </div>
         <div id="jaja" class="formG">
-             <div class="fomrge">
-               <form action="">
-                    <label class="title">Cambio de Grado y Seccion</label><a onclick="cerrarc()">X</a>
+            <div class="faltas">
+                <form action="GestionA.php" method="POST">
+                    <label style="font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    font-style: unset;">Cambio de Grado y Seccion</label><a onclick="cerrarc()" style="float: right; color:red; font-size: 20px; cursor:pointer;">X</a>
                     <br>
                     <br>
                     <label class="letra">Seleccione Especialidad</label>
@@ -95,18 +112,21 @@
                         <option value="1">A</option>
                         <option value="2">B</option>
                     </select>
-                    <input type="submit" value="Buscar" name="buscar">
+                    <input type="submit" value="Buscar" name="cambio">
                 </form>
             </div>
         </div>
         <div id="numa" class="formG">
-           <div class="fomrge">
-                <form action="">
-                    <label class="title">Division de Grupos</label><a onclick="cerrarg()">X</a>
+            <div class="faltas">
+                <form action="GestionA.php" method="POST">
+                    <label style="font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    font-style: unset;">Division de Grupos</label><a onclick="cerrarg()" style="float: right; color:red; font-size: 20px; cursor:pointer;">X</a>
                     <br>
                     <br>
                     <label class="letra">Seleccione Especialidad</label>
-                    <select name="especialidad" id="especialidad" oninput="enablegrado()">
+                    <select name="especialidad" id="espe" oninput="enablegradog()">
                         <option value="">...</option>
                         <option value="1">Combustion Interna</option>
                         <option value="2">Maquinas y herramientas</option>
@@ -115,7 +135,7 @@
                         <option value="5">Mecatronica</option>
                     </select>
                     <lablel>Seleccione Grado</lablel>
-                    <select name="grado" disabled id="grado" oninput="enableseccion()">
+                    <select name="grado" disabled id="gra" oninput="enablesecciong()">
                         <option value="">...</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -125,16 +145,20 @@
                         <option value="6">6</option>
                     </select>
                     <lablel>Seleccione Seccion</lablel>
-                    <select name="seccion" disabled id="seccion">
+                    <select name="seccion" disabled id="sec">
                         <option value="">...</option>
                         <option value="1">A</option>
                         <option value="2">B</option>
                     </select>
-                    <input type="submit" value="Buscar" name="buscar">
+                    <input type="submit" value="Buscar" name="covid">
                 </form>
             </div>
         </div>
     </div>
+
+    <?php
+    include('Controllers/gestion.php');
+    ?>
 </body>
 <script src="js/gestion.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -163,7 +187,7 @@
 
     };
 
-    
+
 
     function mosta() {
         document.getElementById('activos').style.display = "block";
@@ -173,22 +197,49 @@
         document.getElementById('activos').style.display = "none";
     }
 
-    function mostc(){
+    function mostc() {
         document.getElementById('jaja').style.display = "block";
     }
 
-    function cerrarc(){
+    function cerrarc() {
         document.getElementById('jaja').style.display = "none";
     }
 
-    function mostg(){
+    function mostg() {
         document.getElementById('numa').style.display = "block";
     }
 
-    function cerrarg(){
+    function cerrarg() {
         document.getElementById('numa').style.display = "none";
     }
 
+    function cierra() {
+        document.getElementById('tablafa').style.display = "none";
+    }
+
+
+    
+function enablegradog() {
+    var combo = document.getElementById("espe");
+    var selected = combo.options[combo.selectedIndex].text;
+    if (selected == '...') {
+        document.getElementById('gra').disabled = true;
+        return false;
+    } else {
+        document.getElementById('gra').disabled = false;
+    }
+}
+
+function enablesecciong() {
+    var combo = document.getElementById("gra");
+    var selected = combo.options[combo.selectedIndex].text;
+    if (selected == '...') {
+        document.getElementById('sec').disabled = true;
+        return false;
+    } else {
+        document.getElementById('sec').disabled = false;
+    }
+}
 </script>
 
 </html>
