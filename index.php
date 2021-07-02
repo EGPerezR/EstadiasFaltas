@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="icono/bateil png.ico">
-  <link rel="stylesheet" href="css/registro.css">
+  
   <title>Login</title>
 </head>
 
