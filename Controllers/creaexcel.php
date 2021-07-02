@@ -88,6 +88,22 @@ $styleArray = [
         ],
     ],
 ];
+
+$array2 = [
+    
+    'fill' => [
+        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+        'rotation' => 90,
+        'startColor' => [
+            'argb' => 'FFA2A2',
+        ],
+        'endColor' => [
+            'argb' => 'FFA2A2',
+        ],
+    ],
+];
+
+
 $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
 $sheet = $spreadsheet->getActiveSheet();
 $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(25);
@@ -104,6 +120,7 @@ $spreadsheet->getActiveSheet()->getCell('A4')->setValue($bold);
 $col = $colu;
 for ($i = 0; $i < count($materia); $i++) {
     $sheet->setCellValue($colu . $filama, $materia[$i]);
+
     $sheet->getStyle($colu . $filama)->applyFromArray($styleArray);
     //$spreadsheet->getActiveSheet()->getStyle($colu . $filama)->getBorders()->getAllBorders()->setBorderStyle(true);
     $colu++;
@@ -124,6 +141,11 @@ for ($a = 0; $a < count($nombrea); $a++) {
         if ($o < count($faltase)) {
             $sheet->getStyle($colupa . $filalm)->applyFromArray($styleArray);
             //$spreadsheet->getActiveSheet()->getStyle($colupa . $filalm)->getBorders()->getBottom()->setBorderStyle(true);
+            if ($_POST['seleccion'] == 1) {
+                if ($faltase[$o] > 2) {
+                    $sheet->getStyle($colupa . $filalm)->applyFromArray($array2);
+                }
+            }
             $sheet->setCellValue($colupa . $filalm, $faltase[$o]);
             $colupa++;
             $o++;
@@ -142,6 +164,16 @@ for ($a = 0; $a < count($nombrea); $a++) {
 for ($j = 0; $j < count($faltat); $j++) {
     $fila4++;
     $sheet->setCellValue($colu3 . $fila4, $faltat[$j]);
+    if ($_POST['seleccion'] == 2) {
+                if ($faltat[$j] >= 10) {
+                    $sheet->getStyle($colu3 . $fila4)->applyFromArray($array2);
+                }
+            }
+    if ($_POST['seleccion'] == 3) {
+                if ($faltat[$j] > 15) {
+                    $sheet->getStyle($colu3 . $fila4)->applyFromArray($array2);
+                }
+            }
     $sheet->getStyle($colu3 . $fila4)->applyFromArray($styleArray);
     //$spreadsheet->getActiveSheet()->getStyle($colu3 . $fila4)->getBorders()->getAllBorders()->setBorderStyle(true);
 }

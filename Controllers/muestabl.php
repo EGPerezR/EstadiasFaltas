@@ -179,17 +179,27 @@ if (isset($_POST['buscar'])) {
                                             $falta = mysqli_query($mysqli, $bufa);
 
                                             $fa = $falta->fetch_assoc();
+                            ?>
+                                            <td style="<?php if ($fa['faltas'] > 2) {
+                                                            echo 'background-color: #FFA2A2;';
+                                                        }  ?>">
 
-                                            echo "<td>";
-                                            if (empty($fa['faltas'])) {
-                                                echo "0";
-                                                echo "<input type='text' value='0' name='faltase[]'  hidden>";
-                                            } else {
-                                                echo $fa['faltas'];
-                                                echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
-                                            }
+                                                <?php
 
-                                            echo "</td>";
+                                                if (empty($fa['faltas'])) {
+                                                    echo "0";
+
+                                                    echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                                } else {
+
+                                                    echo $fa['faltas'];
+                                                    echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                                }
+                                                ?>
+
+                                            </td>
+                                    <?php
+
                                         }
                                     } else if (isset($_POST['seleccion2'])) {
                                         if (isNullfecha($_POST['semana'])) {
@@ -224,7 +234,9 @@ if (isset($_POST['buscar'])) {
 
                                             $fa = $falta->fetch_assoc();
 
+
                                             echo "<td>";
+
                                             if (empty($fa['faltas'])) {
                                                 echo "0";
                                                 echo "<input type='text' value='0' name='faltase[]'  hidden>";
@@ -428,9 +440,9 @@ if (isset($_POST['buscar'])) {
 
 
                                 if (isset($_POST['seleccion1'])) {
-                                    echo "<td>";
-                                    $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND dia_registro = "' . $fechaselect . '")';
 
+                                    $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND dia_registro = "' . $fechaselect . '")';
+                                    echo "<td>";
                                     $total = mysqli_query($mysqli, $totfa);
                                     $to = $total->fetch_assoc();
                                     if (empty($to['falta'])) {
@@ -444,28 +456,16 @@ if (isset($_POST['buscar'])) {
                                     echo "</td>";
                                     echo "</tr>";
                                 } else if (isset($_POST['seleccion2'])) {
-                                    echo "<td>";
                                     $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND semana = "' . $fechaselect . '")';
 
                                     $total = mysqli_query($mysqli, $totfa);
                                     $to = $total->fetch_assoc();
-                                    if (empty($to['falta'])) {
-                                        echo "0";
-                                        echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                    } else {
-                                        echo $to['falta'];
-                                        echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
-                                    }
+                                    ?>
+                                    <td style="<?php if ($to['falta'] >= 10) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
 
-                                    echo "</td>";
-                                    echo "</tr>";
-                                } else if (isset($_POST['seleccion3'])) {
-                                    if ($mes == 'Enero') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-01-01" AND faltas.semana <= "2021-01-31")';
-
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
                                         if (empty($to['falta'])) {
                                             echo "0";
                                             echo "<input type='text' value='0' name='faltato[]'  hidden>";
@@ -476,196 +476,272 @@ if (isset($_POST['buscar'])) {
 
                                         echo "</td>";
                                         echo "</tr>";
-                                    }
-                                    if ($mes == 'Febrero') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-02-01" AND faltas.semana <= "2021-02-28")';
+                                    } else if (isset($_POST['seleccion3'])) {
+                                        if ($mes == 'Enero') {
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-01-01" AND faltas.semana <= "2021-01-31")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Febrero') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Marzo') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-03-01" AND faltas.semana <= "2021-03-31")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-02-01" AND faltas.semana <= "2021-02-28")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Marzo') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Abril') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" faltas.semana >= "2021-04-01" AND faltas.semana <= "2021-04-30")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-03-01" AND faltas.semana <= "2021-03-31")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Abril') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Mayo') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-05-01" AND faltas.semana <= "2021-05-31")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" faltas.semana >= "2021-04-01" AND faltas.semana <= "2021-04-30")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Mayo') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Junio') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-06-01" AND faltas.semana <= "2021-06-30")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-05-01" AND faltas.semana <= "2021-05-31")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Junio') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Julio') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-07-01" AND faltas.semana <= "2021-07-31")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-06-01" AND faltas.semana <= "2021-06-30")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Julio') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Agosto') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-08-01" AND faltas.semana <= "2021-08-31")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-07-01" AND faltas.semana <= "2021-07-31")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Agosto') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Septiembre') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-09-01" AND faltas.semana <= "2021-09-30")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-08-01" AND faltas.semana <= "2021-08-31")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Septiembre') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Octubre') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-10-01" AND faltas.semana <= "2021-10-31")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-09-01" AND faltas.semana <= "2021-09-30")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Octubre') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Noviembre') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-11-01" AND faltas.semana <= "2021-11-30")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-10-01" AND faltas.semana <= "2021-10-31")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Noviembre') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    if ($mes == 'Diciembre') {
-                                        echo "<td>";
-                                        $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-12-01" AND faltas.semana <= "2021-12-31")';
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-11-01" AND faltas.semana <= "2021-11-30")';
 
-                                        $total = mysqli_query($mysqli, $totfa);
-                                        $to = $total->fetch_assoc();
-                                        if (empty($to['falta'])) {
-                                            echo "0";
-                                            echo "<input type='text' value='0' name='faltato[]'  hidden>";
-                                        } else {
-                                            echo $to['falta'];
-                                            echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                                        <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
+                                        if ($mes == 'Diciembre') {
 
-                                        echo "</td>";
-                                        echo "</tr>";
+                                            $totfa = 'SELECT SUM(faltas.faltas) as falta from faltas INNER JOIN alumnos on faltas.id_alumno = alumnos.id_alumnos where id_alumno = (SELECT alumnos.id_alumnos from alumnos where alumnos.nombres = "' . $row['nombres'] . '" AND faltas.semana >= "2021-12-01" AND faltas.semana <= "2021-12-31")';
+
+                                            $total = mysqli_query($mysqli, $totfa);
+                                            $to = $total->fetch_assoc();
+                                        ?>
+                                    <td style="<?php if ($to['falta'] >= 20) {
+                                                    echo 'background-color: #FFA2A2;';
+                                                }  ?>">
+                            <?php
+                                            if (empty($to['falta'])) {
+                                                echo "0";
+                                                echo "<input type='text' value='0' name='faltato[]'  hidden>";
+                                            } else {
+                                                echo $to['falta'];
+                                                echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
+                                            }
+
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
                                     }
                                 }
-                            }
 
                             ?>
                         </tbody>
