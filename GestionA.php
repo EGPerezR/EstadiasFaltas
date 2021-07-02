@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'Controllers/conexion.php';
+
 if (isset($_SESSION['matricula'])) {
 } else {
     header('Location: index.php');
@@ -187,7 +187,9 @@ if (isset($_SESSION['matricula'])) {
 
     };
 
-
+function alerta(){
+    alert("Los datos se han actualizado");
+}
 
     function mosta() {
         document.getElementById('activos').style.display = "block";

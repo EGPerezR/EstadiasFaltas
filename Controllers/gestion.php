@@ -1,5 +1,7 @@
 <?php
+include('conexion.php');
 require 'funcs.php';
+$opcion = '';
 $seccion = '';
 if (isset($_POST['activo'])) {
 
@@ -23,7 +25,7 @@ if (isset($_POST['activo'])) {
         $grado = $_POST['grado'];
         $secc = $_POST['seccion'];
         //consulta de alumnos
-        $sql = "SELECT  id_alumnos, nombres, activo from alumnos where especialidad = $espe and grado = $grado and seccion = $secc and activo = 1 ORDER BY nombres ASC";
+        $sql = "SELECT  id_alumnos, nombres, activo from alumnos where especialidad = $espe and grado = $grado and seccion = $secc ORDER BY nombres ASC";
 
         $result = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -32,7 +34,7 @@ if (isset($_POST['activo'])) {
 ?>
             <div class="tablafa" id="tablafa">
 
-                <form action="" method="POST">
+                <form action="Controllers/actualiza.php" method="POST">
 
                     <table border="1" class="tabla">
                         <thead style="
@@ -91,8 +93,13 @@ if (isset($_POST['activo'])) {
                         </tr>
                         <?php
                         while ($lista = $result->fetch_assoc()) {
+                            if($lista['activo'] == 0){
+                                $opcion = 'NA';
+                            }elseif($lista['activo']==1){
+                                $opcion = 'A';
+                            }
                             //muestra los alumnos 
-                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='0' max='1' style='width: 80%;' name='activo[]' value='" . $lista['activo'] . "'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td></tr>";
+                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='text' maxlength='2' style='text-transform:uppercase; width: 80%;' name='activo[]' value='" . $opcion . "'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td></tr>";
                         }
 
                         ?>
@@ -100,10 +107,12 @@ if (isset($_POST['activo'])) {
                     </table>
 
                     <div class="matefa">
-                        
-                        <input type="submit" value="Actualizar" name="insertar">
+                    <b><label>A = Activo</label></b>
+                        <b><label class="na">NA =No Activo</label></b>
+                        <br>
+                        <input type="submit" value="Actualizar" onclick="alerta()" name="update">
 
-                </div>
+                    </div>
                 </form>
             </div>
         <?php
@@ -146,7 +155,7 @@ if (isset($_POST['cambio'])) {
         ?>
             <div class="tablafa" id="tablafa">
 
-                <form action="" method="POST">
+                <form action="Controllers/actualiza.php" method="POST">
 
                     <table border="1" class="tabla">
                         <thead style="
@@ -207,20 +216,23 @@ if (isset($_POST['cambio'])) {
                         <?php
                         while ($lista = $result->fetch_assoc()) {
                             //muestra los alumnos 
-                            if($lista['seccion'] == 1){
+                            if ($lista['seccion'] == 1) {
                                 $seccion = 'A';
-                            } elseif($lista['seccion']== 2){
+                            } elseif ($lista['seccion'] == 2) {
                                 $seccion = 'B';
+                            } elseif ($lista['seccion']== 3){
+                                $seccion = 'C';
                             }
-                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='1' max='6' style='width: 60%;' name='grad[]' value='" .$lista['grado']. "'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td><td><input type='text' maxlength='1' style='text-transform:uppercase; width: 30%;' name='seccion[]' value='".$seccion."'></td></tr>";
+                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='1' max='6' style='width: 60%;' name='grad[]' value='" . $lista['grado'] . "'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td><td><input type='text' maxlength='1' style='text-transform:uppercase; width: 30%;' name='seccion[]' value='" . $seccion . "'></td></tr>";
                         }
 
                         ?>
 
                     </table>
+                   
                     <div class="matefa">
-                        
-                            <input type="submit" value="Actualizar" name="insertar">
+                    
+                        <input type="submit" value="Actualizar" name="camb" onclick="alerta()">
 
                     </div>
 
@@ -237,7 +249,7 @@ if (isset($_POST['cambio'])) {
     }
 }
 if (isset($_POST['covid'])) {
-    
+
     if (isNullesp($_POST['especialidad'])) {
 
         echo '<script>
@@ -267,7 +279,7 @@ if (isset($_POST['covid'])) {
         ?>
             <div class="tablafa" id="tablafa">
 
-                <form action="" method="POST">
+                <form action="Controllers/actualiza.php" method="POST">
 
                     <table border="1" class="tabla">
                         <thead style="
@@ -327,17 +339,17 @@ if (isset($_POST['covid'])) {
                         <?php
                         while ($lista = $result->fetch_assoc()) {
                             //muestra los alumnos 
-                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='0' max='1' style='width: 80%;' name='grupo[]' value='" . $lista['grupo'] . "'><input type='text' hidden  name='alumno[]' value='" . $lista['id_alumnos'] . "'></td></tr>";
+                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='0' max='2' style='width: 80%;' name='grupo[]' value='" . $lista['grupo'] . "'><input type='text' hidden  name='alumno[]' value='" . $lista['id_alumnos'] . "'></td></tr>";
                         }
 
                         ?>
 
                     </table>
                     <div class="matefa">
-                        
-                        <input type="submit" value="Actualizar" name="insertar">
 
-                </div>
+                        <input type="submit" value="Actualizar" name="cov" onclick="alerta()">
+
+                    </div>
 
                 </form>
             </div>
@@ -352,11 +364,6 @@ if (isset($_POST['covid'])) {
     }
 }
 
-
-if(isset($_POST['act'])){
-
-    
-}
 
 
 
