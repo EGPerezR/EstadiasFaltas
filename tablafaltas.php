@@ -66,8 +66,8 @@ if (isset($_SESSION['matricula'])) {
             <input type="checkbox" name="seleccion1" id="dia" onclick="showfe()" value="1">
             <label for="por dia">Por Semana</label>
             <input type="checkbox" name="seleccion2" id="semana" onclick="showfe()" value="1">
-            <label for="por dia">Por Mes</label>
-            <input type="checkbox" name="seleccion3" id="mes" onclick="showfe()" value="1">
+           <!-- <label for="por dia">Por Mes</label>
+            <input type="checkbox" name="seleccion3" id="mes" onclick="showfe()" value="1">-->
             <br>
             <br>
             <div id="fecha1" style="display: none;">
