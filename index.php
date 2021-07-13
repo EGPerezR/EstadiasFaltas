@@ -1,4 +1,12 @@
+<?php
+include('Controllers/backlogin.php');
+if (validalogin()) {
+  header('Location:welcome.php');
+}
 
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +43,7 @@
   </div>
 </body>
 <?php
-include('Controllers/backlogin.php');
+
 ?>
 <script>
   // When the user clicks on <div>, open the popup

@@ -291,6 +291,35 @@ function isNullLogin($usuario, $password)
 	}
 }
 
+function validalogin(){
+	global $mysqli;
+
+	$stmt = $mysqli->prepare("SELECT logged FROM profesores WHERE matricula = ?");
+	$stmt->bind_param('s',$_SESSION['matricula']);
+	$stmt->execute();
+	$stmt->store_result();
+	$rows = $stmt->num_rows;
+
+	if ($rows > 0) {
+		$stmt->bind_result($loged);
+		$stmt->fetch();
+		if($loged == 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+
+function destruirlogeado(){
+	global $mysqli;
+
+	$stmt = $mysqli->prepare("UPDATE profesores SET logged = 0 WHERE matricula = ? ");
+	$stmt->bind_param('s',$_SESSION['matricula']);
+	$stmt->execute();
+	$stmt->close();
+}
+
 
 function login($matricula, $password)
 {
@@ -300,8 +329,9 @@ function login($matricula, $password)
 	$stmt->bind_param('ss', $matricula, $matricula);
 	$stmt->execute();
 	$stmt->store_result();
-	$rows = $stmt->num_rows;
 
+	$rows = $stmt->num_rows;
+	
 	if ($rows > 0) {
 
 		$stmt->bind_result($matri, $usu, $passwd);
@@ -309,8 +339,12 @@ function login($matricula, $password)
 
 
 		if ($password == desencriptar($passwd)) {
-
-
+			$stmt = $mysqli->prepare("UPDATE profesores SET logged = 1 WHERE matricula = ? ");
+			$stmt->bind_param('s',$matri);
+			$stmt->execute();
+			$stmt->close();
+			session_start();
+			$_SESSION['loggedin'] = true;
 			$_SESSION['matricula'] = $matri;
 			$_SESSION['usuairo'] = $usu;
 

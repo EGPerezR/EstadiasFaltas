@@ -223,7 +223,7 @@ if (isset($_POST['cambio'])) {
                             } elseif ($lista['seccion']== 3){
                                 $seccion = 'C';
                             }
-                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='1' max='6' style='width: 60%;' name='grad[]' value='" . $lista['grado'] . "'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td><td><input type='text' maxlength='1' style='text-transform:uppercase; width: 30%;' name='seccion[]' value='" . $seccion . "'></td></tr>";
+                            echo "<tr><td>" . $lista['nombres'] . "</td><td><label>" . $lista['grado'] . "</label><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td><td><input type='text' maxlength='1' style='text-transform:uppercase; width: 30%;' name='seccion[]' value='" . $seccion . "'></td></tr>";
                         }
 
                         ?>
@@ -231,7 +231,8 @@ if (isset($_POST['cambio'])) {
                     </table>
                    
                     <div class="matefa">
-                    
+                        <label>Grado</label>
+                        <input class="grado" type="number" min="1" max="6" name="grad">
                         <input type="submit" value="Actualizar" name="camb" onclick="alerta()">
 
                     </div>

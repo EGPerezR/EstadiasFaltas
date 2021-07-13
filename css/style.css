@@ -294,15 +294,13 @@
        label {
            font-size: 2em;
        }
-
        @keyframes logg {
            from {
-           top: -100%;
-       }
-       to {
-           top: 8%;
-       }
-           
+               top: -100%;
+           }
+           to {
+               top: 8%;
+           }
        }
    }
    
@@ -477,6 +475,16 @@
        cursor: pointer;
    }
    
+   .matefa .grado {
+       width: 8%;
+       padding: 12px 20px;
+       margin: 8px 0;
+       display: inline-block;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       box-sizing: border-box;
+   }
+   
    .matefa input[type=button] {
        width: 100%;
        background-color: #af4f4c;
@@ -613,7 +621,6 @@
        bottom: 0;
        background-color: rgba(0, 0, 0, 0.5);
        z-index: 1;
-       
    }
    
    .tablafal {
@@ -628,7 +635,6 @@
        border-collapse: collapse;
        background-color: white;
        width: 100%;
-     
    }
    
    #advertencia {

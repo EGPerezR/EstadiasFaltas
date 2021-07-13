@@ -40,10 +40,16 @@ if (isset($_SESSION['matricula'])) {
 				if ($rows['tipo_usuario'] == 1) { ?>
 					<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
 					<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
-
 					<li><a href='GestionA.php'>Gestion de alumnos</a></li>
+					<li><a href='pasemaestros.php'>Pase de lista</a></li>
 
-				<?php } ?>
+				<?php } else {
+				?>
+					<li><a href='justificacion.php'>Faltas Justificadas</a></li>
+				<?php
+
+
+				} ?>
 
 				<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
 			</ul>
@@ -53,42 +59,47 @@ if (isset($_SESSION['matricula'])) {
 
 
 	<?php
-
-	//echo "<label>Inicio de semana: </label>" . $lunes;
-	//echo "<br>fecha: " . date("Y-m-d");
+	$nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION['matricula'] . "' or usuario = '" . $_SESSION['usuairo'] . "' Limit 1";
+	$result = mysqli_query($mysqli, $nombre)  or die(mysqli_error($mysqli));
+	$rows = mysqli_fetch_array($result);
+	if ($rows['tipo_usuario'] == 2) {
+		//echo "<label>Inicio de semana: </label>" . $lunes;
+		//echo "<br>fecha: " . date("Y-m-d");
 	?>
-	<div class="faltas">
-		<form action="welcome.php" method="POST">
-			<label class="letra">Seleccione Especialidad</label>
-			<select name="especialidad" id="especialidad" oninput="enablegrado()">
-				<option value="">...</option>
-				<option value="1">Combustion Interna</option>
-				<option value="2">Maquinas y herramientas</option>
-				<option value="3">Electricidad</option>
-				<option value="4">Sistemas</option>
-				<option value="5">Mecatronica</option>
-			</select>
-			<lablel>Seleccione Grado</lablel>
-			<select name="grado" disabled id="grado" oninput="enableseccion()">
-				<option value="">...</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-			</select>
-			<lablel>Seleccione Seccion</lablel>
-			<select name="seccion" disabled id="seccion">
-				<option value="">...</option>
-				<option value="1">A</option>
-				<option value="2">B</option>
-			</select>
-			<input type="submit" value="Buscar" name="buscar">
-		</form>
-	</div>
-	<?php
+		<center><label style="width: fit-content; background-color: black; color:white; font-size: 20px;">Pase de lista</label></center>
+		<div class="faltas">
 
+			<form action="welcome.php" method="POST">
+				<label class="letra">Seleccione Especialidad</label>
+				<select name="especialidad" id="especialidad" oninput="enablegrado()">
+					<option value="">...</option>
+					<option value="1">Combustion Interna</option>
+					<option value="2">Maquinas y herramientas</option>
+					<option value="3">Electricidad</option>
+					<option value="4">Sistemas</option>
+					<option value="5">Mecatronica</option>
+				</select>
+				<lablel>Seleccione Grado</lablel>
+				<select name="grado" disabled id="grado" oninput="enableseccion()">
+					<option value="">...</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+				</select>
+				<lablel>Seleccione Seccion</lablel>
+				<select name="seccion" disabled id="seccion">
+					<option value="">...</option>
+					<option value="1">A</option>
+					<option value="2">B</option>
+				</select>
+				<input type="submit" value="Buscar" name="buscar">
+			</form>
+		</div>
+	<?php
+	}
 	include('Controllers/busalumn.php');
 
 

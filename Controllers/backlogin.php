@@ -1,7 +1,6 @@
 <?php
 
 use ZipStream\Option\Method;
-
 session_start();
 
 include("conexion.php");

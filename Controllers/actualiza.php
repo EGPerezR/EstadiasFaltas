@@ -45,6 +45,7 @@ if (isset($_POST['update'])) {
 
 
 if(isset($_POST['camb'])){
+    $grado = $_POST['grad'];
 //Construccion de Alumnos Activos
 if (!empty($_POST["alumno"]) && is_array($_POST["alumno"])) {
     $alumno = array();
@@ -55,16 +56,7 @@ if (!empty($_POST["alumno"]) && is_array($_POST["alumno"])) {
 } else {
     echo "nada paso";
 }
-//constuccion de grado
-if (!empty($_POST["grad"]) && is_array($_POST["grad"])) {
-    $grad = array();
-    foreach ($_POST["grad"] as $gra) {
 
-        $grad[] = $gra;
-    }
-} else {
-    echo "nada paso";
-}
 
 //construccion de seccion
 if (!empty($_POST["seccion"]) && is_array($_POST["seccion"])) {
@@ -77,7 +69,7 @@ if (!empty($_POST["seccion"]) && is_array($_POST["seccion"])) {
     echo "nada paso";
 }
 
-if (count($alumno) == count($grad)) {
+if (count($alumno) == count($sec)) {
    
     for ($i = 0; $i < count($alumno); $i++) {
         
@@ -91,7 +83,7 @@ if (count($alumno) == count($grad)) {
                $s = 3;
                
            }
-        $up = 'UPDATE alumnos SET grado = '.$grad[$i].', seccion = '.$s.' WHERE id_alumnos = '.$alumno[$i].'';
+        $up = 'UPDATE alumnos SET grado = '.$grado.', seccion = '.$s.' WHERE id_alumnos = '.$alumno[$i].'';
         $ejecutar = mysqli_query($mysqli, $up);
        
         
