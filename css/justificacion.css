@@ -1,0 +1,194 @@
+body {
+    background-color: rgba(60, 149, 250, 0.568);
+}
+
+@media screen and (max-width:480px) {
+    body .lista {
+        width: 50%;
+        height: 100%;
+        margin: 0;
+        left: -100%;
+        z-index: 1;
+        position: fixed;
+    }
+    body .lista .nav-excel li {
+        display: block;
+        float: left;
+        border-bottom: 1px solid rgba(255, 255, 255, .3);
+    }
+    body .menu_bar {
+        width: 100%;
+        display: block;
+    }
+    body .menu_bar .bt-menu {
+        display: block;
+        padding: 20px;
+        background: rgb(255, 255, 255);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 25px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}
+
+.lista {
+    width: 100%;
+    margin: 20px auto;
+    background: white;
+}
+
+.menu_bar {
+    display: none;
+}
+
+.nav-excel {
+    overflow: hidden;
+    list-style: none;
+    height: fit-content;
+}
+
+.nav-excel li {
+    float: left;
+    ;
+}
+
+.nav-excel li a {
+    display: block;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.fondojustifica {
+    position: absolute;
+    width: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.justifiform {
+    top: 5%;
+    left: 25%;
+    border-radius: 5px;
+    width: 50%;
+    display: block;
+    background-color: #f2f2f2;
+    padding: 20px;
+    position: relative;
+}
+
+.justifiform input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.justifiform input[type=number] {
+    width: 11%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.mosdate input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.justifiform .alumjus {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.justifiform #selemateria {
+    width: 35%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width:480px) {
+    body .faltas {
+        width: 80%;
+        left: 5%;
+    }
+    body .faltas label {
+        font-size: 15px;
+    }
+    body .faltas .letra {
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width:481px) and(max-width: 700px) {
+    body .faltas {
+        width: 105%;
+        left: 5%;
+    }
+    body .faltas label {
+        font-size: 15px;
+    }
+    body .faltas .letra {
+        font-size: 20px;
+    }
+}
+
+.faltas {
+    top: 20%;
+    left: 35%;
+    border-radius: 5px;
+    width: 30%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    position: fixed;
+}
+
+.faltas input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.faltas select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
