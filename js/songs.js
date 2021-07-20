@@ -76,9 +76,17 @@ for (x = 0; x < lista.length; x++) {
 cargarCancion(aleatorio());
 
 reproductor.addEventListener("ended", function() {
-    seleccion++;
-    reproductor.removeChild(source);
-    cargarCancion(seleccion);
+    if (seleccion >= lista.length - 1) {
+        seleccion = 0;
+        reproductor.pause();
+        reproductor.removeChild(source);
+        cargarCancion(seleccion);
+    } else {
+        seleccion++;
+        reproductor.pause();
+        reproductor.removeChild(source);
+        cargarCancion(seleccion);
+    }
 });
 
 
