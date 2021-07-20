@@ -22,9 +22,11 @@ if (isset($_SESSION['matricula'])) {
 
 
 
+
+
 </head>
 
-<body>
+<body onload="setVolume()">
 	<header>
 		<div class="menu_bar">
 			<a href="#" class="bt-menu">Menu</a>
@@ -99,13 +101,54 @@ if (isset($_SESSION['matricula'])) {
 			</form>
 		</div>
 	<?php
-	}
-	include('Controllers/busalumn.php');
+	} elseif ($rows['tipo_usuario'] == 1) {
+
+
 
 
 	?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="reproductor">
+			<b><label class="status">Reproduciendo...<span>&nbsp;</span></label></b>
+			<div id="texto"></div>
+			<audio id="audioo">
+				Tu navegador no soporta el elemento <code>audio</code>.
+			</audio>
+			<div class="Controlls">
+				<button type="button" class="previus" id="previus" onclick="previus()">
+					<span><img src="img/previous.png" class="skipp"></span>
+				</button>
+				<div class="controlsa">
+					<img class="volu" src="img/volumesong.png">
+					<input type="range" oninput="setVolume()" id='volume1' min=0 max=1 step=0.01 value='0.2'>
+				</div>
+				<button type="button" class="next" id="next" onclick="selector()">
+					<span><img src="img/skip.png" class="skipp"></span>
+				</button>
+			</div>
+			<label id="cancions">Canciones</label>
+			<ul id="listado"></ul>
+
+		</div>
+	<?php
+	}
+	include('Controllers/busalumn.php');
+	?>
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/songs.js"></script>
 <script type="text/javascript">
 	function disable() {
 

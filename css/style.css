@@ -678,3 +678,146 @@
        color: red;
        cursor: pointer;
    }
+   
+   .volu {
+       position: static;
+   }
+   
+   .controlsa {
+       display: inline-block;
+       border-radius: 4px;
+       border: none;
+       background-color: rgb(170, 170, 170);
+       padding: 3px;
+       width: 20px;
+       transition: 0.5s;
+       cursor: pointer;
+       margin: 5px;
+   }
+   
+   .controlsa #volume1 {
+       cursor: pointer;
+       display: inline-block;
+       position: relative;
+       width: 0%;
+       opacity: 0;
+       transition: 0.5s;
+   }
+   
+   .controlsa:hover #volume1 {
+       margin-left: 25px;
+       width: 70%;
+       opacity: 1;
+   }
+   
+   .controlsa:hover {
+       width: 30%;
+       background-color: rgba(129, 129, 129, 0.486);
+   }
+   
+   .controlsa img {
+       width: 20px;
+       height: 20px;
+       position: fixed;
+       z-index: 1;
+   }
+   
+   .skipp {
+       width: 20px;
+       height: 20px;
+   }
+   
+   .Controlls {
+       border: solid rgba(0, 0, 0, 0.158);
+       background-color: rgb(170, 170, 170);
+       right: 0;
+       left: 0;
+       text-align: center;
+       padding: auto;
+       position: relative;
+   }
+   
+   .previus {
+       float: left;
+       margin: 5px;
+   }
+   
+   .next {
+       float: right;
+       margin: 5px;
+   }
+   
+   .Controlls button {
+       display: inline-block;
+       cursor: pointer;
+       text-align: center;
+       text-decoration: none;
+       outline: none;
+       color: #fff;
+       background-color: rgba(255, 255, 255, 0.795);
+       border: solid 1px #666;
+       border-radius: 15px;
+       box-shadow: 0 5px rgb(247, 247, 247);
+   }
+   
+   .Controlls button:hover {
+       background-color: rgba(170, 170, 170, 0.486);
+   }
+   
+   .Controlls button:active {
+       background-color: rgba(2, 41, 170, 0.486);
+       box-shadow: 0 1px #666;
+       transform: translateY(4px);
+   }
+   
+   .reproductor {
+       box-shadow: 0 5px 10px rgba(170, 170, 170, 0.733);
+       position: relative;
+       width: fit-content;
+       height: fit-content;
+       border-top: solid 2px rgba(255, 255, 255, 0.863);
+       border-right: solid 2px rgba(255, 255, 255, 0.863);
+       border-radius: 10px;
+       padding: 5px;
+       background-color: rgba(255, 0, 0, 0.884);
+       bottom: 0;
+   }
+   
+   .reproductor .status {
+       width: 100%;
+       color: rgb(255, 251, 0);
+       font-size: 20px;
+   }
+   
+   .reproductor .status span {
+       position: absolute;
+       right: 44%;
+       background: rgb(255, 0, 0);
+       border-left: 1px solid rgba(255, 0, 0, 0.884);
+       animation: maquina 3s infinite alternate steps(4);
+   }
+   
+   @keyframes maquina {
+       from {
+           width: 0%;
+       }
+       to {
+           width: 9%;
+       }
+   }
+   
+   .reproductor #texto {
+       font-size: 20px;
+       background-color: rgb(155, 250, 253);
+   }
+   
+   .reproductor #listado {
+       background-color: rgba(255, 255, 255, 0.644);
+       list-style: none;
+   }
+   
+   .reproductor #cancions {
+       font-size: 20px;
+       color: yellow;
+       height: fit-content;
+   }
