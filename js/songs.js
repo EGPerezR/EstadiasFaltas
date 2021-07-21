@@ -46,10 +46,6 @@ function selector() {
         reproductor.removeChild(source);
         cargarCancion(seleccion);
     }
-
-
-    //cargarCancion(seleccion);
-
 }
 
 function aleatorio() {

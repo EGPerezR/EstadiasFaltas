@@ -30,8 +30,8 @@ if (isset($_POST['justificar'])) {
                 <div class="justifiform">
                     <a style="color: red; cursor:pointer;" onclick="cie()">X</a>
                     <br>
-                    <form action="">
-                        <select class="alumjus">
+                    <form action="Controllers/justificar.php" method="POST">
+                        <select class="alumjus" name="alumno">
                             <?php
                             while ($lista = $result->fetch_assoc()) {
 
@@ -50,7 +50,7 @@ if (isset($_POST['justificar'])) {
                         if (mysqli_num_rows($mate) > 0) {
 
                         ?>
-                            <select id="selemateria">
+                            <select id="selemateria" name="materiaj">
                             <?php
                             while ($materiasli = $mate->fetch_assoc()) {
                                 //muestra las materias
@@ -65,7 +65,7 @@ if (isset($_POST['justificar'])) {
                             <div id="mosdate">
 
                             </div>
-                            <input type="submit" value="Justificar">
+                            <input type="submit" value="Justificar" name="justificar">
                     </form>
                 </div>
             </div>
