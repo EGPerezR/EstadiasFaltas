@@ -16,12 +16,13 @@ if (isset($_POST['justificar'])) {
 
     for ($i = 0; $i < count($fechj); $i++) {
         $justificalo = "INSERT INTO faltasjustificadas (idalumno, idmateria, fecha_a_justificar, fecha_justificado) VALUES (" . $alumno . ", " . $materia . ", '" . $fechj[$i] . "', '" . date("Y-m-d") . "')";
-       
 
         $selectf = "SELECT faltas from faltas where dia_registro = '" . $fechj[$i] . "' AND id_alumno = " . $alumno . " AND id_materia = " . $materia . " LIMIT 1";
         $sleccion = mysqli_query($mysqli, $selectf);
+        echo $selectf;
         
         if (mysqli_num_rows($sleccion) > 0) {
+            
             while ($faltaa = $sleccion->fetch_assoc()) {
                 $resta = $faltaa['faltas'] - 1;
                 

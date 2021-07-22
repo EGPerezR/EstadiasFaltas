@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("Controllers/fecha.php");
+
 include("Controllers/conexion.php");
 if (isset($_SESSION['matricula'])) {
 } else {
@@ -119,7 +119,7 @@ if (isset($_SESSION['matricula'])) {
 
 
 
-
+<!---
 		<div class="reproductor">
 			<b><label class="status">Reproduciendo...<span>&nbsp;</span></label></b>
 			<div id="texto"></div>
@@ -131,7 +131,7 @@ if (isset($_SESSION['matricula'])) {
 					<span><img src="img/previous.png" class="skipp"></span>
 				</button>
 				<div class="controlsa">
-					<img class="volu" src="img/volumesong.png">
+					<img class="volu" src="img/volumesong.png" id="volu" onclick="silencio()">
 					<input type="range" oninput="setVolume()" id='volume1' min=0 max=1 step=0.01 value='0.2'>
 				</div>
 				<button type="button" class="next" id="next" onclick="selector()">
@@ -141,7 +141,7 @@ if (isset($_SESSION['matricula'])) {
 			<label id="cancions">Canciones</label>
 			<ul id="listado"></ul>
 
-		</div>
+		</div>--->
 	<?php
 	}
 	include('Controllers/busalumn.php');

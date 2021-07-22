@@ -7,5 +7,8 @@ $fechaInicioSemana = date("Y-m-d", $tiempoDeInicioDeSemana);
 
 $lunes = date("Y-m-d",strtotime($fechaInicioSemana."+ 1 days"));
 
-
+function viernes($dia){
+$viernes = date("Y-m-d",strtotime($dia."+ 4 days"));
+return $viernes;
+}
 ?>

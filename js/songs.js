@@ -88,8 +88,26 @@ reproductor.addEventListener("ended", function() {
 
 
 
-
+var activo;
 
 setVolume = function() {
     reproductor.volume = document.getElementById('volume1').value;
+    activo = 0;
+}
+
+
+silencio = function() {
+    var range = document.getElementById('volume1');
+    var anterior;
+
+    if (range.value > 0) {
+        anterior = range.value;
+        range.value = 0;
+        reproductor.volume = document.getElementById('volume1').value;
+        activo = 1;
+    } else if (activo > 0) {
+        range.value = anterior;
+        reproductor.volume = document.getElementById('volume1').value;
+        activo = 0;
+    }
 }
