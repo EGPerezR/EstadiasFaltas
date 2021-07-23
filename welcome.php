@@ -19,6 +19,8 @@ if (isset($_SESSION['matricula'])) {
 	<title>Registro de falta</title>
 	<link rel="shortcut icon" href="icono/bateil png.ico">
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/especialidades.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
 
@@ -26,7 +28,7 @@ if (isset($_SESSION['matricula'])) {
 
 </head>
 
-<body onload="setVolume()">
+<body onload="alcargar()">
 	<header>
 		<div class="menu_bar">
 			<a href="#" class="bt-menu">Menu</a>
@@ -108,6 +110,41 @@ if (isset($_SESSION['matricula'])) {
 
 	?>
 
+		<label>Estatus del Dia</label>
+		<br>
+		<div class="especialidades">
+
+
+			<div class="Combustion">
+				<table border="1" id="com">
+
+
+				</table>
+			</div>
+			<div class="Maquinas">
+				<table border="1" id="maq">
+
+				</table>
+			</div>
+			<div class="Electricidad">
+				<table border="1" id="ele">
+
+
+				</table>
+			</div>
+			<div class="Sistemas">
+				<table border="1" id="sis">
+
+				</table>
+			</div>
+			<div class="Mecatronica">
+				<table border="1" id="meca">
+
+
+				</table>
+			</div>
+
+		</div>
 
 
 
@@ -117,9 +154,7 @@ if (isset($_SESSION['matricula'])) {
 
 
 
-
-
-<!---
+		<!---
 		<div class="reproductor">
 			<b><label class="status">Reproduciendo...<span>&nbsp;</span></label></b>
 			<div id="texto"></div>
@@ -209,6 +244,74 @@ if (isset($_SESSION['matricula'])) {
 		});
 
 	};
+
+
+	function electricidad() {
+		var datos = $.ajax({
+			url: 'Controllers/E.php',
+			dataType: 'text',
+			async: false
+		}).responseText;
+
+		document.getElementById('ele').innerHTML = datos;
+
+	}
+
+	function mecatronica() {
+		var datos = $.ajax({
+			url: 'Controllers/M.php',
+			dataType: 'text',
+			async: false
+		}).responseText;
+
+		document.getElementById('meca').innerHTML = datos
+	}
+
+	function combustion() {
+		var datos = $.ajax({
+			url: 'Controllers/CI.php',
+			dataType: 'text',
+			async: false
+		}).responseText;
+
+		document.getElementById('com').innerHTML = datos;
+	}
+
+	function sistemas() {
+		var datos = $.ajax({
+			url: 'Controllers/SCI.php',
+			dataType: 'text',
+			async: false
+		}).responseText;
+
+		document.getElementById('sis').innerHTML = datos;
+	}
+
+	function maquinas() {
+		var datos = $.ajax({
+			url: 'Controllers/MH.php',
+			dataType: 'text',
+			async: false
+		}).responseText;
+
+		document.getElementById('maq').innerHTML = datos;
+	}
+
+	$(document).ready(function() {
+	
+			setInterval(maquinas, 0);
+			setInterval(sistemas, 0);
+			setInterval(combustion, 0);
+			setInterval(mecatronica, 0);
+			setInterval(electricidad, 0);
+	});
+
+
+	setInterval(maquinas, 2400000);
+	setInterval(sistemas, 2400000);
+	setInterval(combustion, 2400000);
+	setInterval(mecatronica, 2400000);
+	setInterval(electricidad, 2400000);
 </script>
 
 </html>

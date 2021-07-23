@@ -204,7 +204,8 @@ if (isset($_POST['buscar'])) {
                                                 ?>
 
                                             </td>
-                                            <td style="color: red;"><?php  echo $justi['justificante'];   ?></td>
+                                            <td style="color: red;"><?php  echo $bufa //$justi['justificante'];   
+                                            ?></td>
                                     <?php
 
                                         }

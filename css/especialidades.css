@@ -1,0 +1,304 @@
+        .especialidades {
+            width: 99.5%;
+            border: solid 2px #000;
+            background-color: rgb(91, 231, 138);
+            height: 620px;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        label {
+            position: relative;
+            font-size: 20px;
+            background-color: black;
+            color: white;
+            border-top: solid 2px #000;
+            border-left: solid 2px #000;
+            border-right: solid 2px #000;
+        }
+        
+        .especialidades::-webkit-scrollbar {
+            overflow-y: hidden;
+        }
+        
+        .especialidades .Combustion {
+            position: absolute;
+            width: 27%;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            top: 0;
+            left: 5%;
+        }
+        
+        .especialidades .Combustion::-webkit-scrollbar {
+            overflow-y: hidden;
+        }
+        
+        #com {
+            box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
+            border-collapse: collapse;
+            width: 15%;
+        }
+        
+        #com th {
+            background-color: red;
+            color: white;
+        }
+        
+        #com th td {
+            border-bottom: 1px solid #ddd;
+        }
+        
+        #com td {
+            background-color: whitesmoke;
+        }
+        
+        .especialidades .Maquinas {
+            position: absolute;
+            width: 27%;
+            padding: 5px;
+            margin: 5px;
+            overflow-y: scroll;
+            height: 300px;
+            top: 0%;
+            left: 35%;
+        }
+        
+        .especialidades .Maquinas::-webkit-scrollbar {
+            overflow-y: hidden;
+        }
+        
+        #maq {
+            border-collapse: collapse;
+            width: 15%;
+            box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
+        }
+        
+        #maq th {
+            background-color: rgb(0, 132, 255);
+            color: white;
+        }
+        
+        #maq th td {
+            border-bottom: 1px solid #ddd;
+        }
+        
+        #maq td {
+            background-color: whitesmoke;
+        }
+        
+        .especialidades .Electricidad {
+            position: absolute;
+            width: 27%;
+            padding: 5px;
+            left: 70%;
+            overflow-y: scroll;
+            height: 300px;
+        }
+        
+        .especialidades .Electricidad::-webkit-scrollbar {
+            overflow-y: hidden;
+        }
+        
+        #ele th {
+            background-color: rgb(255, 184, 51);
+        }
+        
+        #ele {
+            border-collapse: collapse;
+            width: 15%;
+            box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
+        }
+        
+        #ele th td {
+            border-bottom: 1px solid #ddd;
+        }
+        
+        #ele td {
+            background-color: whitesmoke;
+        }
+        
+        .especialidades .Sistemas {
+            position: absolute;
+            width: 27%;
+            padding: 5px;
+            overflow-y: scroll;
+            height: 280px;
+            top: 53%;
+            left: 20%;
+        }
+        
+        .especialidades .Sistemas::-webkit-scrollbar {
+            overflow-y: hidden;
+        }
+        
+        #sis th {
+            background-color: yellowgreen;
+        }
+        
+        #sis th td {
+            border-bottom: 1px solid #ddd;
+        }
+        
+        #sis td {
+            background-color: whitesmoke;
+        }
+        
+        #sis {
+            border-collapse: collapse;
+            box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
+            width: 15%;
+        }
+        
+        .especialidades .Mecatronica {
+            position: absolute;
+            width: fit-content;
+            padding: 5px;
+            left: 60%;
+            top: 53%;
+            overflow-y: scroll;
+            height: 280px;
+        }
+        
+        .especialidades .Mecatronica::-webkit-scrollbar {
+            overflow-y: hidden;
+        }
+        
+        #meca {
+            border-collapse: collapse;
+            width: 15%;
+            box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
+        }
+        
+        #meca th {
+            background-color: rgb(110, 0, 110);
+            color: white;
+        }
+        
+        #meca th td {
+            border-bottom: 1px solid #ddd;
+        }
+        
+        #meca td {
+            background-color: whitesmoke;
+        }
+        
+        @media screen and (max-width:480px) {
+            body .especialidades {
+                height: fit-content;
+                width: 100%
+            }
+            body .especialidades .Combustion {
+                left: 0%;
+                height: 150px;
+                width: 95%;
+                position: relative;
+                left: .1%;
+            }
+            body .especialidades .Maquinas {
+                top: 10%;
+                width: 96%;
+                height: 150px;
+                position: relative;
+                left: 0%;
+                left: .1%;
+            }
+            body .especialidades .Electricidad {
+                top: 20%;
+                width: 96.5%;
+                height: 150px;
+                position: relative;
+                left: 0%;
+            }
+            body .especialidades .Sistemas {
+                top: 30%;
+                width: 96.5%;
+                height: 150px;
+                position: relative;
+                left: 0%;
+            }
+            body .especialidades .Mecatronica {
+                top: 40%;
+                width: 96.5%;
+                height: 150px;
+                position: relative;
+                left: 0%;
+            }
+            body #maq {
+                width: fit-content;
+            }
+            body #com {
+                width: fit-content;
+            }
+            body #sis {
+                width: fit-content;
+            }
+            body #ele {
+                width: fit-content;
+            }
+            body #meca {
+                width: fit-content;
+            }
+        }
+        
+        @media screen and (min-width:481px) and (max-width:1080px) {
+            body .especialidades {
+                left: 20%;
+                height: 1500px;
+                width: 60%;
+            }
+            body label {
+                left: 20%;
+            }
+            body .especialidades .Combustion {
+                left: 0%;
+                height: 150px;
+                width: fit-content;
+                position: relative;
+                left: 1%;
+            }
+            body .especialidades .Maquinas {
+                top: 10%;
+                width: fit-content;
+                height: 150px;
+                position: relative;
+                left: 1%;
+            }
+            body .especialidades .Electricidad {
+                top: 20%;
+                width: fit-content;
+                height: 150px;
+                position: relative;
+                left: 1%;
+            }
+            body .especialidades .Sistemas {
+                top: 30%;
+                width: fit-content;
+                height: 150px;
+                position: relative;
+                left: 1%;
+            }
+            body .especialidades .Mecatronica {
+                top: 40%;
+                width: fit-content;
+                height: 150px;
+                position: relative;
+                left: 1%;
+            }
+            body #sis {
+                width: fit-content;
+            }
+            body #meca {
+                width: fit-content;
+            }
+            body #ele {
+                width: fit-content;
+            }
+            body #maq {
+                width: fit-content;
+            }
+            body #com {
+                width: fit-content;
+            }
+        }
