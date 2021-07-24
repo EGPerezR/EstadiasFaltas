@@ -38,7 +38,7 @@
         #com {
             box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
             border-collapse: collapse;
-            width: 15%;
+            width: fit-content;
         }
         
         #com th {
@@ -71,7 +71,7 @@
         
         #maq {
             border-collapse: collapse;
-            width: 15%;
+            width: fit-content;
             box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
         }
         
@@ -107,7 +107,7 @@
         
         #ele {
             border-collapse: collapse;
-            width: 15%;
+            width: fit-content;
             box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
         }
         
@@ -148,12 +148,12 @@
         #sis {
             border-collapse: collapse;
             box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
-            width: 15%;
+            width: fit-content;
         }
         
         .especialidades .Mecatronica {
             position: absolute;
-            width: fit-content;
+            width: 27%;
             padding: 5px;
             left: 60%;
             top: 53%;
@@ -167,7 +167,7 @@
         
         #meca {
             border-collapse: collapse;
-            width: 15%;
+            width: fit-content;
             box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.568), 0.3em 0.3em 1em rgba(0, 0, 0, 0.514);
         }
         

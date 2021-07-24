@@ -110,36 +110,46 @@ if (isset($_SESSION['matricula'])) {
 
 	?>
 
-		<label>Estatus del Dia</label>
+		<label>Estatus del Dia <?php  echo date("Y-m-d");  ?></label>
 		<br>
 		<div class="especialidades">
 
 
 			<div class="Combustion">
 				<table border="1" id="com">
-
+					<?php
+					include('Controllers/CI.php')
+					?>
 
 				</table>
 			</div>
 			<div class="Maquinas">
 				<table border="1" id="maq">
-
+					<?php
+					include('Controllers/MH.php')
+					?>
 				</table>
 			</div>
 			<div class="Electricidad">
 				<table border="1" id="ele">
-
+					<?php
+					include('Controllers/E.php')
+					?>
 
 				</table>
 			</div>
 			<div class="Sistemas">
 				<table border="1" id="sis">
-
+					<?php
+					include('Controllers/SCI.php')
+					?>
 				</table>
 			</div>
 			<div class="Mecatronica">
 				<table border="1" id="meca">
-
+					<?php
+					include('Controllers/M.php')
+					?>
 
 				</table>
 			</div>
@@ -297,14 +307,7 @@ if (isset($_SESSION['matricula'])) {
 		document.getElementById('maq').innerHTML = datos;
 	}
 
-	$(document).ready(function() {
 	
-			setInterval(maquinas, 0);
-			setInterval(sistemas, 0);
-			setInterval(combustion, 0);
-			setInterval(mecatronica, 0);
-			setInterval(electricidad, 0);
-	});
 
 
 	setInterval(maquinas, 2400000);
