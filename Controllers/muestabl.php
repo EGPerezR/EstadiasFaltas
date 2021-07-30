@@ -204,8 +204,9 @@ if (isset($_POST['buscar'])) {
                                                 ?>
 
                                             </td>
-                                            <td style="color: red;"><?php  echo $bufa //$justi['justificante'];   
-                                            ?></td>
+                                            <td style="color: red;"><?php  echo $justi['justificante'];   
+                                            ?>
+                                            <input type="text" value=" <?php echo $justi['justificante']; ?>" hidden ></td>
                                     <?php
 
                                         }
@@ -485,10 +486,10 @@ if (isset($_POST['buscar'])) {
                                     $total = mysqli_query($mysqli, $totfa);
                                     $to = $total->fetch_assoc();
                                     if (empty($to['falta'])) {
-                                        echo "0";
+                                        echo "<b>0</b>";
                                         echo "<input type='text' value='0' name='faltato[]'  hidden>";
                                     } else {
-                                        echo $to['falta'];
+                                        echo "<b>".$to['falta']."</b>";
                                         echo "<input type='text' value='" . $to['falta'] . "' name='faltato[]' hidden >";
                                     }
 

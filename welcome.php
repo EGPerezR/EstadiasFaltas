@@ -49,7 +49,7 @@ if (isset($_SESSION['matricula'])) {
 
 				<?php } else {
 				?>
-					<li><a href='justificacion.php'>Faltas Justificadas</a></li>
+					<li><a href='justificacion.php'>Justificantes</a></li>
 				<?php
 
 

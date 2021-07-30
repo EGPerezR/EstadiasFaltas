@@ -60,9 +60,14 @@ if (isset($_SESSION['matricula'])) {
                 <option value="1">A</option>
                 <option value="2">B</option>
             </select>
-            <input type="submit" value="Buscar" name="justificar">
+            <input type="submit" value="Buscar" name="justificar" class="justificar">
+            
+           <input type="submit" value="Justificantes" name="historial" class="historial"> 
+            </div>
         </form>
-    </div>
+    
+
+
 
     <?php
     include('Controllers/justifiback.php');
@@ -96,10 +101,14 @@ if (isset($_SESSION['matricula'])) {
 
     };
 
-    function cie() {
+    function cierr() {
     document.getElementById('fondojustifica').style.display = "none";
-    document.getElementById('justifiform').style.display = "none";
-}
+    }
+
+
+    function cierra(){
+        document.getElementById('histo').style.display= "none";
+    }
     
 </script>
 
