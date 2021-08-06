@@ -47,13 +47,15 @@ if (isset($_SESSION['matricula'])) {
 					<li><a href='GestionA.php'>Gestion de alumnos</a></li>
 					<li><a href='pasemaestros.php'>Pase de lista</a></li>
 
-				<?php } else {
+				<?php } else if ($rows['tipo_usuario'] == 2){
 				?>
 					<li><a href='justificacion.php'>Justificantes</a></li>
 				<?php
 
 
-				} ?>
+				} else if ($rows['tipo_usuario'] == 3){ 
+					echo "<li><a href='justificacion.php'>Historial</a></li>";
+				}?>
 
 				<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
 			</ul>
@@ -103,7 +105,7 @@ if (isset($_SESSION['matricula'])) {
 			</form>
 		</div>
 	<?php
-	} elseif ($rows['tipo_usuario'] == 1) {
+	} elseif ($rows['tipo_usuario'] == 3) {
 
 
 
@@ -188,6 +190,8 @@ if (isset($_SESSION['matricula'])) {
 
 		</div>--->
 	<?php
+	} else{
+		echo "<h1>Bienvenid@ ".$_SESSION['usuairo']."<h1>";
 	}
 	include('Controllers/busalumn.php');
 	?>
