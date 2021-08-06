@@ -34,13 +34,40 @@ if (isset($_SESSION['matricula'])) {
             </ul>
         </nav>
     </header>
-    <div class="form">
+    <div class="alumnuevo" id="alumnuevo">
+        <input type="button" value="Insertar alumno manualmente" onclick="Manual()">
+        <input type="button" value="Lista de Excel" onclick="Excel()">
+    </div>
+    <div class="manual" id="manual">
+        <form>
+            <label for="Nombres">Nombre Completo</label>
+            <input type="text" placeholder="Empiece por los apellidos...">
+            <label for="especialidad">Especialidad: </label>
+                        <select name="especialidad" id="especialidad" oninput="mossec()">
+                            <option value="...">...</option>
+                            <option value="1">Combustion Interna</option>
+                            <option value="2">Maquinas y herramientas</option>
+                            <option value="3">Electricidad</option>
+                            <option value="4">sistemas</option>
+                            <option value="5">Mecatronica</option>
+                        </select>
+                        <label for="seccion">Seccion:</label>
+                        <select name="seccion" id="seccion" disabled>
+                            <option value="1">A</option>
+                            <option value="2">B</option>
+                        </select>
+                        <input type="submit" value="Insertar alumno" name="manual">
+                        <img src="img/regresar.png" onclick="balm()">
+        </form>
+    </div>
+    <div class="form" id="forma">
         <form action="alumnos.php" method="POST" enctype="multipart/form-data">
             <label for="lista">Elegir una lista: </label>
             <input type="file" name="fichero_usuario">
 
             <br>
             <input type="submit" value="Subir" name="Insertar">
+            <img src="img/regresar.png" onclick="back()">
         </form>
     </div>
     <?php
@@ -51,6 +78,27 @@ if (isset($_SESSION['matricula'])) {
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script type="text/javascript">
+    function balm(){
+        document.getElementById('alumnuevo').style.display = "block";
+        document.getElementById('manual').style.display = "none";
+    }
+
+    function Manual(){
+        document.getElementById('alumnuevo').style.display = "none";
+        document.getElementById('manual').style.display = "block";
+    }
+
+    function back(){
+        document.getElementById('forma').style.display = "none";
+        document.getElementById('alumnuevo').style.display = "block";
+    }
+
+    function Excel(){
+        document.getElementById('forma').style.display = "block";
+        document.getElementById('alumnuevo').style.display = "none";
+    }
+
+
     function actualizar() {
         location.reload(true)
     };
