@@ -39,9 +39,9 @@ if (isset($_SESSION['matricula'])) {
         <input type="button" value="Lista de Excel" onclick="Excel()">
     </div>
     <div class="manual" id="manual">
-        <form>
+        <form action="alumnos.php" method="POST">
             <label for="Nombres">Nombre Completo</label>
-            <input type="text" placeholder="Empiece por los apellidos...">
+            <input type="text" placeholder="Empiece por los apellidos..." name="nombres">
             <label for="especialidad">Especialidad: </label>
                         <select name="especialidad" id="especialidad" oninput="mossec()">
                             <option value="...">...</option>
@@ -72,7 +72,7 @@ if (isset($_SESSION['matricula'])) {
     </div>
     <?php
     include 'Controllers/leer.php';
-
+    include 'Controllers/manual.php';
     ?>
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
