@@ -26,7 +26,7 @@ if (isset($_POST['activo'])) {
         $secc = $_POST['seccion'];
         //consulta de alumnos
         $sql = "SELECT  id_alumnos, nombres, activo from alumnos where especialidad = $espe and grado = $grado and seccion = $secc ORDER BY nombres ASC";
-
+        
         $result = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($result) > 0) {
 
@@ -118,7 +118,9 @@ if (isset($_POST['activo'])) {
         <?php
 
         } else {
+            echo $sql;
         ?>
+        
             <h1>No se Encontro este grupo...</h1>
 
         <?php
@@ -145,6 +147,7 @@ if (isset($_POST['cambio'])) {
         $espe = $_POST['especialidad'];
         $grado = $_POST['grado'];
         $secc = $_POST['seccion'];
+        
         //consulta de alumnos
         $sql = "SELECT  id_alumnos, nombres, grado, seccion from alumnos where especialidad = $espe and grado = $grado and seccion = $secc and activo = 1 ORDER BY nombres ASC";
 

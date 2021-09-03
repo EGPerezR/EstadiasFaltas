@@ -45,7 +45,7 @@ if (isset($_SESSION['matricula'])) {
 					<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
 					<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
 					<li><a href='GestionA.php'>Gestion de alumnos</a></li>
-					<li><a href='pasemaestros.php'>Pase de lista</a></li>
+					<!---<li><a href='pasemaestros.php'>Pase de lista</a></li>--->
 
 				<?php } else if ($rows['tipo_usuario'] == 2){
 				?>
@@ -54,7 +54,7 @@ if (isset($_SESSION['matricula'])) {
 
 
 				} else if ($rows['tipo_usuario'] == 3){ 
-					echo "<li><a href='justificacion.php'>Historial</a></li>";
+					echo "<li><a href='tablafaltas.php'>Grafica de faltas</a></li>";
 				}?>
 
 				<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>

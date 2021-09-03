@@ -96,7 +96,7 @@ if (isset($_POST['Insertar'])) {
                             <option value="5">Mecatronica</option>
                         </select>
                         <label for="seccion">Seccion:</label>
-                        <select name="seccion" id="seccion" disabled>
+                        <select name="seccion" id="seccion" >
                             <option value="1">A</option>
                             <option value="2">B</option>
                         </select>
@@ -166,7 +166,7 @@ if (isset($_POST['confirmado'])) {
 
 
     for ($i = 0; $i < count($alumnos); $i++) {
-        $insert = "INSERT INTO alumnos (nombres,especialidad,grado,seccion) VALUES ('" . $alumnos[$i] . "'," . $espe . ",1," . $seccion . ")";
+        $insert = "INSERT INTO alumnos (nombres,especialidad,grado,seccion,activo) VALUES ('" . $alumnos[$i] . "'," . $espe . ",1," . $seccion . ",1)";
         $ejecuta = mysqli_query($mysqli, $insert);
     }
 
