@@ -1,6 +1,6 @@
 <?php
 include('conexion.php');
-
+date_default_timezone_set('America/Monterrey');
 require 'fecha.php';
 require 'funcs.php';
 
@@ -54,8 +54,15 @@ if (isset($_POST['buscar'])) {
                         }
                             ?>
                             </select>
-                            <input type="submit" value="Insertar" name="insertar">
-                            <input type="button" value="Cancelar" onclick="offa()">
+                            <input type="button" value="Insertar" class="inserconf" onclick="confirm()">
+                            <input type="button" value="Cancelar" class="cancel" onclick="offa()">
+                    </div>
+                    <div class="fondoconf" id="fondoconf"></div>
+                    <div id="confirmarlista" class="listaconf">
+                        <img src="img/warning.png">
+                        <label>¿Segur@ de insertar esta lista?</label>
+                        <input type="submit" value="Aceptar" name="insertar">
+                        <input type="button" value="Cancelar" onclick="cancelamela()">
                     </div>
                     <table border="1" class="tabla">
                         <thead style="
@@ -111,9 +118,12 @@ if (isset($_POST['buscar'])) {
                             <th style="width: 40px;">Faltas</hd>
                         </tr>
                         <?php
+                        echo "<input hidden name='especialidad' value='".$espe."'>";
+                        echo "<input hidden name='grado' value='".$grado."'>";
+                        echo "<input hidden name='seccion' value='".$secc."'>";
                         while ($lista = $result->fetch_assoc()) {
                             //muestra los alumnos 
-                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='0' style='width: 80%;' name='faltas[]' value='0'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td></tr>";
+                            echo "<tr><td>" . $lista['nombres'] . "</td><td><input type='number' min='0' max='1' style='width: 80%;' name='faltas[]' value='0'><input type='text' hidden dissabled name='alumno[]' value='" . $lista['id_alumnos'] . "'></td></tr>";
                         }
 
                         ?>
@@ -142,6 +152,9 @@ if (isset($_POST['insertar'])) {
     $hoy = date("Y-m-d");
     $lunes;
     $materia = $_POST['materia'];
+    $especialidad = $_POST['especialidad'];
+    $grado = $_POST['grado'];
+    $seccion = $_POST['seccion'];
     $nueva = [];
     //Construccion de las faltas
     if (!empty($_POST["faltas"]) && is_array($_POST["faltas"])) {
@@ -167,6 +180,8 @@ if (isset($_POST['insertar'])) {
             $insert = "INSERT INTO faltas (id_alumno, id_profesor,  id_materia, faltas, semana, dia_registro) VALUES(" . $alumnos[$i] . ",'" . $_SESSION['matricula'] . "'," . $materia . "," . $faltas[$i] . ",'" . $lunes . "','" . $hoy . "')";
             $insertando = mysqli_query($mysqli, $insert);
         }
+        $hist = "INSERT INTO historial (maestro, materia, especialidad, grado, seccion, fecha, hora) VALUES ('".$_SESSION['matricula']."', ".$materia.",".$especialidad.", ".$grado.",".$seccion.", '".$hoy."','".date('h:i:s')."')";
+        $eject = mysqli_query($mysqli,$hist);
 
         echo "<div class = 'hecho' id = 'hecho' ><div class='alert'><a onclick='off()' href=''>X</a><br><label><b>Todos los datos se han insertado correctamente</b></label><div></div>";
     }

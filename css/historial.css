@@ -1,0 +1,26 @@
+table tr:hover {
+    background-color: rgb(255, 205, 96);
+}
+
+table {
+    position: relative;
+    background-color: white;
+    width: 85%;
+    border-collapse: collapse;
+    left: 7%;
+}
+
+.fechahora {
+    font-size: 20px;
+    color: grey;
+}
+
+table td {
+    font-size: 25px;
+}
+
+table th {
+    background-color: yellow;
+    height: 50px;
+    font-size: 30px;
+}

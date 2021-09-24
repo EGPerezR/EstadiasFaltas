@@ -45,17 +45,18 @@ if (isset($_SESSION['matricula'])) {
 					<li><a href='tablafaltas.php'>Grafica de faltas</a></li>
 					<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
 					<li><a href='GestionA.php'>Gestion de alumnos</a></li>
-					<!---<li><a href='pasemaestros.php'>Pase de lista</a></li>--->
+					<li><a href='pasemaestros.php'>Historial</a></li>
 
-				<?php } else if ($rows['tipo_usuario'] == 2){
+				<?php } else if ($rows['tipo_usuario'] == 2) {
 				?>
 					<li><a href='justificacion.php'>Justificantes</a></li>
 				<?php
 
 
-				} else if ($rows['tipo_usuario'] == 3){ 
+				} else if ($rows['tipo_usuario'] == 3) {
 					echo "<li><a href='tablafaltas.php'>Grafica de faltas</a></li>";
-				}?>
+					echo "<li><a href='pasemaestros.php'>Historial Asistencia</a></li>";
+				} ?>
 
 				<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
 			</ul>
@@ -72,8 +73,59 @@ if (isset($_SESSION['matricula'])) {
 		//echo "<label>Inicio de semana: </label>" . $lunes;
 		//echo "<br>fecha: " . date("Y-m-d");
 	?>
-		<center><label style="width: fit-content; background-color: black; color:white; font-size: 20px;">Pase de lista</label></center>
-		<div class="faltas">
+		<div id="back" hidden><button onclick="atras()">Atras</button></div>
+		<div id="opvis">
+			<button onclick="lista()">Pasar Lista</button>
+			<button onclick="milista()">Mi lista</button>
+		</div>
+		<div class="CF" id="CF" hidden>
+			<form method="POST" >
+				<table class="tabCF">
+					<tr>
+						<td><label for="">Especialidad:</label></td>
+						<td><label for="">Grado:</label></td>
+						<td><label for="">Seccion:</label></td>
+						<td><label for="">Materia:</label></td>
+					</tr>
+				</table>
+
+
+				<select name="espe" id="espe">
+					<option value="">...</option>
+					<option value="1">Combustion Interna</option>
+					<option value="2">Maquinas y herramientas</option>
+					<option value="3">Electricidad</option>
+					<option value="4">Sistemas</option>
+					<option value="5">Mecatronica</option>
+				</select>
+				
+				<input type="button" onclick="faltgra()" value=">>">
+				<select disabled id="resultado" name="grado">
+
+				</select>
+				<input type="button" onclick="faltsec()" value=">>">
+				
+				<select name="sec" id="result" disabled>
+
+				</select>
+				<input type="button" onclick="faltmater()" value=">>">
+				
+				<select name="mate" id="mate" disabled>
+
+				</select>
+				<input type="submit" Value=">>" name="faltma">
+			</form>
+
+			
+		</div>
+		<?php
+			include('Controllers/CF.php');
+
+?>
+
+		<div class="faltas" id="faltas">
+			<center><label style="width: fit-content; background-color: black; color:white; font-size: 20px;">Pase de lista</label></center>
+
 
 			<form action="welcome.php" method="POST">
 				<label class="letra">Seleccione Especialidad</label>
@@ -112,7 +164,7 @@ if (isset($_SESSION['matricula'])) {
 
 	?>
 
-		<label>Estatus del Dia <?php  echo date("Y-m-d");  ?></label>
+		<label>Estatus del Dia <?php echo date("Y-m-d");  ?></label>
 		<br>
 		<div class="especialidades">
 
@@ -190,18 +242,53 @@ if (isset($_SESSION['matricula'])) {
 
 		</div>--->
 	<?php
-	} else{
-		echo "<h1>Bienvenid@ ".$_SESSION['usuairo']."<h1>";
+	} else {
+
+		echo "<h1>Bienvenid@ " . $_SESSION['usuairo'] . "<h1>";
 	}
 	include('Controllers/busalumn.php');
 	?>
 </body>
+<script src="js/CF.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/songs.js"></script>
+<!--<script src="js/songs.js"></script>-->
 <script type="text/javascript">
+	function atras() {
+		document.getElementById("back").style.display = "none";
+		document.getElementById("faltas").style.display = "none";
+		document.getElementById("CF").style.display = "none";
+		document.getElementById("opvis").style.display = "block";
+	}
+
+	function lista() {
+		document.getElementById("back").style.display = "block";
+		document.getElementById("faltas").style.display = "block";
+		document.getElementById("opvis").style.display = "none";
+		document.getElementById("CFt").style.display = "none";
+
+	}
+
+	function milista() {
+		document.getElementById("opvis").style.display = "none";
+		document.getElementById("CFt").style.display = "none";
+		document.getElementById("CF").style.display = "block";
+		document.getElementById("back").style.display = "block";
+
+	}
+
 	function disable() {
 
 		document.getElementById("grado").disabled = true;
+	}
+
+	function confirm() {
+		document.getElementById("fondoconf").style.display = "block";
+		document.getElementById("confirmarlista").style.display = "block";
+	}
+
+	function cancelamela() {
+		document.getElementById("fondoconf").style.display = "none";
+		document.getElementById("confirmarlista").style.display = "none";
 	}
 
 	function enablegrado() {
@@ -311,7 +398,7 @@ if (isset($_SESSION['matricula'])) {
 		document.getElementById('maq').innerHTML = datos;
 	}
 
-	
+
 
 
 	setInterval(maquinas, 2400000);

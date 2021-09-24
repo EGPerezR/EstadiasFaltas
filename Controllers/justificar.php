@@ -5,6 +5,7 @@ include('conexion.php');
 if (isset($_POST['justificar'])) {
     $materia = $_POST['materiaj'];
     $alumno = $_POST['alumno'];
+    $motivo = $_POST['motivo'];
 
     //Contruccion de la fecha
     if (!empty($_POST["fecha"]) && is_array($_POST["fecha"])) {
@@ -16,7 +17,7 @@ if (isset($_POST['justificar'])) {
 
 
     for ($i = 0; $i < count($fechj); $i++) {
-        $justificalo = "INSERT INTO faltasjustificadas (idalumno, idmateria, profesor,fecha_a_justificar, fecha_justificado) VALUES (" . $alumno . ", " . $materia . ", '".$_SESSION['matricula']."','" . $fechj[$i] . "', '" . date("Y-m-d") . "')";
+        $justificalo = "INSERT INTO faltasjustificadas (idalumno, idmateria, profesor, motivo, fecha_a_justificar, fecha_justificado) VALUES (" . $alumno . ", " . $materia . ", '".$_SESSION['matricula']."', '".$motivo."','" . $fechj[$i] . "', '" . date("Y-m-d") . "')";
 
         $selectf = "SELECT faltas from faltas where dia_registro = '" . $fechj[$i] . "' AND id_alumno = " . $alumno . " AND id_materia = " . $materia . " LIMIT 1";
         $sleccion = mysqli_query($mysqli, $selectf);
@@ -25,6 +26,7 @@ if (isset($_POST['justificar'])) {
         if (mysqli_num_rows($sleccion) > 0) {
             
             while ($faltaa = $sleccion->fetch_assoc()) {
+                if($faltaa['faltas']==1){
                 $resta = $faltaa['faltas'] - 1;
                 
 
@@ -35,6 +37,9 @@ if (isset($_POST['justificar'])) {
                 if($justifica){
                     header('Location:../justificacion.php');
                 }
+            } else {
+                echo "no hay registro de una falta de ese dia <a style='font-size: 20px; ' href='../justificacion.php'>Regresar...</a>";
+            }
             }
         } else{
             echo "no hay registro de una falta de ese dia <a style='font-size: 20px; ' href='../justificacion.php'>Regresar...</a>";

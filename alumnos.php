@@ -56,6 +56,8 @@ if (isset($_SESSION['matricula'])) {
                             <option value="1">A</option>
                             <option value="2">B</option>
                         </select>
+                        <label for="semestre">Semestre</label>
+                        <input type="number" min="1" max="6" name="semestre">
                         <input type="submit" value="Insertar alumno" name="manual">
                         <img src="img/regresar.png" onclick="balm()">
         </form>

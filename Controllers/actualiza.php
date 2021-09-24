@@ -83,7 +83,7 @@ if (count($alumno) == count($sec)) {
                $s = 3;
                
            }
-        $up = 'UPDATE alumnos SET grado = '.$grado.', seccion = '.$s.' WHERE id_alumnos = '.$alumno[$i].'';
+        $up = 'UPDATE alumnos SET grado = '.$grado.', seccion = '.$s.' WHERE id_alumnos = '.$alumno[$i].' AND activo = 1';
         $ejecutar = mysqli_query($mysqli, $up);
        
         
