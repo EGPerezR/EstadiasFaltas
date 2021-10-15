@@ -30,7 +30,7 @@ while($historial = $busca->fetch_assoc()){
     echo "</td>";
   
     echo "<td>";
-    echo "<label>".$historial['Docente']." ha pasado lista en ".$historial['grado']." de ".$espe." del ".$secc." <a style='color: red;'>(".$historial['Materia'].")</a></label>";
+    echo "<label>".$historial['Docente']." ha pasado lista en ".$historial['grado']." de ".$espe." del ".$secc." <a style='color: white; background-color:rgba(0, 0, 0, 0.5);'>(".$historial['Materia'].")</a></label>";
     echo "</td>";
     echo "</tr>";
 }

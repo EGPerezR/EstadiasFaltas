@@ -1,18 +1,19 @@
 table tr:hover {
-    background-color: rgb(255, 205, 96);
+    background-color: rgb(110, 110, 110);
 }
 
 table {
     position: relative;
-    background-color: white;
+    background-color: rgb(87, 85, 85);
     width: 85%;
+    color: white;
     border-collapse: collapse;
     left: 7%;
 }
 
 .fechahora {
     font-size: 20px;
-    color: grey;
+    color: rgb(211, 210, 210);
 }
 
 table td {
@@ -20,7 +21,7 @@ table td {
 }
 
 table th {
-    background-color: yellow;
+    background-color: rgb(126, 126, 126);
     height: 50px;
     font-size: 30px;
 }

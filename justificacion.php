@@ -1,10 +1,13 @@
 <?php
 session_start();
+require 'Controllers/conexion.php';
 if (isset($_SESSION['matricula'])) {
 } else {
 	header('Location: index.php');
 }
-
+$nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION['matricula'] . "' or usuario = '" . $_SESSION['usuairo'] . "' Limit 1";
+				$result = mysqli_query($mysqli, $nombre)  or die(mysqli_error($mysqli));
+				$rows = mysqli_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,9 +63,13 @@ if (isset($_SESSION['matricula'])) {
                 <option value="1">A</option>
                 <option value="2">B</option>
             </select>
+            <?php
+                if ($rows['tipo_usuario'] == 1) {
+            ?>
             <input type="submit" value="Buscar" name="justificar" class="justificar">
-            
+            <?php  } if ($rows['tipo_usuario'] == 2) {?>
            <input type="submit" value="Justificantes" name="historial" class="historial"> 
+           <?php  } ?>
             </div>
         </form>
     
@@ -75,8 +82,13 @@ if (isset($_SESSION['matricula'])) {
 
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/justi.js"></script>
+
 <script>
+    
+
+
     $(document).ready(main);
 
     var contador = 1;

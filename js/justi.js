@@ -23,9 +23,12 @@ function abilitaseccion() {
 
 
 
+
 var x = 1;
 
 function crearDin() {
+
+
 
 
     var padre = document.getElementById("mosdate");
