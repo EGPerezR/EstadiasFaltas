@@ -58,7 +58,7 @@ if (isset($_POST['justificar'])) {
                             <?php
                             while ($materiasli = $mate->fetch_assoc()) {
                                 
-                                echo "<input type='checkbox' value ='".$materiasli['id_materia']."' id='materia' name ='materia[]'>";
+                                echo "<input type='checkbox' value ='".$materiasli['id_materia']."' id='materia' name ='materiaj[]'>";
                                 echo "<b><label>".$materiasli['nombre']." </label></b><br>";
                                 $mater++;
                                 
@@ -109,8 +109,8 @@ if (isset($_POST['historial'])) {
         $espe = $_POST['especialidad'];
         $gra = $_POST['grado'];
         $se = $_POST['seccion'];
-        $historial = "SELECT faltasjustificadas.idalumno, faltasjustificadas.idmateria,faltasjustificadas.motivo, alumnos.nombres as Alumno, materias.nombre as Materia, faltasjustificadas.fecha_a_justificar as 'fecha justificada', faltasjustificadas.fecha_justificado as 'Fecha de justificante' from faltasjustificadas INNER JOIN alumnos ON faltasjustificadas.idalumno = alumnos.id_alumnos INNER JOIN materias ON faltasjustificadas.idmateria = materias.id_materia WHERE fecha_justificado >= '" . $lunes . "' AND fecha_justificado <= '" . estasemana() . "' AND alumnos.especialidad = $espe AND alumnos.grado = $gra AND alumnos.seccion = $se";
-
+        $historial = "SELECT faltasjustificadas.idalumno, faltasjustificadas.idmateria,faltasjustificadas.motivo, alumnos.nombres as Alumno, materias.nombre as Materia, faltasjustificadas.fecha_a_justificar as 'fecha justificada', faltasjustificadas.fecha_justificado as 'Fecha de justificante' from faltasjustificadas INNER JOIN alumnos ON faltasjustificadas.idalumno = alumnos.id_alumnos INNER JOIN materias ON faltasjustificadas.idmateria = materias.id_materia WHERE fecha_justificado >= '" . $lunes . "' AND fecha_justificado <= '".estasemana()."' AND alumnos.especialidad = $espe AND alumnos.grado = $gra AND alumnos.seccion = $se GROUP BY id_materia, fecha_justificado";
+        
         $ejecuta = mysqli_query($mysqli, $historial);
 
         if (mysqli_num_rows($ejecuta) > 0) {

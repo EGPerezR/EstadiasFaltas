@@ -25,38 +25,36 @@ if (isset($_POST['justificar'])) {
         }
     }
 
-    
+
 
     for ($i = 0; $i < count($fechj); $i++) {
         for ($j = 0; $j < count($materia); $j++) {
-            $selectf = "SELECT sum(faltas) from faltas where dia_registro = '".$fechj[$i]."' AND id_alumno = $alumno";
+
+
+            $justificalo = "INSERT INTO faltasjustificadas (idalumno, idmateria, profesor, motivo, fecha_a_justificar, fecha_justificado) VALUES (" . $alumno . ", " . $materia[$j] . ", '" . $_SESSION['matricula'] . "', '" . $motivo . "','" . $fechj[$i] . "', '" . date("Y-m-d") . "')";
             
-            $justificalo = "INSERT INTO faltasjustificadas (idalumno, idmateria, profesor, motivo, fecha_a_justificar, fecha_justificado) VALUES (" . $alumno . ", " . $materia[$j] . ", '" . $_SESSION['matricula'] . "', '" . $motivo . "','" . $fechj[$i] . "', '" . date("Y-m-d") . "') WHERE faltas.id_alumno = " . $alumno . " AND faltas.faltas = 1 AND faltas.dia_registro = " . $fechj[$i] . "";
-            echo $justificalo;
-             
-    echo $selectf;
-/*
+
             $selectf = "SELECT faltas from faltas where dia_registro = '" . $fechj[$i] . "' AND id_alumno = " . $alumno . " AND id_materia = " . $materia[$j] . " LIMIT 1";
             $sleccion = mysqli_query($mysqli, $selectf);
 
+            if (mysqli_num_rows($sleccion) > 0) {
 
-            
 
                 while ($faltaa = $sleccion->fetch_assoc()) {
-                    if (!$faltaa['faltas'] == 0) {
-                        $resta = $faltaa['faltas'] - 1;
-
-                        echo "ala";
+                    if ($faltaa['faltas'] > 0) {
+                        $resta = $faltaa['faltas'] - $faltaa['faltas'];
                         $cambia = "UPDATE faltas SET faltas = $resta WHERE dia_registro = '" . $fechj[$i] . "' AND id_alumno = " . $alumno . " AND id_materia = " . $materia[$j] . "";
 
                         $cambio = mysqli_query($mysqli, $cambia);
                         $justifica = mysqli_query($mysqli, $justificalo);
-                        
-                    } else {
                         header('Location:../justificacion.php');
+                    } else {
+                        echo "No faltó <a href='../justificacion.php'>Regresar</a>";
                     }
                 }
-            */
+            }else {
+                echo "No hay registro de faltas de ese dia <a href='../justificacion.php'>Regresar</a>";
+            }
         }
     }
 }
