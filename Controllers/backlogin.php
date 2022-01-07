@@ -3,7 +3,7 @@
 use ZipStream\Option\Method;
 session_start();
 
-include("conexion.php");
+
 require('funcs.php');
 if (isset($_POST['Iniciar'])) {
     //Mandamos a pedir datos del index

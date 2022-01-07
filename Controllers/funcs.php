@@ -359,7 +359,7 @@ function login($matricula, $password)
 			$stmt-> bind_param('sss',$_SESSION['matricula'],$hora,$hoy);
 			$stmt->execute();
 			$stmt->close();
-			header("location: welcome.php");
+			header("location: reparacion.php");
 		} else {
 
 			echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>La contrase&ntilde;a es incorrecta</div></div>";
