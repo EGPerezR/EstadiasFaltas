@@ -139,10 +139,12 @@ if (isset($_POST['historial'])) {
                                 echo "<input type='text' class='lista'  value='".$rows['idmateria']."' name='materias[]'style='display: none;' >";
                                 echo $rows['Materia'];
                                 echo "</td>";
+                                if (!$rows['tipo_usuario'] == 2) {
                                 echo "<td>";
                                 echo "<input type='text' class='lista'  value='".$rows['idmateria']."' name='materias[]'style='display: none;' >";
                                 echo $rows['motivo'];
                                 echo "</td>";
+                                }
                                 echo "<td>";
                                 echo "<input type='text' name='fecha2[]' value='" . $rows['fecha justificada'] . "' style='display: none;' > ";
                                 //echo "<input type='date' name='fecha1[]' value='" . $rows['fecha justificada'] . "' >";

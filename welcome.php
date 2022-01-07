@@ -47,7 +47,7 @@ if (isset($_SESSION['matricula'])) {
 					<li><a href='GestionA.php'>Gestion de alumnos</a></li>
 					<li><a href='justificacion.php'>Justificar</a></li>
 					<li><a href='pasemaestros.php'>Historial</a></li>
-					
+
 
 				<?php } else if ($rows['tipo_usuario'] == 2) {
 				?>
@@ -61,7 +61,7 @@ if (isset($_SESSION['matricula'])) {
 					echo "<li><a href='pasemaestros.php'>Historial Asistencia</a></li>";
 				} ?>
 
-				<li><a href='Controllers/cerrars.php' >Cerrar Sesi&oacute;n</a></li>
+				<li><a href='Controllers/cerrars.php'>Cerrar Sesi&oacute;n</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -82,7 +82,7 @@ if (isset($_SESSION['matricula'])) {
 			<button onclick="milista()">Mi lista</button>
 		</div>
 		<div class="CF" id="CF" hidden>
-			<form method="POST" >
+			<form method="POST">
 				<table class="tabCF">
 					<tr>
 						<td><label for="">Especialidad:</label></td>
@@ -101,18 +101,18 @@ if (isset($_SESSION['matricula'])) {
 					<option value="4">Sistemas</option>
 					<option value="5">Mecatronica</option>
 				</select>
-				
+
 				<input type="button" onclick="faltgra()" value=">>">
 				<select disabled id="resultado" name="grado">
 
 				</select>
 				<input type="button" onclick="faltsec()" value=">>">
-				
+
 				<select name="sec" id="result" disabled>
 
 				</select>
 				<input type="button" onclick="faltmater()" value=">>">
-				
+
 				<select name="mate" id="mate" disabled>
 
 				</select>
@@ -121,12 +121,12 @@ if (isset($_SESSION['matricula'])) {
 				<input type="submit" Value=">>" name="faltma">
 			</form>
 
-			
+
 		</div>
 		<?php
-			include('Controllers/CF.php');
+		include('Controllers/CF.php');
 
-?>
+		?>
 
 		<div class="faltas" id="faltas">
 			<center><label style="width: fit-content; background-color: black; color:white; font-size: 20px;">Pase de lista</label></center>
@@ -247,10 +247,24 @@ if (isset($_SESSION['matricula'])) {
 
 		</div>--->
 	<?php
-	} else {
+	}  elseif ($rows['tipo_usuario'] == 4){
+        ?>
+		<div class="pase" id="pase">
+			<?php
 
-		echo "<h1>Bienvenid@ " . $_SESSION['usuairo'] . "<h1>";
-	}
+				include 'Controllers/pasemaestros.php';
+?>
+		</div>
+
+<?php
+        
+    }
+	?>
+
+
+
+	<?php
+
 	include('Controllers/busalumn.php');
 	?>
 </body>
@@ -351,6 +365,16 @@ if (isset($_SESSION['matricula'])) {
 
 	};
 
+	function pasemaestro(){
+		var datos= $.ajax({
+			url: 'Controllers/pasemaestros.php',
+			dataType: 'text',
+			async: false
+		}).responseText;
+
+		document.getElementById('pase').innerHTML = datos;
+	}
+
 
 	function electricidad() {
 		var datos = $.ajax({
@@ -411,6 +435,7 @@ if (isset($_SESSION['matricula'])) {
 	setInterval(combustion, 2400000);
 	setInterval(mecatronica, 2400000);
 	setInterval(electricidad, 2400000);
+	setInterval(pasemaestro, 10000);
 </script>
 
 </html>

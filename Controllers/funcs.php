@@ -347,7 +347,13 @@ function login($matricula, $password)
 			$_SESSION['loggedin'] = true;
 			$_SESSION['matricula'] = $matri;
 			$_SESSION['usuairo'] = $usu;
-
+			date_default_timezone_set('America/Monterrey');
+			$hora = date('h:i:s');
+			$hoy = date("Y-m-d");
+			$stmt = $mysqli->prepare("INSERT INTO pasemaestros (maestro, hora, fecha) Values (?,?,?)");
+			$stmt-> bind_param('sss',$_SESSION['matricula'],$hora,$hoy);
+			$stmt->execute();
+			$stmt->close();
 			header("location: welcome.php");
 		} else {
 

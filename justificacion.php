@@ -64,10 +64,10 @@ $nombre = "SELECT tipo_usuario from profesores where matricula = '" . $_SESSION[
                 <option value="2">B</option>
             </select>
             <?php
-                if ($rows['tipo_usuario'] == 1) {
+                if ($rows['tipo_usuario'] == 1 ) {
             ?>
             <input type="submit" value="Buscar" name="justificar" class="justificar">
-            <?php  } if ($rows['tipo_usuario'] == 2) {?>
+            <?php  } if ($rows['tipo_usuario'] == 2 || $rows['tipo_usuario'] == 1) {?>
            <input type="submit" value="Justificantes" name="historial" class="historial"> 
            <?php  } ?>
             </div>
