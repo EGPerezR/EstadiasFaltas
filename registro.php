@@ -25,8 +25,6 @@
     </header>
     <div class="registro">
         <form action="registro.php" method="POST" onsubmit="verificaPasswords(); return false">
-            <label for="matricula">Matricula</label>
-            <input type="text" name="matricula" tabindex="1" id="matricula" placeholder="Matricula">
             <label for="nombre">Nombre Completo</label>
             <input type="text" name="nombre" tabindex="2" id="nombre" placeholder="Nombre completo...">
             <label for="usuario">Usuario</label>
