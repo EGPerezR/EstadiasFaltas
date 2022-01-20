@@ -3,8 +3,19 @@ session_start();
 include('conexion.php');
 
 if (isset($_POST['justificar'])) {
-    $materia = $_POST['materiaj'];
     $alumno = $_POST['alumno'];
+    $motivo = $_POST['motivo'];
+
+    //Construccion de materias
+    if (!empty($_POST["materiaj"]) && is_array($_POST["materiaj"])) {
+        $materia = array();
+        foreach ($_POST["materiaj"] as $como) {
+
+            $materia[] = $como;
+        }
+    } else {
+        echo "nada paso";
+    }
 
     //Contruccion de la fecha
     if (!empty($_POST["fecha"]) && is_array($_POST["fecha"])) {
@@ -15,40 +26,41 @@ if (isset($_POST['justificar'])) {
     }
 
 
+
     for ($i = 0; $i < count($fechj); $i++) {
-        $justificalo = "INSERT INTO faltasjustificadas (idalumno, idmateria, profesor,fecha_a_justificar, fecha_justificado) VALUES (" . $alumno . ", " . $materia . ", '".$_SESSION['matricula']."','" . $fechj[$i] . "', '" . date("Y-m-d") . "')";
+        for ($j = 0; $j < count($materia); $j++) {
 
-        $selectf = "SELECT faltas from faltas where dia_registro = '" . $fechj[$i] . "' AND id_alumno = " . $alumno . " AND id_materia = " . $materia . " LIMIT 1";
-        $sleccion = mysqli_query($mysqli, $selectf);
-    
-        
-        if (mysqli_num_rows($sleccion) > 0) {
+
+            $justificalo = "INSERT INTO faltasjustificadas (idalumno, idmateria, profesor, motivo, fecha_a_justificar, fecha_justificado) VALUES (" . $alumno . ", " . $materia[$j] . ", '" . $_SESSION['matricula'] . "', '" . $motivo . "','" . $fechj[$i] . "', '" . date("Y-m-d") . "')";
             
-            while ($faltaa = $sleccion->fetch_assoc()) {
-                $resta = $faltaa['faltas'] - 1;
-                
 
-                $cambia = "UPDATE faltas SET faltas = $resta WHERE dia_registro = '" . $fechj[$i] . "' AND id_alumno = " . $alumno . " AND id_materia = " . $materia . "";
+            $selectf = "SELECT faltas from faltas where dia_registro = '" . $fechj[$i] . "' AND id_alumno = " . $alumno . " AND id_materia = " . $materia[$j] . " LIMIT 1";
+            $sleccion = mysqli_query($mysqli, $selectf);
 
-                $cambio = mysqli_query($mysqli,$cambia);
-                $justifica = mysqli_query($mysqli, $justificalo);
-                if($justifica){
-                    header('Location:../justificacion.php');
+            if (mysqli_num_rows($sleccion) > 0) {
+
+
+                while ($faltaa = $sleccion->fetch_assoc()) {
+                    if ($faltaa['faltas'] > 0) {
+                        $resta = $faltaa['faltas'] - $faltaa['faltas'];
+                        $cambia = "UPDATE faltas SET faltas = $resta WHERE dia_registro = '" . $fechj[$i] . "' AND id_alumno = " . $alumno . " AND id_materia = " . $materia[$j] . "";
+
+                        $cambio = mysqli_query($mysqli, $cambia);
+                        $justifica = mysqli_query($mysqli, $justificalo);
+                        header('Location:../justificacion.php');
+                    } else {
+                        echo "No faltó <a href='../justificacion.php'>Regresar</a>";
+                    }
                 }
+            }else {
+                echo "No hay registro de faltas de ese dia <a href='../justificacion.php'>Regresar</a>";
             }
-        } else{
-            echo "no hay registro de una falta de ese dia <a style='font-size: 20px; ' href='../justificacion.php'>Regresar...</a>";
         }
-
-
-        
     }
-
-
 }
 
 
-if(isset($_POST['corregir'])){
+if (isset($_POST['corregir'])) {
     //contruccion de alumnos
     if (!empty($_POST["alumnos"]) && is_array($_POST["alumnos"])) {
         $alumn = array();
@@ -80,12 +92,11 @@ if(isset($_POST['corregir'])){
             $fechj2[] = $fehcajus2;
         }
     }
-    
 
-    for($i=0; $i<count($alumn); $i++){
-        $upd = "UPDATE faltasjustificadas SET fecha_a_justificar = '".$fechj1[$i]."', fecha_justificado = '".date("Y-m-d")."' WHERE fecha_a_justificar = '".$fechj2[$i]."' AND profesor = '".$_SESSION['matricula']."' AND idalumno = ".$alumn[$i]." AND idmateria = ".$materia[$i]."";
+
+    for ($i = 0; $i < count($alumn); $i++) {
+        $upd = "UPDATE faltasjustificadas SET fecha_a_justificar = '" . $fechj1[$i] . "', fecha_justificado = '" . date("Y-m-d") . "' WHERE fecha_a_justificar = '" . $fechj2[$i] . "' AND profesor = '" . $_SESSION['matricula'] . "' AND idalumno = " . $alumn[$i] . " AND idmateria = " . $materia[$i] . "";
 
         echo $upd;
     }
-
 }

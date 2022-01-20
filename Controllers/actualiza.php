@@ -28,9 +28,9 @@ if (isset($_POST['update'])) {
     if (count($alumno) == count($activo)) {
        
         for ($i = 0; $i < count($alumno); $i++) {
-            if($activo[$i]=='NA'){
+            if($activo[$i]=='NA' || $activo[$i]=='na'){
                 $a = 0;
-               }elseif($activo[$i]=='A'){
+               }elseif($activo[$i]=='A' || $activo[$i]=='a'){
                    $a = 1;
                }
             $up = 'UPDATE alumnos SET activo = '.$a.' WHERE id_alumnos = '.$alumno[$i].'';
@@ -83,7 +83,7 @@ if (count($alumno) == count($sec)) {
                $s = 3;
                
            }
-        $up = 'UPDATE alumnos SET grado = '.$grado.', seccion = '.$s.' WHERE id_alumnos = '.$alumno[$i].'';
+        $up = 'UPDATE alumnos SET grado = '.$grado.', seccion = '.$s.' WHERE id_alumnos = '.$alumno[$i].' AND activo = 1';
         $ejecutar = mysqli_query($mysqli, $up);
        
         

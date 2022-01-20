@@ -1,7 +1,7 @@
 <?php
 require 'conexion.php';
-
-$filtro4 = "SELECT alumnos.nombres as nombres, alumnos.grado as grado, alumnos.seccion as seccion, alumnos.especialidad as especialidad, SUM(faltas.faltas) as faltas from faltas INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos WHERE faltas.dia_registro = '" . date("Y-m-d") . "' AND especialidad = 4 GROUP BY alumnos.nombres ORDER BY faltas DESC LIMIT 10";
+require 'lunesEs.php';
+$filtro4 = "SELECT alumnos.nombres as nombres, alumnos.grado as grado, alumnos.seccion as seccion, alumnos.especialidad as especialidad, SUM(faltas.faltas) as faltas from faltas INNER JOIN alumnos on faltas.id_alumno=alumnos.id_alumnos WHERE faltas.semana >= '".$lunes."' AND especialidad = 4 GROUP BY alumnos.nombres ORDER BY faltas DESC LIMIT 10";
 $SCI = mysqli_query($mysqli, $filtro4);
 if (mysqli_num_rows($SCI) > 0) {
 ?>

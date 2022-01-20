@@ -14,9 +14,9 @@ function regresaUsuario()
 	return $usuarios;
 }
 
-function isNullRegistro($matricula, $nombre, $usuario, $pass1, $pass2, $correo)
+function isNullRegistro($nombre, $usuario, $pass1, $pass2, $correo)
 {
-	if (strlen(trim($matricula)) < 1	|| strlen(trim($nombre)) < 1	|| strlen(trim($usuario)) < 1	|| strlen(trim($pass1)) < 1	|| strlen(trim($pass2)) < 1	|| strlen(trim($correo)) < 1) {
+	if (strlen(trim($nombre)) < 1	|| strlen(trim($usuario)) < 1	|| strlen(trim($pass1)) < 1	|| strlen(trim($pass2)) < 1	|| strlen(trim($correo)) < 1) {
 		return true;
 	} else {
 		return false;
@@ -225,11 +225,16 @@ function resultBlock2($mensajes)
 	}
 }
 
-function registraMaestro($matricula, $nombre, $usuario, $pass_hash, $email,  $token, $tipo_usuario)
+function registraMaestro($nombre, $usuario, $pass_hash, $email,  $token, $tipo_usuario)
 {
 
 	global $mysqli;
-
+	$ma = 'SELECT matricula FROM `profesores` ORDER BY `matricula` DESC LIMIT 1';
+        $eject = mysqli_query($mysqli,$ma);
+			while($sa = $eject->fetch_assoc()){
+					$matricula = $sa['matricula'] + 1;
+					echo "<script>alert('".$matricula."')</script>";
+			}
 	$stmt = $mysqli->prepare("INSERT INTO profesores (matricula, nombre, usuario, contrasena, correo, token, tipo_usuario) VALUES(?,?,?,?,?,?,?)");
 	$stmt->bind_param('ssssssi', $matricula, $nombre, $usuario, $pass_hash, $email,  $token, $tipo_usuario);
 
@@ -347,7 +352,13 @@ function login($matricula, $password)
 			$_SESSION['loggedin'] = true;
 			$_SESSION['matricula'] = $matri;
 			$_SESSION['usuairo'] = $usu;
-
+			date_default_timezone_set('America/Monterrey');
+			$hora = date('h:i:s');
+			$hoy = date("Y-m-d");
+			$stmt = $mysqli->prepare("INSERT INTO pasemaestros (maestro, hora, fecha) Values (?,?,?)");
+			$stmt-> bind_param('sss',$_SESSION['matricula'],$hora,$hoy);
+			$stmt->execute();
+			$stmt->close();
 			header("location: welcome.php");
 		} else {
 

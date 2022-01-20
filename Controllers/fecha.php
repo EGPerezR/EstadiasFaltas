@@ -14,7 +14,7 @@ return $viernes;
 
 function estasemana(){
     global $lunes;
-    $estasema = date("Y-m-d",strtotime($lunes."+ 4 days"));
+    $estasema = date("Y-m-d",strtotime($lunes."+ 5 days"));
     return $estasema;
 }
 ?>

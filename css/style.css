@@ -75,7 +75,7 @@
        bottom: 0;
        background-color: rgba(0, 0, 0, 0.5);
        z-index: 1;
-       overflow: scroll;
+       overflow-x: scroll;
    }
    /*seleccion de la lista*/
    
@@ -128,6 +128,58 @@
        border: 1px solid #ccc;
        border-radius: 4px;
        box-sizing: border-box;
+   }
+   
+   .fondoconf {
+       position: fixed;
+       width: 100%;
+       height: 100%;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background-color: rgba(0, 0, 0, 0.5);
+       z-index: 3;
+       display: none;
+   }
+   
+   .listaconf {
+       display: none;
+       position: fixed;
+       z-index: 4;
+       background-color: rgb(255, 212, 72);
+       padding: 10px;
+       left: 5%;
+       top: 25%;
+       border-radius: 5px;
+   }
+   
+   .listaconf img {
+       float: right;
+       width: 22px;
+       height: 22px;
+   }
+   
+   .listaconf input[type=submit] {
+       width: 49%;
+       background-color: #3bce40;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+   }
+   
+   .listaconf input[type=button] {
+       width: 50%;
+       background-color: #ff0000;
+       color: white;
+       padding: 14px 20px;
+       margin: 8px 0;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
    }
    
    .manual input[type=submit] {
@@ -469,11 +521,35 @@
        }
    }
    
+   .CFt {
+       border-collapse: collapse;
+       background-color: white;
+   }
+   
+   .tabCF {
+       border-collapse: collapse;
+       width: 90%;
+   }
+   
+   .tabCF td {
+       width: 10%;
+   }
+   
+   .CF {
+       width: 100%;
+       border-radius: 5%;
+   }
+   
+   .CF select {
+       width: 20%;
+   }
+   
    .faltas {
        top: 20%;
        left: 35%;
        border-radius: 5px;
        width: 30%;
+       display: none;
        background-color: #f2f2f2;
        padding: 20px;
        position: fixed;
@@ -532,7 +608,7 @@
        position: fixed;
    }
    
-   .matefa input[type=submit] {
+   .matefa .inserconf {
        width: 100%;
        background-color: #4CAF50;
        color: white;
@@ -553,7 +629,7 @@
        box-sizing: border-box;
    }
    
-   .matefa input[type=button] {
+   .matefa .cancel {
        width: 100%;
        background-color: #af4f4c;
        color: white;

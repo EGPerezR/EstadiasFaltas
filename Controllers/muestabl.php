@@ -33,7 +33,7 @@ if (isset($_POST['buscar'])) {
         $materias = mysqli_query($mysqli, $buscarm);
 
         //busca los alumnos de una especialidad, grado y seccion
-        $busa = "SELECT nombres from alumnos where grado= $grado and especialidad = $espe and seccion = $secc ORDER BY nombres ASC";
+        $busa = "SELECT nombres from alumnos where grado= $grado and especialidad = $espe and seccion = $secc AND activo = 1 ORDER BY nombres ASC";
         $alumnos = mysqli_query($mysqli, $busa);
 
 
@@ -193,7 +193,7 @@ if (isset($_POST['buscar'])) {
                                                 <?php
 
                                                 if (empty($fa['faltas'])) {
-                                                    echo "0";
+                                                    echo "";
 
                                                     echo "<input type='text' value='0' name='faltase[]'  hidden>";
                                                 } else {
@@ -226,16 +226,20 @@ if (isset($_POST['buscar'])) {
 
                                             $fa = $falta->fetch_assoc();
 
-                                            echo "<td>";
+                                            
                                             if (empty($fa['faltas'])) {
-                                                echo "0";
+                                                echo "<td>";
+                                                echo $fa['faltas'];
                                                 echo "<input type='text' value='0' name='faltase[]'  hidden>";
+                                                echo "</td>";
                                             } else {
+                                                echo "<td style='background-color: green;'>";
                                                 echo $fa['faltas'];
                                                 echo "<input type='text' value='" . $fa['faltas'] . "' name='faltase[]' hidden >";
+                                                echo "</td>";
                                             }
 
-                                            echo "</td>";
+                                            
                                             echo "<td style = 'color: red;'>";
                                             echo $justi['justificante'];
                                             
@@ -254,7 +258,7 @@ if (isset($_POST['buscar'])) {
                                             echo "<td>";
 
                                             if (empty($fa['faltas'])) {
-                                                echo "0";
+                                                echo "";
                                                 echo "<input type='text' value='0' name='faltase[]'  hidden>";
                                             } else {
                                                 echo $fa['faltas'];

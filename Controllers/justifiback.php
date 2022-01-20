@@ -32,6 +32,7 @@ if (isset($_POST['justificar'])) {
                     <a style="color: red; cursor:pointer;" onclick="cierr()">X</a>
                     <br>
                     <form action="Controllers/justificar.php" method="POST">
+                    <b><label>Alumno</label></b>
                         <select class="alumjus" name="alumno">
                             <?php
                             while ($lista = $result->fetch_assoc()) {
@@ -42,26 +43,37 @@ if (isset($_POST['justificar'])) {
                             ?>
                         </select>
 
-                        <b><label>Materia</label></b>
+                        <br>
+                        <label>Materia: </label> <br>
+                        
                         <?php
                         //consulta de materias
                         $materia = "SELECT * from materias where especialidad = $espe and grado = $grado";
                         $mate = mysqli_query($mysqli, $materia);
-
+                        $mater = 0;
                         if (mysqli_num_rows($mate) > 0) {
 
                         ?>
-                            <select id="selemateria" name="materiaj">
+                            
                             <?php
                             while ($materiasli = $mate->fetch_assoc()) {
-                                //muestra las materias
-                                echo "<option value='" . $materiasli['id_materia'] . "'>" . $materiasli['nombre'] . "</option>";
+                                
+                                echo "<input type='checkbox' value ='".$materiasli['id_materia']."' id='materia' name ='materiaj[]'>";
+                                echo "<b><label>".$materiasli['nombre']." </label></b><br>";
+                                $mater++;
+                                
+                               
                             }
                         }
                             ?>
                             </select>
+                            <br>
+                            <label>Motivo:</label>
+                            <input type="text" name="motivo">
+                            <br>
                             <b><label for="cantidad">Presione para agregar fecha</label></b>
                             <input type="button" value=">>" id="btn_agregar" onclick="crearDin()">
+                            
                             <br>
                             <div id="mosdate">
 
@@ -94,8 +106,11 @@ if (isset($_POST['historial'])) {
             alert("Seleccionar una Seccion");
           </script>';
     } else {
-        $historial = "SELECT faltasjustificadas.idalumno, faltasjustificadas.idmateria, alumnos.nombres as Alumno, materias.nombre as Materia, faltasjustificadas.fecha_a_justificar as 'fecha justificada', faltasjustificadas.fecha_justificado as 'Fecha de justificante' from faltasjustificadas INNER JOIN alumnos ON faltasjustificadas.idalumno = alumnos.id_alumnos INNER JOIN materias ON faltasjustificadas.idmateria = materias.id_materia WHERE fecha_justificado >= '" . $lunes . "' AND fecha_justificado <= '" . estasemana() . "' AND profesor = '" . $_SESSION['matricula'] . "'";
-
+        $espe = $_POST['especialidad'];
+        $gra = $_POST['grado'];
+        $se = $_POST['seccion'];
+        $historial = "SELECT faltasjustificadas.idalumno, faltasjustificadas.idmateria,faltasjustificadas.motivo, alumnos.nombres as Alumno, materias.nombre as Materia, faltasjustificadas.fecha_a_justificar as 'fecha justificada', faltasjustificadas.fecha_justificado as 'Fecha de justificante' from faltasjustificadas INNER JOIN alumnos ON faltasjustificadas.idalumno = alumnos.id_alumnos INNER JOIN materias ON faltasjustificadas.idmateria = materias.id_materia WHERE fecha_justificado >= '" . $lunes . "' AND fecha_justificado <= '".estasemana()."' AND alumnos.especialidad = $espe AND alumnos.grado = $gra AND alumnos.seccion = $se GROUP BY id_materia, fecha_justificado";
+        
         $ejecuta = mysqli_query($mysqli, $historial);
 
         if (mysqli_num_rows($ejecuta) > 0) {
@@ -109,6 +124,7 @@ if (isset($_POST['historial'])) {
                             <tr>
                                 <th>Alumno</th>
                                 <th>Materia</th>
+                                <th>Motivo</th>
                                 <th>Fecha Justificada</th>
                                 <th>Fecha de Justificación</th>
                             </tr>
@@ -122,6 +138,10 @@ if (isset($_POST['historial'])) {
                                 echo "<td>";
                                 echo "<input type='text' class='lista'  value='".$rows['idmateria']."' name='materias[]'style='display: none;' >";
                                 echo $rows['Materia'];
+                                echo "</td>";
+                                echo "<td>";
+                                echo "<input type='text' class='lista'  value='".$rows['idmateria']."' name='materias[]'style='display: none;' >";
+                                echo $rows['motivo'];
                                 echo "</td>";
                                 echo "<td>";
                                 echo "<input type='text' name='fecha2[]' value='" . $rows['fecha justificada'] . "' style='display: none;' > ";
@@ -145,6 +165,7 @@ if (isset($_POST['historial'])) {
 
 <?php
         } else {
+            
             echo "<td><label>No hay faltas registradas</label></td>";
         }
     }
