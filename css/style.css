@@ -1,5 +1,5 @@
    body {
-       background-color: rgba(60, 149, 250, 0.568);
+       background-color: rgba(6, 59, 119, 0.568);
    }
    /* Popup container */
    
@@ -334,13 +334,13 @@
        border-collapse: collapse;
        width: 25%;
        left: 40%;
-       background-color: white;
+       background-color: rgb(207, 207, 207);
    }
    
    .tablaexcel table th,
    td {
        padding: 10px;
-       border: 1px solid #ddd;
+       border: 1px solid rgb(160, 160, 160);
        text-align: left;
    }
    
@@ -365,7 +365,7 @@
        body .menu_bar .bt-menu {
            display: block;
            padding: 20px;
-           background: rgb(255, 255, 255);
+           background: rgb(180, 179, 179);
            text-decoration: none;
            font-weight: bold;
            font-size: 25px;

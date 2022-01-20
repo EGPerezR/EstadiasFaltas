@@ -49,9 +49,11 @@ if (isset($_SESSION['matricula'])) {
 					<li><a href='justificacion.php'>Justificar</a></li>
 					<li><a href='pasemaestros.php'>Historial</a></li>
 
+
 				<?php } else if ($rows['tipo_usuario'] == 2) {
 				?>
 					<li><a href='justificacion.php'>Justificantes</a></li>
+					<li style="float: right;"><a href=''><img style="width: 20px; height: 20px;" src="img/configuracion.png"></a></li>
 				<?php
 
 
@@ -101,12 +103,14 @@ if (isset($_SESSION['matricula'])) {
 					<option value="5">Mecatronica</option>
 				</select>
 				
+
 				<input type="button" onclick="faltgra()" value=">>">
 				<select disabled id="resultado" name="grado">
 
 				</select>
 				<input type="button" onclick="faltsec()" value=">>">
 				
+
 				<select name="sec" id="result" disabled>
 
 				</select>
@@ -357,6 +361,16 @@ if (isset($_SESSION['matricula'])) {
 
 	};
 
+	function pasemaestro(){
+		var datos= $.ajax({
+			url: 'Controllers/pasemaestros.php',
+			dataType: 'text',
+			async: false
+		}).responseText;
+
+		document.getElementById('pase').innerHTML = datos;
+	}
+
 
 	function electricidad() {
 		var datos = $.ajax({
@@ -417,6 +431,7 @@ if (isset($_SESSION['matricula'])) {
 	setInterval(combustion, 2400000);
 	setInterval(mecatronica, 2400000);
 	setInterval(electricidad, 2400000);
+	setInterval(pasemaestro, 10000);
 </script>
 
 </html>

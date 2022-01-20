@@ -118,7 +118,7 @@ if (isset($_POST['activo'])) {
         <?php
 
         } else {
-            echo $sql;
+            
         ?>
 
             <h1>No se Encontro este grupo...</h1>

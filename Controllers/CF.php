@@ -5,7 +5,7 @@ if (isset($_POST['faltma'])) {
     $grado = $_POST['grado'];
     $seccion = $_POST['sec'];
     $materia = $_POST['mate'];
-    $total = array();
+
  
     $alumno = "SELECT alumnos.nombres from alumnos where especialidad = $especialidad and grado = $grado and seccion = $seccion";
     $filtro = mysqli_query($mysqli, $alumno);
@@ -26,7 +26,7 @@ if (isset($_POST['faltma'])) {
                 while($faltas = $ejecuta->fetch_assoc()){
                     echo "<tr>";
                     if ($faltas['falta']==''){
-                        echo "<td >".$faltas['Alumno']."</td><td>0</td>";
+                        echo "<td>".$faltas['Alumno']."</td><td>0</td>";
                     } else{
                         echo "<td>".$faltas['Alumno']."</td><td>".$faltas['falta']."</td>";
                     }
