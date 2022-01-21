@@ -233,7 +233,7 @@ function registraMaestro($nombre, $usuario, $pass_hash, $email,  $token, $tipo_u
         $eject = mysqli_query($mysqli,$ma);
 			while($sa = $eject->fetch_assoc()){
 					$matricula = $sa['matricula'] + 1;
-					echo "<script>alert('".$matricula."')</script>";
+					echo "<script>alert('Usuario registrado con exito.')</script>";
 			}
 	$stmt = $mysqli->prepare("INSERT INTO profesores (matricula, nombre, usuario, contrasena, correo, token, tipo_usuario) VALUES(?,?,?,?,?,?,?)");
 	$stmt->bind_param('ssssssi', $matricula, $nombre, $usuario, $pass_hash, $email,  $token, $tipo_usuario);
@@ -362,10 +362,13 @@ function login($matricula, $password)
 			header("location: welcome.php");
 		} else {
 
-			echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>La contrase&ntilde;a es incorrecta</div></div>";
+			
+			echo "<script>alert('La contraseña es incorrecta.');</script>";
+			
 		}
 	} else {
-		echo "<div class='fondo' id='fondo'><div class='logi' id='log'><a onclick='login()'>X</a><br>El nombre de usuario o matricula no existe</div></div>";
+		
+		echo "<script>alert('El nombre de usuario o matricula no existe.');</script>";
 	}
 }
 

@@ -52,6 +52,7 @@ if (isset($_SESSION['matricula'])) {
 
 				<?php } else if ($rows['tipo_usuario'] == 2) {
 				?>
+					<li><a href='reportes.php'>Reportes</a></li>
 					<li><a href='justificacion.php'>Justificantes</a></li>
 					<li style="float: right;"><a href=''><img style="width: 20px; height: 20px;" src="img/configuracion.png"></a></li>
 				<?php
