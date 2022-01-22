@@ -1,0 +1,100 @@
+body {
+    background-color: rgba(6, 59, 119, 0.568);
+}
+
+@media screen and (max-width:480px) {
+    body .lista {
+        width: 50%;
+        height: 100%;
+        margin: 0;
+        left: -100%;
+        z-index: 1;
+        position: fixed;
+    }
+    body .lista .nav-excel li {
+        display: block;
+        float: left;
+        border-bottom: 1px solid rgba(255, 255, 255, .3);
+    }
+    body .menu_bar {
+        width: 100%;
+        display: block;
+    }
+    body .menu_bar .bt-menu {
+        display: block;
+        padding: 20px;
+        background: rgb(255, 255, 255);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 25px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}
+
+.lista {
+    width: 100%;
+    margin: 20px auto;
+    background: white;
+}
+
+.menu_bar {
+    display: none;
+}
+
+.nav-excel {
+    overflow: hidden;
+    list-style: none;
+    height: fit-content;
+}
+
+.nav-excel li {
+    float: left;
+    ;
+}
+
+.nav-excel li a {
+    display: block;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.contenedor {
+    width: 100%;
+    height: fit-content;
+    position: relative;
+}
+
+.inforepo {
+    background-color: rgb(255, 255, 255);
+    width: 20%;
+    display: inline-block;
+    position: static;
+    overflow-y: scroll;
+    height: 100px;
+    margin: 1%;
+    padding: 10px;
+}
+
+.inforepo::-webkit-scrollbar {
+    display: none;
+}
+
+.inforepo label {
+    background-color: white;
+    z-index: 1;
+    width: fit-content;
+    border-bottom: 1px solid rgb(145, 145, 145);
+    position: absolute;
+}
+
+.inforepo table {
+    width: 100%;
+    position: relative;
+    top: 10px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+}

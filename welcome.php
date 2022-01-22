@@ -47,6 +47,7 @@ if (isset($_SESSION['matricula'])) {
 					<li><a href='alumnos.php'>Nuevos Alumnos</a></li>
 					<li><a href='GestionA.php'>Gestion de alumnos</a></li>
 					<li><a href='justificacion.php'>Justificar</a></li>
+					<li><a href='visrepo.php'>Reportes</a></li>
 					<li><a href='pasemaestros.php'>Historial</a></li>
 
 

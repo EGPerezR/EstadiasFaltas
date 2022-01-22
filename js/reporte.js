@@ -19,3 +19,7 @@ function enableseccion() {
         document.getElementById('seccion').disabled = false;
     }
 }
+
+function cerrarepo() {
+    document.getElementById('fondorepo').style.display = "none";
+}

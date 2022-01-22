@@ -106,3 +106,69 @@ select {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+.fondorepo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.623);
+    width: 100%;
+    height: fit-content;
+}
+
+.formate {
+    width: 20%;
+    position: fixed;
+    z-index: 2;
+    background-color: rgb(184, 166, 134);
+    padding: 1%;
+    border-radius: 5px;
+    left: 5%;
+    top: 0;
+}
+
+.formate label {
+    color: rgb(0, 0, 0);
+}
+
+.formate input[type=submit] {
+    width: 100%;
+    background-color: #3ba100;
+    color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.fondorepo table {
+    background-color: #5c5c5c;
+    border-collapse: collapse;
+    position: relative;
+    left: 30%;
+}
+
+.fondorepo table a {
+    color: red;
+    font-size: 20px;
+    float: left;
+    cursor: pointer;
+}
+
+.fondorepo table th {
+    padding: 2%;
+    background-color: #8b8b8b;
+}
+
+.fondorepo table td {
+    padding: 2%;
+    font-size: 20px;
+    color: white;
+}
+
+.fondorepo input[type=checkbox] {
+    cursor: pointer;
+    width: 100%;
+}

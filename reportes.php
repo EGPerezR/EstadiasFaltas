@@ -78,7 +78,7 @@ if (isset($_SESSION['matricula'])) {
     <?php
         include('controllers/backreportes.php')
     ?>
-    )
+    
 </body>
 
 <script src="js/reporte.js"></script>

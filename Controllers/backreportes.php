@@ -21,20 +21,50 @@ if (isset($_POST['buscar'])) {
         $espe = $_POST['especialidad'];
         $gra = $_POST['grado'];
         $secc = $_POST['seccion'];
-        $consulta = "SELECT nombres from alumnos where especialidad = $espe and grado = $gra and seccion = $secc and activo = 1 ORDER BY nombres DESC";
+        $consulta = "SELECT  id_alumnos, nombres, grado, seccion from alumnos where especialidad = $espe and grado = $gra and seccion = $secc and activo = 1 ORDER BY nombres ASC";
+        $materia = "SELECT * from materias where especialidad = $espe and grado = $gra";
+        $mate = mysqli_query($mysqli, $materia);
         $ejecuta = mysqli_query($mysqli, $consulta);
 
         if ($ejecuta->num_rows > 0) {
+
 ?>
-            <div>
+            <div class="fondorepo" id="fondorepo">
+                <div class="formate">
+                    <form action="" method="POST">
+                        <label for="">Materia:</label>
+                        <select name="materia" id="">
+                            <option value="">...</option>
+                            <?php
+                            if ($mate->num_rows > 0) {
+                                while ($rows = $mate->fetch_assoc()) {
+                                    echo "<option value='".$rows['id_materia']."'>".$rows['nombre']."</option>";
+                                }
+                            }
+                            ?>
+                            
+                        </select>
+                        <input type="submit" value="Enviar" name="insert">
+                </div>
 
-                <?php
-                while ($row = $ejecuta->fetch_assoc()) {
-                }
+                <table>
+                    <tr>
+                        <th>Alumno <a id="cerrarep" onclick="cerrarepo()">X</a></th>
+                        <th>No trabaja</th>
+                    </tr>
+                    <?php
+                    while ($row = $ejecuta->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['nombres'] . "<input type='text' name='alumno[]' hidden value='".$row['id_alumnos']."'</td>";
+                        echo "<td><input type='checkbox' name='sancion[]' value='1'> <span class='checkmark'></span>";
+                        echo "</tr>";
+                    }
 
-                ?>
+                    ?>
+                </table>
+                
+                </form>
             </div>
-
 <?php
         } else {
             echo "<script>alert('cagaste');</script>";
