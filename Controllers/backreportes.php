@@ -31,7 +31,7 @@ if (isset($_POST['buscar'])) {
 ?>
             <div class="fondorepo" id="fondorepo">
                 <div class="formate">
-                    <form action="" method="POST">
+                    <form action="Controllers/reportar.php" method="POST">
                         <label for="">Materia:</label>
                         <select name="materia" id="">
                             <option value="">...</option>
@@ -53,10 +53,12 @@ if (isset($_POST['buscar'])) {
                         <th>No trabaja</th>
                     </tr>
                     <?php
+                    $i = 0;
                     while ($row = $ejecuta->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row['nombres'] . "<input type='text' name='alumno[]' hidden value='".$row['id_alumnos']."'</td>";
-                        echo "<td><input type='checkbox' name='sancion[]' value='1'> <span class='checkmark'></span>";
+                        echo "<td><input type='checkbox' name='sancion[]' value='".$i."'>";
+                        $i++;
                         echo "</tr>";
                     }
 

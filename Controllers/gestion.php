@@ -280,9 +280,8 @@ if (isset($_POST['covid'])) {
         $secc = $_POST['seccion'];
         //consulta de alumnos
         $sql = "SELECT  id_alumnos, nombres, grupo from alumnos where especialidad = $espe and grado = $grado and seccion = $secc and activo = 1 ORDER BY nombres ASC";
-
         $result = mysqli_query($mysqli, $sql);
-        if (mysqli_num_rows($result) > 0) {
+        if ($result->num_rows > 0) {
 
 
         ?>

@@ -43,9 +43,6 @@ if (isset($_SESSION['matricula'])) {
 
 
     <div class="reportes" id="reportes">
-        
-
-
         <form action="reportes.php" method="POST">
             <label class="letra">Seleccione Especialidad</label>
             <select name="especialidad" id="especialidad" oninput="enablegrado()">

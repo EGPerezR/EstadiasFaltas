@@ -20,7 +20,7 @@ if (isset($_SESSION['matricula'])) {
     <link rel="shortcut icon" href="icono/bateil png.ico">
     <link rel="stylesheet" href="css/visrepo.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+    <script src="js/reporte.js"></script>
 
 
 
@@ -39,104 +39,38 @@ if (isset($_SESSION['matricula'])) {
             </ul>
         </nav>
     </header>
+    <div class="visrepo" id="reportes">
+        <form action="" method="POST">
+            <label class="letra">Seleccione Especialidad</label>
+            <select name="especialidad" id="especialidad" oninput="enablegrado()">
+                <option value="">...</option>
+                <option value="1">Combustion Interna</option>
+                <option value="2">Maquinas y herramientas</option>
+                <option value="3">Electricidad</option>
+                <option value="4">Sistemas</option>
+                <option value="5">Mecatronica</option>
+            </select>
+            <lablel>Seleccione Grado</lablel>
+            <select name="grado" disabled id="grado" oninput="enableseccion()">
+                <option value="">...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <lablel>Seleccione Seccion</lablel>
+            <select name="seccion" disabled id="seccion">
+                <option value="">...</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+            </select>
+            <input type="submit" value="Buscar" name="buscar">
+        </form>
+    </div>
     <div class="contenedor">
-        <div class="inforepo">
-            <label>"{Alumno}" Quejas de no trabajo</label>
-
-            <table>
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Matematicas</td>
-                </tr>
-            </table>
-        </div>
-        <div class="inforepo">
-            <label>"{Alumno}" Quejas de no trabajo</label>
-
-            <table>
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Matematicas</td>
-                </tr>
-            </table>
-        </div>
-        <div class="inforepo">
-            <label>"{Alumno}" Quejas de no trabajo</label>
-
-            <table>
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Matematicas</td>
-                </tr>
-            </table>
-        </div>
-        <div class="inforepo">
-            <label>"{Alumno}" Quejas de no trabajo</label>
-
-            <table>
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Matematicas</td>
-                </tr>
-            </table>
-        </div>
-        <div class="inforepo">
-            <label>"{Alumno}" Quejas de no trabajo</label>
-
-            <table>
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Matematicas</td>
-                </tr>
-            </table>
-        </div>
-        <div class="inforepo">
-            <div >
-                <label>"{Alumno}" Quejas de no trabajo</label>
-            </div>
-            <table>
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>ciencias</td>
-                </tr>
-                <tr>
-                    <td>TLR</td>
-                </tr>
-                <tr>
-                    <td>Diseño</td>
-                </tr>
-                <tr>
-                    <td>Diseño</td>
-                </tr>
-                <tr>
-                    <td>Diseño</td>
-                </tr>
-            </table>
-        </div>
-        <div class="inforepo">
-            <label>"{Alumno}" Quejas de no trabajo</label>
-
-            <table>
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Matematicas</td>
-                </tr>
-            </table>
-        </div>
+        
     </div>
 </body>
 

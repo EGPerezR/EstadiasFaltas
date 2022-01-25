@@ -39,7 +39,7 @@ if (isset($_SESSION['matricula'])) {
         <div class="gestion" id="gestion">
             <button id="button1" onclick="mosta()"><b>Activos</b><img src="img/activo.png"></button>
             <button id="button2" onclick="mostc()"><b>Cambio de grado y seccion</b><img src="img/retorno.png"></button>
-            <!--<center><button id="button3" onclick="mostg()"><b>Gestion por Covid</b><img src="img/covid.png"></button></center>-->
+            <!--<button id="button3" onclick="mostg()"><b>Gestion por Covid</b><img src="img/covid.png"></button>-->
         </div>
         <div id="activos" class="formG">
             <div class="faltas">
